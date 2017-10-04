@@ -1,5 +1,4 @@
-import Teoria from 'Teoria'
-import Positions from '../'
+import Teoria from 'teoria'
 
 class NoteGenerator {
     constructor () {
@@ -16,24 +15,25 @@ class NoteGenerator {
     
     _calculateNotes () {
         _.forEach(this.majorOrder, key => {
-
             let major = Teoria.note(key + "3").chord("major")
             let minor = Teoria.note(key + "3").chord("minor")
 
-            Notes.major[key] = []
-            Notes.minor[key] = []
+            this.Notes.major[key] = []
+            this.Notes.minor[key] = []
 
             let octaves = 3
+
+            console.log(this.Notes)
 
             for (var o = 0; o < octaves; o++) {
 
                 var majorNotes = major.notes()
                 var minorNotes = minor.notes()
 
-                _.forEach(majorNotes, j => {
+                _.forEach(majorNotes, (major, key) => {
 
-                    Notes.major[key].push(majorNotes[j].midi())
-                    Notes.minor[key].push(minorNotes[j].midi())
+                    this.Notes.major[key].push(major.midi())
+                    this.Notes.minor[key].push(minorNotes[key].midi())
 
                 })
 

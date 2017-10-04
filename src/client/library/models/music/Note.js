@@ -10,6 +10,7 @@ class Note extends Tone{
         this.time = time
         this.degree = degree
         this.duration = duration
+        this.notes = NoteGenerator.getNotes()
 
         // this.loopDuration = this.toSeconds(PartsData.loopDuration)
         // TODO: this seems useless but commenting it may break something
@@ -19,7 +20,7 @@ class Note extends Tone{
 
     _computeHighestAndLowestNote () {
         for (let chordName in Notes.major){
-            let chord = NoteGenerator.getNotes().major[chordName];
+            let chord = this.notes.major[chordName];
 
             for (let i = 0; i < chord.length; i++){
 

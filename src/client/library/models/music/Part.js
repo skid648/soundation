@@ -8,6 +8,10 @@ class Part {
     constructor (notes) {
         this.notes = []
         this.chord = {}
+        this.sound = new Sound()
+        this.enabled = true
+        this.part = new Tone.Part(this._onnote, this.notes).start(0)
+
         //make each of the notes in the part
         let note = []
 
@@ -19,16 +23,17 @@ class Part {
             this.notes.push(note)
         })
 
-        this.part = new Tone.Part(this._onnote, this.notes).start(0)
-
-        this.enabled = true
+        return Promise.resolve()
+        .then(() => {
+            return this.sound.load()
+        })
     }
 
     _onnote (time, note) {
         if (this.enabled){
             let duration = this.part.toSeconds(note.duration)
             note.play(duration)
-            Sound.play(this.chord[note.degree], time, duration)
+            this.sound.play(this.chord[note.degree], time, duration)
         }
     }
 

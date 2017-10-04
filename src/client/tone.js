@@ -2,6 +2,7 @@
 
 import Tone from 'tone'
 import _ from 'lodash'
+import Part from "./library/models/music/Part";
 
 // Do | Re | Mi | Fa | Sol | La | Si  |
 // C  | D  | E  | F  | G   | A  | B.  |
@@ -17,7 +18,7 @@ let instrumentNotes = {
     'Gb6': './assets/harp/Gb6.mp3' // SOL  7
 }
 
-let part = [
+let partNotes = [
     {"time" : "8n * 0", "note": "Bb3", "degree" : 0, "duration" : "8n"},
     {"time" : "8n * 0", "note": "D6", "degree" : 3, "duration" : "8n"},
 
@@ -40,9 +41,14 @@ let part = [
     {"time" : "8n * 6", "note": "F4", "degree" : 5, "duration" : "8n"}
 ]
 
-let players = new Tone.Players(instrumentNotes).toMaster();
+let partInstance = new Part(partNotes)
+.then(() => {
+    Tone.Transport.start()
+})
 
-var synth = new Tone.Synth().toMaster();
+// let players = new Tone.Players(instrumentNotes).toMaster();
+//
+// var synth = new Tone.Synth().toMaster();
 
 // Tone.Buffer.on('load', () => {
 //     Tone.Transport.start()
