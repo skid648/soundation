@@ -23,17 +23,14 @@ class NoteGenerator {
 
             let octaves = 3
 
-            console.log(this.Notes)
+            for (let o = 0; o < octaves; o++) {
 
-            for (var o = 0; o < octaves; o++) {
+                let majorNotes = major.notes()
+                let minorNotes = minor.notes()
 
-                var majorNotes = major.notes()
-                var minorNotes = minor.notes()
-
-                _.forEach(majorNotes, (major, key) => {
-
-                    this.Notes.major[key].push(major.midi())
-                    this.Notes.minor[key].push(minorNotes[key].midi())
+                _.forEach(majorNotes, (object, i) => {
+                    this.Notes.major[key].push(majorNotes[i].midi())
+                    this.Notes.minor[key].push(minorNotes[i].midi())
 
                 })
 

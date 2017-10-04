@@ -19,17 +19,17 @@ class Note extends Tone{
     }
 
     _computeHighestAndLowestNote () {
-        for (let chordName in Notes.major){
-            let chord = this.notes.major[chordName];
+        for (let chordName in this.notes.major){
+            let chord = this.notes.major[chordName]
 
             for (let i = 0; i < chord.length; i++){
 
                 if (chord[i] > this.highestNote){
-                    this.highestNote = chord[i];
+                    this.highestNote = chord[i]
                 }
 
                 if (chord[i] < this.lowestNote){
-                    this.lowestNote = chord[i];
+                    this.lowestNote = chord[i]
                 }
             }
 

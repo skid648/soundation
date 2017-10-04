@@ -17,8 +17,8 @@ class Part {
 
         _.forEach(notes, note => {
             note = [
-                notes[i].time,
-                new Note(notes[i].time, notes[i].degree, notes[i].duration)
+                note.time,
+                new Note(note.time, note.degree, note.duration)
             ]
             this.notes.push(note)
         })
