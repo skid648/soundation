@@ -1,7 +1,6 @@
 import Player from './Player'
 import NoteGenerator from '../data/NoteGenerator'
 import Tone from 'tone'
-// TODO: finish up player
 
 class Sound {
     constructor () {
@@ -22,14 +21,15 @@ class Sound {
     }
 
     play (midi, time, duration) {
+        console.log(`midi given: ${midi}, converted to: ${Tone.Frequency(midi).toNote()}`)
         if (!this.muted){
-            let note = Tone.prototype.midiToNote(midi)
+            let note = Tone.Frequency(midi).toNote()
             this.harp.play(note, duration, time)
         }
     }
 
-    load (callback) {
-        this.harp.load(callback)
+    load () {
+        return this.harp.load()
     }
 
 }

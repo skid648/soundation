@@ -6,7 +6,6 @@ class NoteGenerator {
         this.majorOrder = ["C", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#", "F"];
         this.minorOrder = ["A", "E", "B", "F#", "C#", "G#", "D#", "A#", "F", "C", "G", "D"];
         this._calculateNotes()
-        console.log(`Calculated Notes: ${JSON.stringify(this.notes)}`)
     }
     
     getNotes () {

@@ -2,7 +2,6 @@ import Note from './Note'
 import _ from 'lodash'
 import Tone from 'tone'
 import Sound from './Sound'
-// TODO: finish up Sound class
 
 class Part {
     constructor (notes) {
@@ -10,7 +9,6 @@ class Part {
         this.chord = {}
         this.sound = new Sound()
         this.enabled = true
-        this.part = new Tone.Part(this._onnote, this.notes).start(0)
 
         //make each of the notes in the part
         let note = []
@@ -22,10 +20,14 @@ class Part {
             ]
             this.notes.push(note)
         })
+    }
 
+    start () {
         return Promise.resolve()
+        .then(() => this.sound.load())
         .then(() => {
-            return this.sound.load()
+            this.part = new Tone.Part(this._onnote, this.notes).start(0)
+            return true
         })
     }
 
