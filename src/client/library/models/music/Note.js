@@ -1,5 +1,6 @@
 import NoteGenerator from '../data/NoteGenerator'
 import Tone from 'tone'
+import teoria from 'teoria'
 
 class Note extends Tone{
     constructor (time, degree, duration) {
@@ -35,6 +36,14 @@ class Note extends Tone{
 
         }
         console.log(`Computed Higest note: ${this.highestNote} and lowest note: ${this.lowestNote}`)
+    }
+
+    setChord (chord) {
+        //get this notes degree from the chord
+        var note = chord[this.degree]
+        var octaveIndex = teoria.note.fromMIDI(note).chroma()
+        // var noteName = this.IndexToNote[octaveIndex]
+        // var color = Colors[noteName]
     }
 
 }

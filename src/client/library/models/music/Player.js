@@ -1,4 +1,6 @@
 import Tone from 'tone'
+import Fileplayer from '../Fileplayer'
+// TODO: finish up fileplayer class
 
 class Player {
     constructor (instrument) {
@@ -20,6 +22,8 @@ class Player {
     load () {
         // Promisify loading of samples
         return new Promise((resolve, reject) => {
+            // TODO: Have to change this to new fileplayer which generates every note
+            // this.player must be type fileplayer
             this.player = new Tone.Players(this.soundSamples, () => {
                 this.loaded = true
                 return resolve()

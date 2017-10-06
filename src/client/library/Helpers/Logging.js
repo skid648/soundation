@@ -4,11 +4,9 @@ class Logging {
     }
 
     SpaceTitleAndLog (title, object) {
-        console.log("")
-        console.log(`${title}`)
-        console.log("==================")
-        console.log("")
+        console.groupCollapsed(title);
         console.log(object)
+        console.groupEnd();
     }
 }
 
