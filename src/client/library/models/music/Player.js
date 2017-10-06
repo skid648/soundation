@@ -1,5 +1,5 @@
 import Tone from 'tone'
-import Fileplayer from '../Fileplayer'
+import Fileplayer from './Fileplayer'
 // TODO: finish up fileplayer class
 
 class Player {
