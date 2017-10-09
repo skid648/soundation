@@ -75,11 +75,62 @@ class Fileplayer {
         this.onload = function(){}
     }
 
+    _getNotes (start, end) {
+        let chromatic = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
+
+        let splitRegexp = /(-?\d+)/
+
+        let startOctave = parseInt(start.split(splitRegexp)[1])
+        let startNote = start.split(splitRegexp)[0]
+        startNote = chromatic.indexOf(startNote)
+
+        let endOctave = parseInt(end.split(splitRegexp)[1])
+        let endNote = end.split(splitRegexp)[0]
+        endNote = chromatic.indexOf(endNote)
+
+        let currentNote = startNote
+        let currentOctave = startOctave
+
+        let retNotes = []
+
+        while(!(currentNote === endNote && currentOctave === endOctave)){
+            retNotes.push(chromatic[currentNote] + currentOctave)
+
+            currentNote++
+
+            if (currentNote >= chromatic.length){
+                currentNote = 0
+                currentOctave++
+            }
+        }
+
+        return retNotes
+    }
+
+    _getNotesRespalling (note) {
+        let respelling = {"Db" : "C#", "Eb" : "D#", "Gb" : "F#", "Ab" : "G#", "Bb" : "A#"}
+
+        let pitch = note.split(splitRegexp)[0]
+        let octave = parseInt(note.split(splitRegexp)[1])
+        if (respelling.hasOwnProperty(pitch)){
+            return respelling[pitch] + octave.toString()
+        } else {
+            return null
+        }
+    }
+
     load () {
         //get all the samples between lowest and highest notes
-        var allNotes = Notes.getNotes(this._lowestNote, this._highestNote);
+        let allNotes = this._getNotes(this._lowestNote, this._highestNote)
+        _.forEach(allNotes, (note, i) => {
+            let end = Math.max(this._stepSize * 2 * 1, allNotes.length)
+            let bufferPitch = allNotes[i + this._stepSize]
 
-        // console.log('Starting from '+ this._lowestNote + ', high: ' + this._highestNote + ' and steps:' + this._stepSize + ' and generated' + JSON.stringify(allNotes, null, 2))
+            if (!_.isNil(bufferPitch)) {
+                this._loadCount += 1
+                let buff = new Buffer(this._instrumentFolder + "/" + bufferPitch + ".mp3",)
+            }
+        })
 
         //get the samples to load
         for (var i = 0; i < allNotes.length; i+=this._stepSize * 2 + 1){
