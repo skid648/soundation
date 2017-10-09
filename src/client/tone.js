@@ -8,6 +8,7 @@ import Note from "./library/models/music/Note"
 import Log from "./library/Helpers/Logging"
 import Player from "./library/models/music/Player"
 import Sound from "./library/models/music/Sound"
+import Fileplayer from "./library/models/music/Fileplayer"
 
 // Do | Re | Mi | Fa | Sol | La | Si  |
 // C  | D  | E  | F  | G   | A  | B.  |
@@ -102,7 +103,7 @@ partNotes = [
 
 /** Trying every class */
 
-Log.SpaceTitleAndLog("Data / NoteGenerator", NoteGenerator)
+Log.SpaceTitleAndLog("Data / NoteGenerator", NoteGenerator.getNotes())
 
 let noteInstance = new Note("8n", 3, "8n")
 Log.SpaceTitleAndLog("Music / Note", noteInstance)
@@ -120,6 +121,9 @@ soundInstance.load()
     Log.SpaceTitleAndLog("Music / Sound", soundInstance)
     // soundInstance.play(340, Tone.now(), "2n")
 })
+
+let FilePlayerInstance = new Fileplayer()
+Log.SpaceTitleAndLog("Music / fileplayer", FilePlayerInstance)
 
 let PartInstance = new Part(partNotes)
 PartInstance.start()
