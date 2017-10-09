@@ -76,6 +76,7 @@ class Fileplayer {
     }
 
     _getNotes (start, end) {
+        // get notes function
         let chromatic = ["C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B"]
 
         let splitRegexp = /(-?\d+)/
