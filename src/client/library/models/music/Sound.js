@@ -9,6 +9,7 @@ class Sound {
         this.startNote = 48
         this.noteGap = 4
         this.notes = NoteGenerator.getNotes()
+        this.scaleIndexToNote = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     }
 
     strum (key, mode) {
@@ -21,15 +22,21 @@ class Sound {
     }
 
     play (midi, time, duration) {
-        console.log(`midi given: ${midi}, converted to: ${Tone.Frequency(midi).toNote()}`)
+        // console.log(`midi given: ${midi}, converted to: ${this._midiToNote(midi)}`)
         if (!this.muted){
-            let note = Tone.Frequency(midi).toNote()
+            let note = this._midiToNote(midi)
             this.harp.play(note, duration, time)
         }
     }
 
     load () {
         return this.harp.load()
+    }
+
+    _midiToNote (midiNumber) {
+        let octave = Math.floor(midiNumber / 12) - 1
+        let note = midiNumber % 12
+        return this.scaleIndexToNote[note] + octave
     }
 
 }

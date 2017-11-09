@@ -1,12 +1,14 @@
 class Logging {
     constructor() {
-
+        this.debug = true
     }
 
     SpaceTitleAndLog (title, object) {
-        console.groupCollapsed(title);
-        console.log(object)
-        console.groupEnd();
+        if (this.debug) {
+            console.groupCollapsed(title);
+            console.log(object)
+            console.groupEnd();
+        }
     }
 }
 

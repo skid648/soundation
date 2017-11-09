@@ -9,6 +9,7 @@ import Log from "./library/Helpers/Logging"
 import Player from "./library/models/music/Player"
 import Sound from "./library/models/music/Sound"
 import Fileplayer from "./library/models/music/Fileplayer"
+import Interface from "./library/interface"
 
 // Do | Re | Mi | Fa | Sol | La | Si  |
 // C  | D  | E  | F  | G   | A  | B.  |
@@ -25,55 +26,43 @@ let instrumentNotes = {
 }
 
 let partNotes = [
-    {"time" : "8n * 0", "note": "Bb3", "degree" : 0, "duration" : "8n"},
-    {"time" : "8n * 0", "note": "D6", "degree" : 3, "duration" : "8n"},
-
-    {"time" : "8n * 1", "note": "C3", "degree" : 1, "duration" : "8n"},
-    {"time" : "8n * 1", "note": "Eb3", "degree" : 4, "duration" : "8n"},
-
-    {"time" : "8n * 2", "note": "C5", "degree" : 2, "duration" : "8n"},
-    {"time" : "8n * 2", "note": "F4", "degree" : 5, "duration" : "8n"},
-
-    {"time" : "8n * 3", "note": "D6", "degree" : 3, "duration" : "8n"},
-    {"time" : "8n * 3", "note": "G5", "degree" : 6, "duration" : "8n"},
-
-    {"time" : "8n * 4", "note": "Eb3", "degree" : 4, "duration" : "8n"},
-    {"time" : "8n * 4", "note": "Gb6", "degree" : 7, "duration" : "8n"},
-
-    {"time" : "8n * 5", "note": "C3", "degree" : 1, "duration" : "8n"},
-    {"time" : "8n * 5", "note": "Eb3", "degree" : 4, "duration" : "8n"},
-
-    {"time" : "8n * 6", "note": "C5", "degree" : 2, "duration" : "8n"},
-    {"time" : "8n * 6", "note": "F4", "degree" : 5, "duration" : "8n"}
-]
-
-partNotes = [
     {"time" : "8n * 0", "degree" : 0, "duration" : "8n"},
-    {"time" : "8n * 0", "degree" : 3, "duration" : "8n"},
-
     {"time" : "8n * 1", "degree" : 1, "duration" : "8n"},
-    {"time" : "8n * 1", "degree" : 4, "duration" : "8n"},
-
     {"time" : "8n * 2", "degree" : 2, "duration" : "8n"},
-    {"time" : "8n * 2", "degree" : 5, "duration" : "8n"},
-
     {"time" : "8n * 3", "degree" : 3, "duration" : "8n"},
-    {"time" : "8n * 3", "degree" : 6, "duration" : "8n"},
-
     {"time" : "8n * 4", "degree" : 4, "duration" : "8n"},
-    {"time" : "8n * 4", "degree" : 7, "duration" : "8n"},
-
-    {"time" : "8n * 5", "degree" : 1, "duration" : "8n"},
-    {"time" : "8n * 5", "degree" : 4, "duration" : "8n"},
-
+    {"time" : "8n * 5", "degree" : 3, "duration" : "8n"},
     {"time" : "8n * 6", "degree" : 2, "duration" : "8n"},
-    {"time" : "8n * 6", "degree" : 5, "duration" : "8n"}
+    {"time" : "8n * 7", "degree" : 1, "duration" : "8n"},
 ]
 
-// let partInstance = new Part(partNotes)
-// .then(() => {
-//     Tone.Transport.start()
-// })
+Tone.Transport.loop = true
+Tone.Transport.loopEnd = "1m"
+
+
+Log.SpaceTitleAndLog('Transport Events', Tone.Transport)
+
+let partInstance = new Part(partNotes)
+partInstance.start()
+.then(() => {
+    $('.fa-play-circle-o').click((event) => {
+        if (Tone.Transport.state === 'stopped') {
+            Tone.Transport.start()
+
+            $(event.currentTarget)
+            .removeClass('fa-play-circle-o')
+            .addClass('fa-pause-circle-o')
+        } else {
+            Tone.Transport.stop()
+
+            $(event.currentTarget)
+            .removeClass('fa-pause-circle-o')
+            .addClass('fa-play-circle-o')
+        }
+    })
+})
+
+
 
 // let players = new Tone.Players(instrumentNotes).toMaster();
 //
@@ -103,34 +92,41 @@ partNotes = [
 
 /** Trying every class */
 
-Log.SpaceTitleAndLog("Data / NoteGenerator", NoteGenerator.getNotes())
+// Log.SpaceTitleAndLog("Data / NoteGenerator", NoteGenerator.getNotes())
+//
+// let noteInstance = new Note("8n", 3, "8n")
+// Log.SpaceTitleAndLog("Music / Note", noteInstance)
 
-let noteInstance = new Note("8n", 3, "8n")
-Log.SpaceTitleAndLog("Music / Note", noteInstance)
+// let playerInstance = new Player("harp")
+// playerInstance.load()
+// .then(res => {
+//     Log.SpaceTitleAndLog("Music / Player", playerInstance)
+//     // playerInstance.play("Bb3", "2n", Tone.now())
+// })
 
-let playerInstance = new Player("harp")
-playerInstance.load()
-.then(res => {
-    Log.SpaceTitleAndLog("Music / Player", playerInstance)
-    // playerInstance.play("Bb3", "2n", Tone.now())
-})
+// let soundInstance = new Sound()
+// soundInstance.load()
+// .then(() => {
+//     Log.SpaceTitleAndLog("Music / Sound", soundInstance)
+//     // soundInstance.play(340, Tone.now(), "2n")
+// })
 
-let soundInstance = new Sound()
-soundInstance.load()
-.then(() => {
-    Log.SpaceTitleAndLog("Music / Sound", soundInstance)
-    // soundInstance.play(340, Tone.now(), "2n")
-})
+// Tone.Transport.start()
+//
+// let FilePlayerInstance = new Fileplayer("https://gweb-musiclab-site.appspot.com/static/sound/harp", "C3", "Gb6", 3)
+// FilePlayerInstance.load()
+// .then(() => {
+//     Log.SpaceTitleAndLog("Music / fileplayer", FilePlayerInstance)
+//     console.log(FilePlayerInstance.triggerAttackRelease("A3", "8n"))
+// })
 
-let FilePlayerInstance = new Fileplayer()
-Log.SpaceTitleAndLog("Music / fileplayer", FilePlayerInstance)
 
-let PartInstance = new Part(partNotes)
-PartInstance.start()
-.then(() => {
-    Log.SpaceTitleAndLog("Music / Part", PartInstance)
-    Tone.Transport.start()
-})
+// let PartInstance = new Part(partNotes)
+// PartInstance.start()
+// .then(() => {
+//     Log.SpaceTitleAndLog("Music / Part", PartInstance)
+//     Tone.Transport.start()
+// })
 
 
 

@@ -4,6 +4,7 @@ import Tone from 'tone'
 import Sound from './Sound'
 import Log from '../../Helpers/Logging'
 import NoteGenerator from '../../models/data/NoteGenerator'
+import Interface from '../../interface'
 
 class Part {
     constructor (notes) {
@@ -25,24 +26,26 @@ class Part {
 
         let generatedNotes = NoteGenerator.getNotes()
         this._setChord(generatedNotes.major.C)
+        this._enable(true)
     }
 
     start () {
-        return Promise.resolve()
-        .then(() => this.sound.load())
+        return this.sound.load()
         .then(() => {
-            Log.SpaceTitleAndLog('Notes on Part object', this.notes)
-            Log.SpaceTitleAndLog('Chord on Part object', this.chord)
+            // Log.SpaceTitleAndLog('Notes on Part object', this.notes)
+            // Log.SpaceTitleAndLog('Chord on Part object', this.chord)
             this.part = new Tone.Part(this._onnote.bind(this), this.notes).start(0)
             return true
         })
     }
 
     _onnote (time, note) {
-        console.log(`Firing onnote with time: ${time}, note: ${JSON.stringify(note)}, noteFromChord: ${this.chord[note.degree]}, enabled: ${this.enabled}`)
+        console.log(`Firing onnote with time: ${time}, note: ${JSON.stringify(note.degree)}, noteFromChord: ${this.chord[note.degree]}, enabled: ${this.enabled}`)
         if (this.enabled){
             let duration = this.part.toSeconds(note.duration)
+            console.log('Seconds:' + note.duration)
             this.sound.play(this.chord[note.degree], time, duration)
+            Interface.addEvent(this.chord[note.degree], time.toFixed(3))
         }
     }
 
@@ -50,7 +53,7 @@ class Part {
         this.enabled = enabled
 
         if (enabled){
-            this.setChord(this.chord)
+            this._setChord(this.chord)
         }
 
     }
