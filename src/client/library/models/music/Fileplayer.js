@@ -94,13 +94,13 @@ class Fileplayer {
         let promiseArray = []
         let bufferPitch = {}
 
-        for(let i = 0; i < this._allNotes.length; i+=this._stepSize * 2 + 1) {
+        for(let noteIndex = 0; noteIndex < this._allNotes.length; noteIndex+=this._stepSize * 2 + 1) {
 
-            bufferPitch = this._allNotes[i + this._stepSize]
+            bufferPitch = this._allNotes[noteIndex + this._stepSize]
             let end = Math.max(this._stepSize * 2 + 1, this._allNotes.length)
 
             if (!_.isNil(bufferPitch)) {
-                promiseArray.push(this._createBufferPromise(bufferPitch, i, end, this._allNotes))
+                promiseArray.push(this._createBufferPromise(bufferPitch, noteIndex, end, this._allNotes))
             }
         }
 
@@ -120,7 +120,9 @@ class Fileplayer {
         let player = this._multiPlayer.get(description.buffer)
 
         Log.SpaceTitleAndLog(`Got player from note ${note}`, player)
+        Log.SpaceTitleAndLog(`Description interval: ${this._intervalToFrequencyRatio(description.interval)}`, {})
 
+        player.playbackRate = this._intervalToFrequencyRatio(description.interval)
         return player.start(startTime, 0, duration)
         // TODO: check if we should remove duration
         // TODO: note should should the same as arpegios
@@ -210,7 +212,7 @@ class Fileplayer {
 
     // BUFFERS
 
-    _createBufferPromise (bufferPitch, i, end, allNotes) {
+    _createBufferPromise (bufferPitch, noteIndex, end, allNotes) {
         return new Promise((resolve, reject) => {
             return new Tone.Buffer(this._instrumentFolder + "/" + bufferPitch + ".mp3", buffer => {
                 return resolve(buffer)
@@ -223,11 +225,11 @@ class Fileplayer {
             this._multiPlayer.add(bufferPitch, res)
             this._buffers[bufferPitch] = res
 
-            for (var j = i; j < end; j++){
+            for (var j = noteIndex; j < end; j++){
                 var note = allNotes[j]
 
                 this._notes[note] = {
-                    "interval" : (j - i - this._stepSize),
+                    "interval" : (j - noteIndex - this._stepSize),
                     "buffer" : bufferPitch,
                 }
 

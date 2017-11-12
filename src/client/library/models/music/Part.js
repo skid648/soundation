@@ -27,6 +27,7 @@ class Part {
         let generatedNotes = NoteGenerator.getNotes()
         this._setChord(generatedNotes.major.C)
         this._enable(true)
+        Interface.clearEvents()
     }
 
     start () {
@@ -68,6 +69,7 @@ class Part {
     }
 
     _setChord (notes) {
+        Interface.clearEvents()
         console.log(`Setting chords to ${JSON.stringify(notes)}`)
         if (this.enabled){
             _.forEach(this.notes, note => {

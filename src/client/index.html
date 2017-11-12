@@ -1,102 +1,23 @@
 <html>
 <head>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"><title>My hello</title>
     <title>My hello</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
-
-        body {
-            background: #d4d4d4;
-            font-family: 'Source Sans Pro', sans-serif;
-            font-size: 15px;
-        }
-
-        .app {
-            margin: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        .app section {
-            width: 100%;
-            color: #FC3A51;
-            /*color: #F5B349;*/
-            background: rgba(0,0,0,0.09);
-            margin: 10px auto;
-
-        }
-
-        h2 {
-            text-align: center;
-            padding: 10px;
-            color: #0E2430;
-            border-bottom: 3px solid #F5B349;
-        }
-
-        #events {
-            display: flex;
-            flex-direction: row;
-            padding: 20px;
-            text-align: center;
-            justify-content: flex-start;
-            align-items: center;
-            overflow: scroll;
-            height: 200px;
-            box-sizing: border-box;
-            overflow-x: scroll;
-        }
-
-        .event {
-            background: #FC3A51;
-            color: white;
-            min-width: 80px;
-            height: 150px;
-            margin: 5px;
-            display: flex;
-            text-align: center;
-            justify-content: center;
-            align-items: center;
-            border-radius: 3px;
-            box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-            position: relative;
-            flex-direction: column;
-        }
-
-        .event .title {
-            flex-grow: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .event .time {
-            justify-self: flex-end;
-            bottom: 0px;
-            width: 100%;
-            height: 20px;
-            color:  #FC3A51;
-            background: #F5B349;
-            padding: 0px 5px;
-            box-sizing: border-box;
-        }
-
-        h3 {
-           align-self: flex-start;
-        }
-
-        .fa-play-circle-o, .fa-pause-circle-o {
-            font-size: 30px;
-        }
-
-
-    </style>
 </head>
 <body>
     <div class="app">
-        <div>
-            <i class="fa fa-play-circle-o" aria-hidden="true"></i>
+        <div id="controls">
+            <div class="top">
+                <i class="fa fa-angle-left nextChord" aria-hidden="true"></i>
+            </div>
+            <div class="middle">
+                <i class="fa fa-angle-left previousTrack" aria-hidden="true"></i>
+                <i class="fa fa-play-circle-o play" aria-hidden="true"></i>
+                <i class="fa fa-angle-right nextTrack" aria-hidden="true"></i>
+            </div>
+            <div class="bottom">
+                <i class="fa fa-angle-right prevChord" aria-hidden="true"></i>
+            </div>
         </div>
         <h2>Sound Translation</h2>
 
