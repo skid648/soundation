@@ -1,4 +1,4 @@
-import NoteGenerator from '../data/NoteGenerator'
+import Chords from '../data/ChordsAndNotesGenerator'
 import Tone from 'tone'
 import teoria from 'teoria'
 
@@ -11,7 +11,7 @@ class Note extends Tone{
         this.time = time
         this.degree = degree
         this.duration = duration
-        this.notes = NoteGenerator.getNotes()
+        this.chords = Chords.getChords()
 
         // this.loopDuration = this.toSeconds(PartsData.loopDuration)
         // TODO: this seems useless but commenting it may break something
@@ -20,30 +20,14 @@ class Note extends Tone{
     }
 
     _computeHighestAndLowestNote () {
-        for (let chordName in this.notes.major){
-            let chord = this.notes.major[chordName]
+        for (let chordName in this.chords.major){
+            let notesFromChord = this.chords.major[chordName]
 
-            for (let i = 0; i < chord.length; i++){
-
-                if (chord[i] > this.highestNote){
-                    this.highestNote = chord[i]
-                }
-
-                if (chord[i] < this.lowestNote){
-                    this.lowestNote = chord[i]
-                }
-            }
-
+            _.forEach(notesFromChord, noteInMidi => {
+                if (noteInMidi > this.highestNote) this.highestNote = noteInMidi
+                if (noteInMidi < this.lowestNote) this.lowestNote = noteInMidi
+            })
         }
-        console.log(`Computed Higest note: ${this.highestNote} and lowest note: ${this.lowestNote}`)
-    }
-
-    setChord (chord) {
-        //get this notes degree from the chord
-        var note = chord[this.degree]
-        var octaveIndex = teoria.note.fromMIDI(note).chroma()
-        // var noteName = this.IndexToNote[octaveIndex]
-        // var color = Colors[noteName]
     }
 
 }

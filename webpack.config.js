@@ -8,7 +8,7 @@ const config = {
         path: path.resolve(__dirname, './src/client/dist'),
         filename: 'test.js'
     },
-    devtool: 'source-map',
+    devtool: 'eval-cheap-module-source-map',
     module: {
         rules: [
             {

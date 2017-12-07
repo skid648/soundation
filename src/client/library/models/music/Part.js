@@ -3,81 +3,91 @@ import _ from 'lodash'
 import Tone from 'tone'
 import Sound from './Sound'
 import Log from '../../Helpers/Logging'
-import NoteGenerator from '../../models/data/NoteGenerator'
+import Chords from '../data/ChordsAndNotesGenerator'
 import Interface from '../../interface'
 
 class Part {
-    constructor (notes) {
+    constructor (partData, partName) {
         this.notes = []
         this.chord = {}
+        this.name = partName
         this.sound = new Sound()
         this.enabled = true
+        this.chords = Chords.getChords()
+        this.currentVariation = { 'chordName': 'major', 'key': 'C' }
 
         //make each of the notes in the part
         let note = []
 
-        _.forEach(notes, obj => {
+        // Transform partData to Notes object
+        // and fill this.notes
+        _.forEach(partData, partNote => {
             note = [
-                obj.time,
-                new Note(obj.time, obj.degree, obj.duration)
+                partNote.time,
+                new Note(
+                    partNote.time,
+                    partNote.degree,
+                    partNote.duration
+                )
             ]
             this.notes.push(note)
         })
 
-        let generatedNotes = NoteGenerator.getNotes()
-        this._setChord(generatedNotes.major.C)
-        this._enable(true)
+        // enable part
+        this.enable(true)
         Interface.clearEvents()
     }
 
+    /**
+     * Loads the sounds binds what happens after each note and
+     * starts the part
+     */
     start () {
         return this.sound.load()
-        .then(() => {
-            // Log.SpaceTitleAndLog('Notes on Part object', this.notes)
-            // Log.SpaceTitleAndLog('Chord on Part object', this.chord)
-            this.part = new Tone.Part(this._onnote.bind(this), this.notes).start(0)
-            return true
+        .then(res => {
+            this.part = new Tone.Part(this._onNextNote.bind(this), this.notes).start(0)
+            return res
         })
     }
 
-    _onnote (time, note) {
-        console.log(`Firing onnote with time: ${time}, note: ${JSON.stringify(note.degree)}, noteFromChord: ${this.chord[note.degree]}, enabled: ${this.enabled}`)
+
+    _onNextNote (time, note) {
         if (this.enabled){
             let duration = this.part.toSeconds(note.duration)
-            console.log('Seconds:' + note.duration)
             this.sound.play(this.chord[note.degree], time, duration)
             Interface.addEvent(this.chord[note.degree], time.toFixed(3))
         }
     }
 
-    _enable (enabled) {
+    enable (enabled) {
         this.enabled = enabled
-
         if (enabled){
-            this._setChord(this.chord)
+            this.setChord(this.currentVariation.chordName, this.currentVariation.key)
+            Interface.printArrayHeader()
         }
 
     }
 
-    _initChord () {
-        var notes = this.chord
-
-        _.forEach(this.notes, note => {
-            note[1].setChord(notes)
-        })
-
+    setChord (chordName, chordKey) {
+        console.log(`Setting Part [${this.name}] to ${chordName}:${chordKey}`)
+        // check if chord exists
+        let notesFromChord = _.get(this.chords, `${chordName}.${chordKey}`)
+        if (notesFromChord != null) {
+            Interface.clearEvents()
+            // alter the note mapping to the new chord
+            this.chord = notesFromChord
+            // store the select chord
+            this.currentVariation.chordName = chordName
+            this.currentVariation.key = chordKey
+        } else {
+            console.warn(`Chould not set part to ${chordName}:${chordKey}, it appears that one or either of them are not defined`)
+        }
     }
 
-    _setChord (notes) {
-        Interface.clearEvents()
-        console.log(`Setting chords to ${JSON.stringify(notes)}`)
-        if (this.enabled){
-            _.forEach(this.notes, note => {
-                note[1].setChord(notes)
-            })
-        }
-
-        this.chord = notes
+    dispose () {
+        this.part.dispose()
+        this.part.removeAll()
+        this.sound.dispose()
     }
 }
 

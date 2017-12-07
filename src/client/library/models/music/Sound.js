@@ -1,5 +1,5 @@
 import Player from './Player'
-import NoteGenerator from '../data/NoteGenerator'
+import Chords from '../data/ChordsAndNotesGenerator'
 import Tone from 'tone'
 
 class Sound {
@@ -8,12 +8,12 @@ class Sound {
         this.muted = false
         this.startNote = 48
         this.noteGap = 4
-        this.notes = NoteGenerator.getNotes()
+        this.chords = Chords.getChords()
         this.scaleIndexToNote = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
     }
 
-    strum (key, mode) {
-        let chord = this.notes[mode][key]
+    strum (key, chordName) {
+        let chord = this.chords[chordName][key]
         let now = Tone.context.currentTime + Tone.prototype.blockTime
         let wait = 0.05
         for (var i = 0; i < 4; i++){
@@ -22,7 +22,6 @@ class Sound {
     }
 
     play (midi, time, duration) {
-        // console.log(`midi given: ${midi}, converted to: ${this._midiToNote(midi)}`)
         if (!this.muted){
             let note = this._midiToNote(midi)
             this.harp.play(note, duration, time)
@@ -37,6 +36,10 @@ class Sound {
         let octave = Math.floor(midiNumber / 12) - 1
         let note = midiNumber % 12
         return this.scaleIndexToNote[note] + octave
+    }
+
+    dispose () {
+        this.harp.dispose()
     }
 
 }

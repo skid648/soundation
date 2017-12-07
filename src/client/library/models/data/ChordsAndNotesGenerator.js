@@ -1,6 +1,6 @@
 import Teoria from 'teoria'
 
-class NoteGenerator {
+class Chords {
     constructor () {
         this.Notes = { major : {}, minor : {} }
         this.majorOrder = ["C", "G", "D", "A", "E", "B", "F#", "C#", "G#", "D#", "A#", "F"];
@@ -42,7 +42,7 @@ class NoteGenerator {
      * }
      * @returns {{major: {}, minor: {}}|*}
      */
-    getNotes () {
+    getChords () {
        return this.Notes
     }
     
@@ -74,4 +74,4 @@ class NoteGenerator {
     }
 }
 
-export default new NoteGenerator()
+export default new Chords()

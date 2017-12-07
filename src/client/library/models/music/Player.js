@@ -14,13 +14,16 @@ class Player {
 
     play (note, duration, time) {
         if(this.player.loaded){
-            console.log(`${note} ${duration} ${time}`)
             this.player.triggerAttackRelease(note, duration, time)
         }
     }
 
     isLoaded () {
         return this.player.loaded
+    }
+
+    dispose () {
+        this.player.dispose()
     }
 
 }
