@@ -1,6 +1,7 @@
 import Tone from 'tone'
 import Promise from 'bluebird'
 import Log from "../../../library/Helpers/Logging"
+import Interface from "../../../library/interface"
 
 class Fileplayer {
     /**
@@ -131,23 +132,22 @@ class Fileplayer {
     }
 
     triggerAttackRelease (note, duration, startTime) {
-        console.log(this._notes) // DAFACK IS THIS UNDEFINED
+        console.log('note:        ' + note)
+        console.log('duration:    ' + duration)
+        console.log('startTime:   ' + startTime)
+        // console.log('this._notes: ' + JSON.stringify(this._notes, null, 2))
         let description = this._notes[note]
 
-        console.log('Note: ' + note + ', rate: ' + this._intervalToFrequencyRatio(description.interval) + '')
+        console.log('description: ' + JSON.stringify(description))
+        console.log('to ITFR:     ' + description.interval + ' => ' + JSON.stringify(this._intervalToFrequencyRatio(description.interval)))
 
         let player = this._multiPlayer.get(description.buffer)
 
-        player.playbackRate = this._intervalToFrequencyRatio(description.interval)
-
-        // console.log(`    ${note}    |     ${duration}     |    ${startTime}   |    ${player.playbackRate}`)
-
-        console.log('Player start: note: ' + note + ' interval: ' + description.interval + ' rate: ' + player.playbackRate)
-
         player._playbackRate = this._intervalToFrequencyRatio(description.interval)
 
+        console.log(player)
+        Interface.logSpacerColored()
         player.start(startTime, 0)
-
         return
         // return player.start(startTime)
     }
@@ -281,10 +281,6 @@ class Fileplayer {
             this._multiPlayer.add(bufferPitch, res)
             this._buffers[bufferPitch] = res
 
-            let trans = _.find(this.transformations, { bufferPitch: bufferPitch})
-
-            trans.pitching = []
-
             for (var j = noteIndex; j < end; j++){
                 var note = allNotes[j]
 
@@ -292,11 +288,6 @@ class Fileplayer {
                     "interval" : (j - noteIndex - this._stepSize),
                     "buffer" : bufferPitch,
                 }
-
-                trans.pitching.push({
-                    "interval" : (j - noteIndex - this._stepSize),
-                    "buffer" : bufferPitch,
-                })
 
                 //and the respelling if it exists
                 var respelling = this._getNotesRespalling(note)
@@ -306,6 +297,10 @@ class Fileplayer {
                 }
             }
             return res
+        })
+        .catch(e => {
+            console.err(`Buffer failed: ${JSON.stringify(e)}...`)
+            return Promise.reject(new Error())
         })
     }
 
