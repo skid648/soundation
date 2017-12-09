@@ -65,6 +65,6 @@ partInstance.start()
 // }).toMaster()
 
 let basicFilePlayer = new Fileplayer('https://gweb-musiclab-site.appspot.com/static/sound/harp/', 'C3', 'B5')
-basicFilePlayer.triggerAttackRelease("C3",)
+// basicFilePlayer.triggerAttackRelease("C3",)
 
 

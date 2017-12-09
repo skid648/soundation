@@ -53,7 +53,6 @@ class Interface {
 
             let currentEvent = events[events.length - 1]
             spacer.insertBefore(currentEvent)
-            // console.log("%c ↑ ========== %cFIRST ELEMENT OF LOOP %c==========", 'color: #FC3A51', 'color: #F5B349', 'color: #FC3A51')
         }
     }
 
@@ -119,6 +118,10 @@ class Interface {
         console.log('-----------------------------------------------------------------------')
         console.log('   Note   |   Duration   |          Time          |       interval     ')
         console.log('-----------------------------------------------------------------------')
+    }
+
+    logSpacerColored () {
+        console.log("%c==========%c---------%c==============", 'color: #FC3A51', 'color: #F5B349', 'color: #FC3A51')
     }
 }
 
