@@ -144,6 +144,7 @@ class Fileplayer {
 
         console.log('Player start: note: ' + note + ' interval: ' + description.interval + ' rate: ' + player.playbackRate)
 
+        player._playbackRate = this._intervalToFrequencyRatio(description.interval)
 
         player.start(startTime, 0)
 
