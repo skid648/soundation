@@ -1,4 +1,4 @@
 ### install
 
-* run ```npm install``` and ```npm run start```
-* open a new terminal and start a server e.g. ```http-server```
+* run ```npm run build```
+* open a tab in the same directory ```npm run serve```

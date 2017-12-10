@@ -4,7 +4,8 @@
   "description": "",
   "main": "tone.js",
   "scripts": {
-    "start": "webpack --watch --progress --colors",
+    "build": "yarn && webpack --watch --progress --colors",
+    "serve": "cd src/client/ && http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
