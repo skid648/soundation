@@ -123,3 +123,9 @@ h3 {
 #bpm {
     width: 70%;
 }
+
+.center {
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+}
