@@ -63,6 +63,10 @@ class Soundation {
     Tone.Transport.start()
   }
 
+  strum(letter, chord) {
+    this._partPlaying.strum(letter, chord)
+  }
+
   destroy() {
     this._partPlaying.dispose()
   }

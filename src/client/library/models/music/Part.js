@@ -51,6 +51,10 @@ class Part {
       })
   }
 
+  strum(letter, key) {
+    this.sound.strum(letter, key)
+  }
+
 
   _onNextNote(time, note) {
     if (this.enabled) {

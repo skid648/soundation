@@ -12,7 +12,7 @@ class Sound {
     this.scaleIndexToNote = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
   }
 
-  strum(key, chordName) {
+  strum(chordName, key) {
     const chord = this.chords[chordName][key]
     const now = Tone.context.currentTime + Tone.prototype.blockTime
     const wait = 0.05
