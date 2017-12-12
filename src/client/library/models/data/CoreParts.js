@@ -156,7 +156,7 @@ class Parts {
   }
 
   next() {
-    if (this.nextPartIndex >= this.parts.length) {
+    if (this.nextPartIndex >= this.parts.length - 1) {
       this.nextPartIndex = 0
     } else {
       this.nextPartIndex = this.nextPartIndex + 1

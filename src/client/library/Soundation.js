@@ -2,33 +2,38 @@ import _ from 'lodash'
 
 import Tone from 'tone'
 import Part from './models/music/Part'
-import Interface from './interface'
 import CoreParts from './models/data/CoreParts'
 
 class Soundation {
   /**
-   *
+   * Constructs and returns the object
    * @param bpm Overval bpm of soundation
    * @param partName Choose the part to be played initially
-   * @param key Set the key that soundation starts with
    * @param autostart Set false to disable the the player from starting after loading
    * @returns {*}
    */
-  constructor(bpm = 50, partName = '1 note', autostart = true) {
-    console.debug(`New Soundation Object bpm: ${bpm}, part name: ${partName}`)
-    // Set bpm or default 100
+  constructor(bpm = 100, partName = '1 note', autostart = true) {
     this._setBpm(bpm)
-    // Set part name or default part is '1 note'
     this.partName = partName
     this.autostart = autostart
   }
 
-  /**
-   * @public
-   */
+  /* ***************************** *
 
+            PUBLIC METHODS
+
+   * ***************************** */
+
+  /**
+   * load initializes ths soundation object.
+   * This involves grabing all the instrument
+   * sounds, initializing the chord that the part
+   * will play and finally starts the transport
+   * if autoplay is set to true. (Transport is tone's
+   * master time keeper and needs to be started for
+   * the events to be played)
+   */
   load() {
-    // Load the resources, set the initial key, and start the tone transport
     return this._initializeConfiguration()
       .then(() => {
         this._partPlaying.setChord('major', 'D#')
@@ -36,6 +41,15 @@ class Soundation {
       })
   }
 
+  /**
+   * Soundation can transform it's sound real time
+   * either directly thought the public api or can
+   * Automatically advance the variables and loop them
+   *
+   * This method takes care of the automatic transition
+   * Auto advance to the next sound transformation
+   * @param method can be one of ['key', 'bpm', 'track']
+   */
   next(method) {
     console.debug(`Advancing to next ${method}`)
     switch (method) {
@@ -55,46 +69,120 @@ class Soundation {
     }
   }
 
+  /* ***************************** *
+
+             API METHODS
+
+   * ***************************** */
+
+  /**
+   *
+   * @param key
+   * @param color
+   */
+  setKey({ key, color }) {
+
+  }
+
+  /**
+   *
+   * @param trackname
+   */
+  setTrack({ trackname }) {
+
+  }
+
+  /**
+   *
+   * @param bpm
+   * @param transition currenlty not supported
+   */
+  setBpm({ bpm, transition }) {
+
+  }
+
+  /* ***************************** *
+
+      USEFUL GENERIC-USE METHODS
+
+   * ***************************** */
+
+  /**
+   * Pause stops soundation object from playing
+   * without disposing anything. Used together with
+   * resume()
+   */
   pause() {
     Tone.Transport.stop()
   }
 
+  /**
+   * resume resumes soundation object from the start
+   * Used together with pause()
+   */
   resume() {
     Tone.Transport.start()
   }
 
+  /**
+   * Strum plays a bulk of notes from a chord
+   * one close to the other. Can be called
+   * multiple times
+   * @param letter Letter of key E.g. minor
+   * @param chord Name of the chord E.g. C#
+   */
   strum(letter, chord) {
     this._partPlaying.strum(letter, chord)
   }
 
+  /**
+   * Destructor of the class.
+   * Cleans eventing up.
+   */
   destroy() {
     this._partPlaying.dispose()
   }
 
+  /* ***************************** *
+
+           PRIVATE METHODS
+
+   * ***************************** */
+
   /**
+   * Used to initialize configuration of
+   * soundation the first time.
+   *  - Sets looping
+   *  - Retrieves the part to be played
+   *  - Initiliazes the part and starts it
+   * @returns {promise[thenable]}
    * @private
    */
-
   _initializeConfiguration() {
     // if true soundation keeps looping the track set
     this._loopTransportEnable(true)
-
-    // Gets and sets the default track
     const part = CoreParts.get(this.partName)
-    console.log(part)
     this._partPlaying = new Part(part, this.partName)
-    // here part loads sound from urls and returns a promise
     return this._partPlaying.start()
   }
 
+  /**
+   * Enables sample looping
+   * @param switchOn
+   * @private
+   */
   _loopTransportEnable(switchOn) {
     Tone.Transport.loop = _.isNil(switchOn) ? true : switchOn
     Tone.Transport.loopStart = '0m'
     Tone.Transport.loopEnd = '1m'
   }
 
+  /**
+   * Changes and stores bpm
+   * @param bpm
+   * @private
+   */
   _setBpm(bpm) {
-    console.debug(`Setting bpm to ${bpm}`)
     if (!_.isNil(bpm) && bpm > 0) {
       Tone.Transport.bpm.value = bpm
       this.bpm = bpm
@@ -104,11 +192,11 @@ class Soundation {
   }
 
   /**
-   * Get the next key from the chroma association
+   * Get the next key from the chroma array
    * @private
    */
   _nextKey() {
-    this._partPlaying.setChord('minor', 'C#')
+    this._partPlaying.nextChord()
   }
 
   /**
@@ -161,7 +249,7 @@ class Soundation {
     } else {
       goal = 70
       const animation = setInterval(() => {
-        if (this.bpm <= goal) {
+        if (this.bpm >= goal) {
           this._setBpm(this.bpm - step)
         } else {
           console.log('transition ended')
@@ -172,7 +260,9 @@ class Soundation {
   }
 
   /**
-   * Loops tracks
+   * Returns the next track data.
+   * If no track is next it starts
+   * looping again the tracks
    * @private
    */
   _nextTrack() {

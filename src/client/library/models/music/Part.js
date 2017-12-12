@@ -93,6 +93,11 @@ class Part {
     this.part.removeAll()
     this.sound.dispose()
   }
+
+  nextChord() {
+    const c = Chords.nextChord()
+    this.setChord(c.order, c.chord)
+  }
 }
 
 export default Part

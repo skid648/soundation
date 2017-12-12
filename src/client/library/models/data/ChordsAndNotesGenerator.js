@@ -6,6 +6,12 @@ class Chords {
     this.majorOrder = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'F'];
     this.minorOrder = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'F', 'C', 'G', 'D'];
     this._calculateNotes()
+
+    /**
+     * These are used to loop all keys sequentially
+     */
+    this.flattenedChords = this._getFlattenedChords()
+    this.chordIndex = 0
   }
 
   /**
@@ -69,6 +75,21 @@ class Chords {
         minor.transpose(Teoria.interval('P8'))
       }
     })
+  }
+
+  _getFlattenedChords() {
+    const majorChords = _.map(this.majorOrder, chord => ({ order: 'major', chord }))
+    const minorChords = _.map(this.minorOrder, chord => ({ order: 'minor', chord }))
+    return _.flatten(_.union(majorChords, minorChords))
+  }
+
+  nextChord() {
+    if (this.chordIndex >= this.flattenedChords.length - 1) {
+      this.chordIndex = 0
+    } else {
+      this.chordIndex = this.chordIndex + 1
+    }
+    return this.flattenedChords[this.chordIndex]
   }
 }
 
