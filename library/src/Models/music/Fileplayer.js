@@ -264,8 +264,9 @@ class Fileplayer {
   }
 
   _getNotesRespalling(note) {
-    const respelling = { Db: 'C#', Eb: 'D#', Gb: 'F#', Ab: 'G#', Bb: 'A#' }
-
+    const respelling = {
+      Db: 'C#', Eb: 'D#', Gb: 'F#', Ab: 'G#', Bb: 'A#',
+    }
     const splitRegexp = /(-?\d+)/
     const pitch = note.split(splitRegexp)[0]
     const octave = parseInt(note.split(splitRegexp)[1], 10)

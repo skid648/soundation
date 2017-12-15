@@ -2,8 +2,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="js/marvin.js"></script>
-    <!--<script src="js/pixels.js"></script>-->
+    <script src="assets/js/marvin.js"></script>
+    <script src="assets/js/soundation.min.js"></script>
     <style>
         canvas {
             border: 10px solid darkcyan;
@@ -13,7 +13,7 @@
             transition: background 0.2s;
         }
     </style>
-    <img id="image" src="img/darth-vader.jpg" alt="">
+    <img id="image" src="assets/img/darth-vader.jpg" alt="">
     <div id="coords"></div>
     <div id="color"></div>
 </head>
@@ -26,7 +26,12 @@
 
         function hookImage() {
             imageExample1 = new MarvinImage()
-            imageExample1.load("img/darth-vader.jpg", function(){
+            imageExample1.load("assets/img/darth-vader.jpg", function(){
+                console.log(Soundation)
+//                s.load()
+//                .then(() => {
+//                    console.log("Loaded")
+//                })
                 width = imageExample1.width
                 height = imageExample1.height
                 console.log(imageExample1)

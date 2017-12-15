@@ -7,8 +7,12 @@ const config = {
   output: {
     path: path.resolve(__dirname, './library/script'),
     filename: 'soundation.min.js',
+    library: 'Soundation',
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
+    libraryExport: 'default'
   },
-  devtool: 'eval-cheap-module-source-map',
+    devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [
       {
@@ -38,7 +42,7 @@ const config = {
       title: 'Sound translation',
       logo: path.resolve('./src/client/assets/images/soundation_logo_only.png'),
       suppressSuccess: false,
-    }),
+    })
   ],
 };
 
