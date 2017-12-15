@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+body {
+    background: #d4d4d4;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 15px;
+}
+
+.app {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.app section {
+    width: 100%;
+    color: #FC3A51;
+    /*color: #F5B349;*/
+    background: rgba(0,0,0,0.09);
+    margin: 10px auto;
+
+}
+
+h2 {
+    text-align: center;
+    padding: 10px;
+    color: #0E2430;
+    border-bottom: 3px solid #F5B349;
+}
+
+#events {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    text-align: center;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: scroll;
+    height: 200px;
+    box-sizing: border-box;
+    overflow-x: scroll;
+}
+
+.event {
+    background: #FC3A51;
+    color: white;
+    min-width: 80px;
+    height: 150px;
+    margin: 5px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    border-radius: 3px;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    position: relative;
+    flex-direction: column;
+}
+
+.event .title {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.event .time {
+    justify-self: flex-end;
+    bottom: 0px;
+    width: 100%;
+    height: 20px;
+    color:  #FC3A51;
+    background: #F5B349;
+    padding: 0px 5px;
+    box-sizing: border-box;
+}
+
+h3 {
+    align-self: flex-start;
+}
+
+#controls .fa {
+    font-size: 30px;
+    margin: 5px 10px;
+    cursor: pointer;
+}
+
+#controls > div {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+#controls .prevChord {
+    transform: rotate(90deg);
+}
+
+#controls .nextChord {
+    transform: rotate(90deg);
+}
+
+.spacer {
+    /* border: 1px solid black; */
+    margin: 0px 15px;
+    width: 8px;
+    height: 100%;
+    background: #0000000f;
+    flex-shrink: 0;
+    border-radius: 8px;
+}
+
+#tempo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#bpm {
+    width: 70%;
+}
+
+.center {
+    text-align: center;
+    align-self: center;
+    justify-self: center;
+}

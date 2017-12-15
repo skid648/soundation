@@ -3,10 +3,10 @@ const webpack = require('webpack');
 const WebpackBuildNotifierPlugin = require('webpack-build-notifier');
 
 const config = {
-  entry: './src/client/tone.js',
+  entry: './library/src/soundation.js',
   output: {
-    path: path.resolve(__dirname, './src/client/dist'),
-    filename: 'test.js',
+    path: path.resolve(__dirname, './library/script'),
+    filename: 'soundation.min.js',
   },
   devtool: 'eval-cheap-module-source-map',
   module: {

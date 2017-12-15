@@ -1,0 +1,39 @@
+<html>
+<head>
+    <script src="../../library/script/soundation.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"><title>My hello</title>
+    <title>My hello</title>
+</head>
+<body>
+    <div class="app">
+        <img src="./assets/images/soundation_logo_only.png" alt="" id="logo">
+        <h2 class="center">
+            Just wait
+        </h2>
+        <canvas id="canvas"></canvas>
+    </div>
+    <script src="assets/js/script.js"></script>
+    <script>
+      var canvas = document.getElementById('canvas')
+      var ctx = canvas.getContext("2d")
+      var gl = canvas.getContext('webgl')
+
+      var img = document.getElementById("logo")
+      ctx.drawImage(img, 10, 10)
+
+      var pixels = new Uint8Array(gl.drawingBufferWidth * gl.drawingBufferHeight * 4)
+
+      gl.readPixels(
+        0,
+        0,
+        gl.drawingBufferWidth,
+        gl.drawingBufferHeight,
+        gl.RGBA,
+        gl.UNSIGNED_BYTE,
+        pixels
+      );
+      console.log(pixels); // Uint8Array
+    </script>
+</body>
+</html>

@@ -1,14 +1,14 @@
 {
-  "name": "toneexpirement",
+  "name": "soundation",
   "version": "1.0.0",
-  "description": "",
+  "description": "A library to help manipulate audio realtime and translate colors to sound.",
   "main": "tone.js",
   "scripts": {
-    "build": "yarn && webpack --watch --progress --colors",
-    "serve": "cd src/client/ && http-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build-dev": "yarn && webpack --watch --progress --colors",
+    "build": "webpack",
+    "serve": "cd ./examples/image_translation/ && http-server"
   },
-  "author": "",
+  "author": "Gkliatis Athanasios",
   "license": "ISC",
   "dependencies": {
     "bluebird": "^3.5.1",
