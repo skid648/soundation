@@ -10,9 +10,9 @@ const config = {
     library: 'Soundation',
     libraryTarget: 'umd',
     umdNamedDefine: true,
-    libraryExport: 'default'
+    libraryExport: 'default',
   },
-    devtool: 'eval-cheap-module-source-map',
+  devtool: 'eval-cheap-module-source-map',
   module: {
     rules: [
       {
@@ -40,9 +40,9 @@ const config = {
     new webpack.optimize.UglifyJsPlugin({ sourceMap: true }),
     new WebpackBuildNotifierPlugin({
       title: 'Sound translation',
-      logo: path.resolve('./src/client/assets/images/soundation_logo_only.png'),
+      logo: path.resolve('./development/assets/soundation_logo_only.png'),
       suppressSuccess: false,
-    })
+    }),
   ],
 };
 

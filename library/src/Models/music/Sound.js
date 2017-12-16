@@ -1,10 +1,10 @@
 import Tone from 'tone'
-import Player from './Player'
+import Instruments from './Instruments'
 import Chords from '../data/ChordsAndNotesGenerator'
 
 class Sound {
-  constructor() {
-    this.harp = new Player('harp')
+  constructor(instrumentUrl) {
+    this.instrument = new Instruments(instrumentUrl)
     this.muted = false
     this.startNote = 48
     this.noteGap = 4
@@ -12,6 +12,13 @@ class Sound {
     this.scaleIndexToNote = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
   }
 
+  /**
+   * Strums the instrument
+   * play a chord sequentially
+   * with a small time delay
+   * @param chordName
+   * @param key
+   */
   strum(chordName, key) {
     const chord = this.chords[chordName][key]
     const now = Tone.context.currentTime + Tone.prototype.blockTime
@@ -21,25 +28,45 @@ class Sound {
     }
   }
 
+  /**
+   * User the selected instrument
+   * to play a note at a given time
+   * @param midi
+   * @param time
+   * @param duration
+   */
   play(midi, time, duration) {
     if (!this.muted) {
       const note = this._midiToNote(midi)
-      this.harp.play(note, duration, time)
+      this.instrument.play(note, duration, time)
     }
   }
 
+  /**
+   * Load the selected instrument
+   * @returns {*}
+   */
   load() {
-    return this.harp.load()
+    return this.instrument.load()
   }
 
+  /**
+   * Used to clean up the instruments
+   */
+  dispose() {
+    this.instrument.dispose()
+  }
+
+  /**
+   * Translates midi to note name
+   * @param midiNumber
+   * @returns {*}
+   * @private
+   */
   _midiToNote(midiNumber) {
     const octave = Math.floor(midiNumber / 12) - 1
     const note = midiNumber % 12
     return this.scaleIndexToNote[note] + octave
-  }
-
-  dispose() {
-    this.harp.dispose()
   }
 }
 

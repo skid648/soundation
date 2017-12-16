@@ -12,7 +12,8 @@ class Soundation {
    * @param autostart Set false to disable the the player from starting after loading
    * @returns {*}
    */
-  constructor(bpm = 100, partName = '1 note', autostart = true) {
+  constructor(instrumentUrl, bpm = 100, partName = '1 note', autostart = false) {
+    this.instrumentUrl = instrumentUrl
     this._setBpm(bpm)
     this.partName = partName
     this.autostart = autostart
@@ -35,9 +36,10 @@ class Soundation {
    */
   load() {
     return this._initializeConfiguration()
-      .then(() => {
+      .then((res) => {
         this._partPlaying.setChord('major', 'D#')
         if (this.autostart) Tone.Transport.start()
+        return res
       })
   }
 
@@ -159,10 +161,13 @@ class Soundation {
    * @private
    */
   _initializeConfiguration() {
-    // if true soundation keeps looping the track set
+    // if true soundation keeps looping the part
     this._loopTransportEnable(true)
+    // grab the part from CoreParts
     const part = CoreParts.get(this.partName)
-    this._partPlaying = new Part(part, this.partName)
+    // initiate the part
+    this._partPlaying = new Part(this.instrumentUrl, part, this.partName)
+    // start the part
     return this._partPlaying.start()
   }
 

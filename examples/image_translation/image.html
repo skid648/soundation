@@ -23,24 +23,26 @@
         let height = 0
         let data = {}
         let image = {}
+        let harp = new Soundation('http://' + window.location.host + '/assets/harp')
 
         function hookImage() {
             imageExample1 = new MarvinImage()
             imageExample1.load("assets/img/darth-vader.jpg", function(){
-                console.log(Soundation)
-//                s.load()
-//                .then(() => {
-//                    console.log("Loaded")
-//                })
-                width = imageExample1.width
-                height = imageExample1.height
-                console.log(imageExample1)
-                image = imageExample1.imageData
-                document.onmousemove = point_it
+                harp.load()
+                .then(() => {
+                  width = imageExample1.width
+                  height = imageExample1.height
+                  console.log(imageExample1)
+                  image = imageExample1.imageData
+                  document.onmousemove = point_it
+                  document.getElementById("image").onclick = click_it
+                })
             })
         }
 
         function point_it(event){
+            // https://github.com/tsuyoshiwada/color-classifier
+            // TODO: use this
             let pos_x =
                 event.offsetX
                     ? (event.offsetX)
@@ -52,6 +54,7 @@
                     : event.pageY - document.getElementById("image").offsetTop;
 
             if ((pos_x > 0 && pos_x <= width) && (pos_y > 0 && pos_y <= height)) {
+                harp.resume()
                 document.getElementById("coords").innerHTML = `${pos_x} : ${pos_y}`
                 var color = getPixel(pos_x, pos_y)
                 var r = color >> 24 & 0xFF;
@@ -61,7 +64,8 @@
                 document.getElementById("color").innerHTML = `${r}, ${g}, ${b}`
                 document.body.style.background = `rgba(${r},${g},${b},${a})`
             } else {
-                document.getElementById("coords").innerHTML = `0 : 0`
+              harp.pause()
+              document.getElementById("coords").innerHTML = `0 : 0`
             }
 
         }
@@ -73,6 +77,11 @@
         function getPixel(x, y) {
             const pos = getPixelPositionRaw(x, y);
             return image.data[pos] << 24 | image.data[pos + 1] << 16 | image.data[pos + 2] << 8 | image.data[pos + 3];
+        }
+
+        function click_it() {
+          console.log('Clicked')
+          harp.strum('major', 'C#')
         }
 
         hookImage()

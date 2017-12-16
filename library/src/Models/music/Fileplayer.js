@@ -3,14 +3,24 @@ import Promise from 'bluebird'
 import Log from '../..//Helpers/Logging'
 
 class Fileplayer {
+  /* ***************************** *
+
+            INITIALIZATION
+
+   * ***************************** */
+
   /**
-     *
-     * @param folder
-     * @param lowestNote
-     * @param highestNote
-     * @param steps
-     */
-  constructor(folder, lowestNote, highestNote, steps) {
+   * The class loads samples of an instrument
+   * and abstracts playing the notes individually.
+   * Initiating the class and then calling load() is required.
+   * To add an instrument, you need 8 accurate samples of
+   * the following notes:
+   *
+   * [ Bb3, C3, C5, D6, Eb3, F4, G5, Gb6 ] in mp3 format
+   *
+   * @param folder The folder to fetch the samples from
+   */
+  constructor(folder) {
     /**
      * The multibuffer player
      * @type {Tone.MultiPlayer}
@@ -30,22 +40,22 @@ class Fileplayer {
      * @type {String}
      * @private
      */
-    this._lowestNote = lowestNote
+    this._lowestNote = 'C3'
 
     /**
      * The highest note playable
      * @type {String}
      * @private
      */
-    this._highestNote = highestNote
+    this._highestNote = 'Gb6'
 
     /**
-     * The number of chromaitc steps (up and down) which the sample
-     * will be repitched
+     * The number of chromatic steps (up and down) which the sample
+     * will be re-pitched
      * @type {Number}
      * @private
      */
-    this._stepSize = steps || 4
+    this._stepSize = 3
 
     /**
      * The number of buffers currently
@@ -56,7 +66,7 @@ class Fileplayer {
     this._loadCount = 0
 
     /**
-     * The sample lookup. Each note mapes to a buffer and a playbackRate
+     * The sample lookup. Each note maps to a buffer and a playbackRate
      * @type {Object}
      * @private
      */
@@ -70,23 +80,11 @@ class Fileplayer {
     this._buffers = {}
 
     /**
-     * The time it takes for the note to release
-     * @type {Number}
-     * @private
-     */
-    this._releaseTime = 0.5
-
-    /**
      * Generate Note numbers based on chromatic scale
      * @type {Array}
      * @private
      */
     this._allNotes = this._getNotes(this._lowestNote, this._highestNote)
-
-    console.log('Creating fileplayer')
-    this.transformations = []
-
-    this._end = Math.max((this._stepSize * 2) + 1, this._allNotes.length)
 
     /**
      * if all the samples are loaded
@@ -94,8 +92,6 @@ class Fileplayer {
      */
     this.loaded = false
   }
-
-  /** PUBLIC METHODS */
 
   /**
    * After initializing the player load() should be called
@@ -105,19 +101,11 @@ class Fileplayer {
    */
   load() {
     const promiseArray = []
-    let bufferPitch = {}
-
-    let trans = {}
-
     const forStep = (this._stepSize * 2) + 1
 
     for (let noteIndex = 0; noteIndex < this._allNotes.length; noteIndex += forStep) {
-      bufferPitch = this._allNotes[noteIndex + this._stepSize]
+      const bufferPitch = this._allNotes[noteIndex + this._stepSize]
       const end = Math.max(forStep, this._allNotes.length)
-
-      trans = { bufferPitch, noteIndex: noteIndex + this._stepSize, end }
-
-      this.transformations.push(trans)
 
       if (!_.isNil(bufferPitch)) {
         promiseArray.push(this._createBufferPromise(bufferPitch, noteIndex, end, this._allNotes))
@@ -129,8 +117,26 @@ class Fileplayer {
         this.loaded = true
         return res
       })
+      .catch((err) => {
+        console.error('Instrument files did not load succesfully, plase make sure there ' +
+          'are files with the names Bb3.mp3, C3.mp3, C5.mp3, D6.mp3, Eb3.mp3, F4.mp3, G5.mp3, ' +
+          'Gb6.mp3 inside the folder')
+        return Promise.reject(new Error('Did not load instrument completely'))
+      })
   }
 
+  /* ***************************** *
+
+              PLAYBACK
+
+   * ***************************** */
+
+  /**
+   * Fires a note from the current instrument
+   * @param note Note number
+   * @param duration Duration of note playing in sec
+   * @param startTime The exact start time
+   */
   triggerAttackRelease(note, duration, startTime) {
     const description = this._notes[note]
     // console.log(`note:        ${note}`)
@@ -139,12 +145,13 @@ class Fileplayer {
     // console.log(`description: ${JSON.stringify(description)}`)
     // console.log(`to ITFR:     ${description.interval} =>
     // ${JSON.stringify(this._intervalToFrequencyRatio(description.interval))}`)
-    // Interface.logSpacerColored()
+    // Log.logSpacerColored()
 
     /**
      * Grab the player based on the note given
      */
     const player = this._multiPlayer.get(description.buffer)
+
     /**
      * For the player to sound correctly we need to convert
      * buffers interval to Frequency ratio and alter the player
@@ -163,21 +170,32 @@ class Fileplayer {
     return player.start(startTime, 0, duration)
   }
 
+  /**
+   * Method to stop a note playing from a player
+   * @param note
+   * @param time
+   */
   triggerRelease(note, time) {
     const description = this._notes[note]
-    console.log(`Stop note | given: ${note} calculated: ${description}`)
     this._multiPlayer.stop(description.buffer, time)
   }
 
   /**
-     * Stop all the players with
-     */
+   * Stop all the players
+   */
   releaseAll() {
     this._multiPlayer.stopAll()
   }
 
-  // DESTRUCT
+  /* ***************************** *
 
+              DESTRUCT
+
+   * ***************************** */
+
+  /**
+   * Destroy everything
+   */
   dispose() {
     this.releaseAll()
     for (const buff in this._buffers) {
@@ -187,9 +205,11 @@ class Fileplayer {
     this._notes = null
   }
 
-  /** PRIVATE METHODS */
+  /* ***************************** *
 
-  // CALCULATE NOTES
+            CALCULATE NOTES
+
+   * ***************************** */
 
   /**
      * Generates an array of notes from start
@@ -201,26 +221,26 @@ class Fileplayer {
      */
   _getNotes(start, end) {
     /**
-         * Chromatic scale is notes that are seperated via semitones
-         * @type { Array }
-         */
+     * Chromatic scale is notes that are seperated via semitones
+     * @type { Array }
+     */
     const chromatic = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
 
     /**
-         * This regex splits the given notes symbol to note
-         * and octave
-         * E.g. given C3 after the split ['C', '3']
-         * @type {RegExp}
-         */
+     * This regex splits the given notes symbol to note
+     * and octave
+     * E.g. given C3 after the split ['C', '3']
+     * @type {RegExp}
+     */
     const splitRegexp = /(-?\d+)/
     const startOctave = parseInt(start.split(splitRegexp)[1], 10)
     let startNote = start.split(splitRegexp)[0]
 
     /**
-         * Calculating start note based on chromatic scale
-         * Where e.g. C = 0
-         * @type {number} 0 - 11
-         */
+     * Calculating start note based on chromatic scale
+     * Where e.g. C = 0
+     * @type {number} 0 - 11
+     */
     startNote = chromatic.indexOf(startNote)
 
     const endOctave = parseInt(end.split(splitRegexp)[1], 10)
@@ -229,26 +249,27 @@ class Fileplayer {
     endNote = chromatic.indexOf(endNote)
 
     /**
-         * currentNote gets set to the start note
-         * In the comments example is 0
-         */
+     * currentNote gets set to the start note
+     * In the comments example is 0
+     */
     let currentNote = startNote
+
     /**
-         * currentOctave gets set to the start Octave
-         * In the comments example is 3
-         * @type {Number}
-         */
+     * currentOctave gets set to the start Octave
+     * In the comments example is 3
+     * @type {Number}
+     */
     let currentOctave = startOctave
 
     const retNotes = []
 
     /**
-         * Example for the while loop is
-         *  currentNote: 0
-         *  endNote: 6
-         *  currentOctave: 3
-         *  endOctave: 6
-         */
+     * Example for the while loop is
+     *  currentNote: 0
+     *  endNote: 6
+     *  currentOctave: 3
+     *  endOctave: 6
+     */
     while (!(currentNote === endNote && currentOctave === endOctave)) {
       retNotes.push(chromatic[currentNote] + currentOctave)
 
@@ -259,10 +280,18 @@ class Fileplayer {
         currentOctave++
       }
     }
-    Log.SpaceTitleAndLog(`Given start: ${start}, end: ${end}, returns:`, retNotes)
+    Log.spaceTitleAndLog(`Given start: ${start}, end: ${end}, returns:`, retNotes)
     return retNotes
   }
 
+  /**
+   * Check if note needs respelling and
+   * if it does need return the new name
+   * otherwise return null
+   * @param note
+   * @returns {*}
+   * @private
+   */
   _getNotesRespalling(note) {
     const respelling = {
       Db: 'C#', Eb: 'D#', Gb: 'F#', Ab: 'G#', Bb: 'A#',
@@ -276,8 +305,22 @@ class Fileplayer {
     return null
   }
 
-  // BUFFERS
+  /* ***************************** *
 
+                BUFFERS
+
+   * ***************************** */
+
+  /**
+   * Grab buffer from url and append to the fileplayer class
+   * to be ready for use.
+   * @param bufferPitch Name of the buffer
+   * @param noteIndex
+   * @param end
+   * @param allNotes
+   * @returns {*|Promise.<T>}
+   * @private
+   */
   _createBufferPromise(bufferPitch, noteIndex, end, allNotes) {
     return new Promise((resolve, reject) => new Tone.Buffer(`${this._instrumentFolder}/${bufferPitch}.mp3`, buffer => resolve(buffer)))
       .then((res) => {
@@ -288,8 +331,8 @@ class Fileplayer {
         this._buffers[bufferPitch] = res
 
         for (let j = noteIndex; j < end; j++) {
+          // insert note from buffer
           const note = allNotes[j]
-
           this._notes[note] = {
             interval: (j - noteIndex - this._stepSize),
             buffer: bufferPitch,
@@ -297,10 +340,7 @@ class Fileplayer {
 
           // and the respelling if it exists
           const respelling = this._getNotesRespalling(note)
-
-          if (respelling) {
-            this._notes[respelling] = this._notes[note];
-          }
+          if (respelling) this._notes[respelling] = this._notes[note]
         }
         return res
       })
@@ -310,8 +350,18 @@ class Fileplayer {
       })
   }
 
-  // MISC
+  /* ***************************** *
 
+                  MISC
+
+   * ***************************** */
+
+  /**
+   * Converts buffers interval to Frequency ratio
+   * @param interval
+   * @returns {number}
+   * @private
+   */
   _intervalToFrequencyRatio(interval) {
     return Math.pow(2, (interval / 12))
   }
