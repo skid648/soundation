@@ -1049,6 +1049,10 @@ code-point-at@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
+color-classifier@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/color-classifier/-/color-classifier-0.0.1.tgz#c14ff1e740b704a0fa75e7139c9a26ee971c1e65"
+
 color-convert@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.1.tgz#c1261107aeb2f294ebffec9ed9ecad529a6097ed"

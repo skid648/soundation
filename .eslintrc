@@ -12,6 +12,7 @@
     "guard-for-in": "warn",
     "no-restricted-syntax": "warn",
     "no-trailing-spaces": "off",
-    "no-restricted-properties": "off"
+    "no-restricted-properties": "off",
+    "no-bitwise": "off"
   }
 }

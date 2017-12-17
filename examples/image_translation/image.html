@@ -2,89 +2,19 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="assets/js/marvin.js"></script>
+    <!-- Image grabber library -->
+    <script src="assets/js/third-party/marvin.js"></script>
     <script src="assets/js/soundation.min.js"></script>
-    <style>
-        canvas {
-            border: 10px solid darkcyan;
-        }
-
-        body {
-            transition: background 0.2s;
-        }
-    </style>
-    <img id="image" src="assets/img/darth-vader.jpg" alt="">
-    <div id="coords"></div>
-    <div id="color"></div>
+    <script src="assets/js/script.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <script>
-        let width = 0
-        let height = 0
-        let data = {}
-        let image = {}
-        let harp = new Soundation('http://' + window.location.host + '/assets/harp')
+    <img id="image" src="assets/img/darth-vader.jpg" alt=""/>
+    <div id="coords">
 
-        function hookImage() {
-            imageExample1 = new MarvinImage()
-            imageExample1.load("assets/img/darth-vader.jpg", function(){
-                harp.load()
-                .then(() => {
-                  width = imageExample1.width
-                  height = imageExample1.height
-                  console.log(imageExample1)
-                  image = imageExample1.imageData
-                  document.onmousemove = point_it
-                  document.getElementById("image").onclick = click_it
-                })
-            })
-        }
+    </div>
+    <div id="color">
 
-        function point_it(event){
-            // https://github.com/tsuyoshiwada/color-classifier
-            // TODO: use this
-            let pos_x =
-                event.offsetX
-                    ? (event.offsetX)
-                    : event.pageX - document.getElementById("image").offsetLeft;
-
-            let pos_y =
-                event.offsetY
-                    ? (event.offsetY)
-                    : event.pageY - document.getElementById("image").offsetTop;
-
-            if ((pos_x > 0 && pos_x <= width) && (pos_y > 0 && pos_y <= height)) {
-                harp.resume()
-                document.getElementById("coords").innerHTML = `${pos_x} : ${pos_y}`
-                var color = getPixel(pos_x, pos_y)
-                var r = color >> 24 & 0xFF;
-                var g = color >> 16 & 0xFF;
-                var b = color >> 8 & 0xFF;
-                var a = color >> 0 & 0xFF;
-                document.getElementById("color").innerHTML = `${r}, ${g}, ${b}`
-                document.body.style.background = `rgba(${r},${g},${b},${a})`
-            } else {
-              harp.pause()
-              document.getElementById("coords").innerHTML = `0 : 0`
-            }
-
-        }
-
-        function getPixelPositionRaw(x, y) {
-            return (y * image.width + x) * 4;
-        }
-
-        function getPixel(x, y) {
-            const pos = getPixelPositionRaw(x, y);
-            return image.data[pos] << 24 | image.data[pos + 1] << 16 | image.data[pos + 2] << 8 | image.data[pos + 3];
-        }
-
-        function click_it() {
-          console.log('Clicked')
-          harp.strum('major', 'C#')
-        }
-
-        hookImage()
-    </script>
+    </div>
 </body>
 </html>

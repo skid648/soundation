@@ -129,3 +129,11 @@ h3 {
     align-self: center;
     justify-self: center;
 }
+
+canvas {
+    border: 10px solid darkcyan;
+}
+
+body {
+    transition: background 0.2s;
+}
