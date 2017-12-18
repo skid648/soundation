@@ -4,12 +4,12 @@ const data = {}
 let image = {}
 const harp = new Soundation(`http://${window.location.host}/assets/harp`)
 
-function getPixelPositionRaw(x, y) {
-  return (y * (image.width + x) * 4)
+function getPixelPositionRaw(x, y, width) {
+    return (y * width + x) * 4;
 }
 
-function getPixelColor(x, y) {
-  const pos = getPixelPositionRaw(x, y)
+function getPixelColor(x, y, image) {
+  const pos = getPixelPositionRaw(x, y, image.width)
   /**
    * Shift
    * @type {number}
@@ -44,7 +44,7 @@ function pointIt(event) {
   if ((posX > 0 && posX <= width) && (posY > 0 && posY <= height)) {
     harp.resume()
     document.getElementById('coords').innerHTML = `${posX} : ${posY}`
-    const color = getPixelColor(posX, posY)
+    const color = getPixelColor(posX, posY, image)
     document.getElementById('color').innerHTML = `${color.r}, ${color.g}, ${color.b}`
     document.body.style.background = `rgba(${color.r},${color.g},${color.b},${color.a})`
   } else {
@@ -69,6 +69,8 @@ function hookImage() {
         image = imageExample1.imageData
         document.onmousemove = pointIt
         document.getElementById('image').onclick = clickIt
+        // console.log(image.data[1491044])
+        console.log(image.data.length > 1491044)
       })
   })
 }
