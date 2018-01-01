@@ -5,6 +5,18 @@ class Chords {
     this.Notes = { major: {}, minor: {} }
     this.majorOrder = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'F'];
     this.minorOrder = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'F', 'C', 'G', 'D'];
+    this.colors = {
+      '#000000': { order: 'major', chord: 'C' },
+      '#808080': { order: 'major', chord: 'G' },
+      '#ffffff': { order: 'major', chord: 'D' },
+      '#ff0000': { order: 'major', chord: 'A' },
+      '#ffa500': { order: 'major', chord: 'E' },
+      '#ffff00': { order: 'major', chord: 'B' },
+      '#008000': { order: 'major', chord: 'F#' },
+      '#00ffff': { order: 'major', chord: 'C#' },
+      '#0000ff': { order: 'major', chord: 'G#' },
+      '#800080': { order: 'major', chord: 'D#' },
+    }
     this._calculateNotes()
 
     /**
@@ -90,6 +102,10 @@ class Chords {
       this.chordIndex = this.chordIndex + 1
     }
     return this.flattenedChords[this.chordIndex]
+  }
+  
+  colorToKey(color) {
+    return this.colors[color]
   }
 }
 

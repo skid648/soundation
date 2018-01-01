@@ -106,8 +106,14 @@ class Part {
     this.setChord(c.order, c.chord)
   }
 
+  setChordFromColor(colorCode) {
+    const key = Chords.colorToKey(colorCode)
+    console.log(`Setting part from color: ${colorCode} to key: ${JSON.stringify(key)}`)
+    this.setChord(key.order, key.chord)
+  }
+
   /**
-   * Callback the fires when the sound
+   * Callback that fires when the sound
    * should play a note
    * @param time
    * @param note

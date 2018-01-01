@@ -3,20 +3,24 @@ import _ from 'lodash'
 import Tone from 'tone'
 import Part from './Models/music/Part'
 import CoreParts from './Models/data/CoreParts'
+import Classifier from './Models/color/Classifier'
+import Chords from './Models/data/ChordsAndNotesGenerator'
+
 
 class Soundation {
   /**
-   * Constructs and returns the object
-   * @param bpm Overval bpm of soundation
+   * Constructs and returns the Soundation object
+   * @param bpm Overall bpm of soundation
    * @param partName Choose the part to be played initially
    * @param autostart Set false to disable the the player from starting after loading
    * @returns {*}
    */
-  constructor(instrumentUrl, bpm = 100, partName = '1 note', autostart = false) {
+  constructor(instrumentUrl, bpm = 60, partName = '1 note', autostart = false) {
     this.instrumentUrl = instrumentUrl
     this._setBpm(bpm)
     this.partName = partName
     this.autostart = autostart
+    this.colorClassifier = new Classifier({ imageArray: {}, segments: 10 })
   }
 
   /* ***************************** *
@@ -26,8 +30,8 @@ class Soundation {
    * ***************************** */
 
   /**
-   * load initializes ths soundation object.
-   * This involves grabing all the instrument
+   * Initializes ths soundation object.
+   * This involves grabbing all the instrument
    * sounds, initializing the chord that the part
    * will play and finally starts the transport
    * if autoplay is set to true. (Transport is tone's
@@ -44,9 +48,24 @@ class Soundation {
   }
 
   /**
+   * Sets and loads a color classifier
+   * based on an image given. If no
+   * image given it generates a generic
+   * classifier to a rainbow palette.
+   * @param image An image object
+   * @param segments number of segments to extract palette
+   */
+  imageClassifier(image, segments) {
+    this.colorClassifier = new Classifier({
+      imageArray: image,
+      segments,
+    })
+  }
+
+  /**
    * Soundation can transform it's sound real time
    * either directly thought the public api or can
-   * Automatically advance the variables and loop them
+   * automatically advance the variables and loop them
    *
    * This method takes care of the automatic transition
    * Auto advance to the next sound transformation
@@ -78,29 +97,51 @@ class Soundation {
    * ***************************** */
 
   /**
-   *
+   * Manually alter the key that the sound
+   * will play in. You can set the key directly
+   * or you can let the library decide the key
+   * based on a color.
    * @param key
    * @param color
    */
-  setKey({ key, color }) {
-
+  key({ key, color }) {
+    if (!_.isNil(key.order) && !_.isNil(key.chord)) {
+      // manually setting the key
+      this._partPlaying.setChord(key.order, key.chord)
+    } else if (!_.isNil(color)) {
+      // passing a color argument and let the color classifier decide the key
+      const c = this.colorClassifier.color(color, true)
+      this._partPlaying.setChordFromColor(c)
+    }
   }
 
   /**
-   *
+   * Alter the part that is playing
+   * to another predefined track
+   * // TODO: document track names
    * @param trackname
    */
-  setTrack({ trackname }) {
-
+  track({ trackname }) {
+    // TODO: implement track change
   }
 
   /**
-   *
+   * Alter how fast or slow the track is
+   * playing. Bpm gradually transition from
+   * the current value to the new one
    * @param bpm
-   * @param transition currenlty not supported
+   * @param transition currently not supported
    */
-  setBpm({ bpm, transition }) {
+  bpm({ bpm, transition }) {
+    // TODO: implement bpm change
+  }
 
+  /**
+   * Speaks out loud the color name.
+   * @param color {r, g, b} object
+   */
+  shoutColor(color) {
+    this.colorClassifier.shoutColor(color)
   }
 
   /* ***************************** *
@@ -110,7 +151,7 @@ class Soundation {
    * ***************************** */
 
   /**
-   * Pause stops soundation object from playing
+   * Stops soundation object from playing
    * without disposing anything. Used together with
    * resume()
    */
@@ -119,7 +160,7 @@ class Soundation {
   }
 
   /**
-   * resume resumes soundation object from the start
+   * Resumes soundation object from the start
    * Used together with pause()
    */
   resume() {
@@ -127,14 +168,22 @@ class Soundation {
   }
 
   /**
-   * Strum plays a bulk of notes from a chord
+   * Plays a bulk of notes from a chord
    * one close to the other. Can be called
-   * multiple times
-   * @param letter Letter of key E.g. minor
-   * @param chord Name of the chord E.g. C#
+   * multiple times. Takes either a key or
+   * a color
+   * @param key: { letter: 'minor', chord: 'C#'}
+   * @param color: { r: 10, g: 130, b: 255 }
    */
-  strum(letter, chord) {
-    this._partPlaying.strum(letter, chord)
+  strum({ key, color }) {
+    if (!_.isNil(key) && !_.isNil(key.chord) && !_.isNil(key.letter)) {
+      ({ letter, chord } = { letter: key.letter, chord: key.chord })
+      this._partPlaying.strum(letter, chord)
+    } else if (!_.isNil(color)) {
+      key = Chords.colorToKey(color);
+      ({ letter, chord } = { letter: key.letter, chord: key.chord })
+      this._partPlaying.strum(letter, chord)
+    }
   }
 
   /**
@@ -197,7 +246,7 @@ class Soundation {
   }
 
   /**
-   * Get the next key from the chroma array
+   * Gets the next key from the chroma array
    * @private
    */
   _nextKey() {
@@ -265,7 +314,7 @@ class Soundation {
   }
 
   /**
-   * Returns the next track data.
+   * Returns the next track chartData.
    * If no track is next it starts
    * looping again the tracks
    * @private

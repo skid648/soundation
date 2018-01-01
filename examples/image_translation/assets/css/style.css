@@ -4,6 +4,7 @@ body {
     background: #d4d4d4;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 15px;
+    margin: 0px;
 }
 
 .app {
@@ -12,22 +13,45 @@ body {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 0px 70px;
 }
 
 .app section {
+    padding: 15px;
     width: 100%;
+    max-width: 1200px;
     color: #FC3A51;
+    margin-bottom: 50px;
+    margin-top: 50px;
     /*color: #F5B349;*/
     background: rgba(0,0,0,0.09);
-    margin: 10px auto;
+    min-height: 70vh;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.2), 0 10px 10px rgba(0,0,0,0.18);
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
 
+.app section img {
+    margin: 20px 0px;
 }
 
 h2 {
     text-align: center;
-    padding: 10px;
     color: #0E2430;
-    border-bottom: 3px solid #F5B349;
+    margin: 5px;
+}
+
+.sub {
+    color: #7b7a7a;
+}
+
+.seperator {
+    width: 30%;
+    border-top: 3px solid #F5B349;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #events {
@@ -120,10 +144,6 @@ h3 {
     align-items: center;
 }
 
-#bpm {
-    width: 70%;
-}
-
 .center {
     text-align: center;
     align-self: center;
@@ -136,4 +156,126 @@ canvas {
 
 body {
     transition: background 0.2s;
+}
+
+#palette {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+#palette div {
+    margin: 10px;
+}
+
+#logo {
+    justify-self: center;
+    align-self: center;
+    width: 300px;
+}
+
+.header {
+    margin: 40px auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+#intro {
+    text-align: justify;
+}
+
+.content {
+    width: 60%;
+    margin: 60px auto 60px 0px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #7b7a7a;
+    padding: 0px 60px;
+    border-right: 1px solid rgba(0,0,0,0.09);
+}
+
+.viz-portfolio-total-value {
+    font-family: helvetica, arial, sans-serif;
+    margin: 0 auto;
+    font-size: 10px;
+    width: 450px;
+    height: 300px;
+    margin: 0px auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.viz-portfolio-total-value svg {
+    margin: auto 0px;
+    position: relative;
+}
+
+.charts {
+    margin-top: 60px;
+    width: 40%;
+    justify-self: flex-start;
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.viz-legend {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-top: 20px;
+}
+
+.viz-legend .name {
+    font-size: 20px;
+    color: black;
+    text-align: left;
+}
+
+.viz-legend .value {
+    text-align: left;
+}
+
+.color-1 {
+    width: 15px;
+    height: 15px;
+    background: #FC3A51;
+    display: inline-block;
+    margin: 0px 10px;
+}
+
+.color-2 {
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+    background: darkcyan;
+    margin: 0px 10px;
+}
+
+.animation-delay-0 {
+    animation-delay: 0s;
+}
+
+.animation-delay-1 {
+    animation-delay: 1s;
+}
+
+.animation-delay-2 {
+    animation-delay: 2s;
+}
+
+.animation-delay-3 {
+    animation-delay: 3s;
+}
+
+.animation-delay-4 {
+    animation-delay: 4s;
 }

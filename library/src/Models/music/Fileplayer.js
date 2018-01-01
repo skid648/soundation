@@ -118,7 +118,7 @@ class Fileplayer {
         return res
       })
       .catch((err) => {
-        console.error('Instrument files did not load succesfully, plase make sure there ' +
+        console.error('Instrument files did not load successfully, plase make sure there ' +
           'are files with the names Bb3.mp3, C3.mp3, C5.mp3, D6.mp3, Eb3.mp3, F4.mp3, G5.mp3, ' +
           'Gb6.mp3 inside the folder')
         return Promise.reject(new Error('Did not load instrument completely'))
@@ -139,13 +139,6 @@ class Fileplayer {
    */
   triggerAttackRelease(note, duration, startTime) {
     const description = this._notes[note]
-    // console.log(`note:        ${note}`)
-    // console.log(`duration:    ${duration}`)
-    // console.log(`startTime:   ${startTime}`)
-    // console.log(`description: ${JSON.stringify(description)}`)
-    // console.log(`to ITFR:     ${description.interval} =>
-    // ${JSON.stringify(this._intervalToFrequencyRatio(description.interval))}`)
-    // Log.logSpacerColored()
 
     /**
      * Grab the player based on the note given
@@ -221,7 +214,7 @@ class Fileplayer {
      */
   _getNotes(start, end) {
     /**
-     * Chromatic scale is notes that are seperated via semitones
+     * Chromatic scale is notes that are separated via semitones
      * @type { Array }
      */
     const chromatic = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
@@ -280,7 +273,6 @@ class Fileplayer {
         currentOctave++
       }
     }
-    Log.spaceTitleAndLog(`Given start: ${start}, end: ${end}, returns:`, retNotes)
     return retNotes
   }
 
