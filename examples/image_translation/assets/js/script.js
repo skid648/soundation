@@ -13,8 +13,8 @@ function getPixelPositionRaw(x, y) {
   return ((y * image.width) + x) * 4
 }
 
-function getPixelColor(x, y) {
-  const pos = getPixelPositionRaw(x, y)
+function getPixelColor(x, y, image) {
+  const pos = getPixelPositionRaw(x, y, image.width)
   /**
    * Shift
    * @type {number}
@@ -89,6 +89,8 @@ function hookImage() {
         image = imageExample1.imageData
         document.onmousemove = mouseover
         document.getElementById('image').onclick = clickIt
+        // console.log(image.data[1491044])
+        console.log(image.data.length > 1491044)
       })
   })
 }
