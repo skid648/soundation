@@ -28,7 +28,7 @@ class Part {
     this.chord = {}
     this.name = partName
     this.sound = new Sound(this.instrumentUrl)
-    this.enabled = true
+    this.enabled = false
     this.chords = Chords.getChords()
     this.currentVariation = { chordName: 'major', key: 'C' }
 
@@ -65,8 +65,8 @@ class Part {
    * @param letter
    * @param key
    */
-  strum(letter, key) {
-    this.sound.strum(letter, key)
+  strum(letter, key, delay = 0) {
+    setTimeout(() => this.sound.strum(letter, key), delay)
   }
 
   /**
@@ -75,7 +75,7 @@ class Part {
    * @param chordKey
    */
   setChord(chordName, chordKey) {
-    console.debug(`Setting Part [${this.name}] to ${chordName}:${chordKey}`)
+    // console.debug(`Setting Part [${this.name}] to ${chordName}:${chordKey}`)
     // check if chord exists
     const notesFromChord = _.get(this.chords, `${chordName}.${chordKey}`)
     if (notesFromChord != null) {
@@ -108,8 +108,22 @@ class Part {
 
   setChordFromColor(colorCode) {
     const key = Chords.colorToKey(colorCode)
-    console.log(`Setting part from color: ${colorCode} to key: ${JSON.stringify(key)}`)
+    // console.log(`Setting part from color: ${colorCode} to key: ${JSON.stringify(key)}`)
     this.setChord(key.order, key.chord)
+  }
+
+  /**
+   * Unmutes the part
+   */
+  enable() {
+    this.enabled = true
+  }
+
+  /**
+   * Mutes the part
+   */
+  disable() {
+    this.enabled = false
   }
 
   /**

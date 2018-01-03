@@ -21,7 +21,7 @@ class Classifier {
      * Extract the palette if imageArray is given
      * If not we pick the rainbow palette
      */
-    this.palette = this._extractColorPalette(imageArray) || this.rainbow
+    this.palette = _.isEmpty(imageArray) ? this.rainbow : this._extractColorPalette(imageArray)
 
     /**
      * Debug
@@ -55,8 +55,6 @@ class Classifier {
       { name: 'teal', hex: '#008080' },
       { name: 'aqua', hex: '#00FFFF' },
     ];
-
-    console.log('Classifier ready!')
   }
 
   // PUBLIC METHODS

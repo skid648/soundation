@@ -18,6 +18,7 @@ class Soundation {
   constructor(instrumentUrl, bpm = 60, partName = '1 note', autostart = false) {
     this.instrumentUrl = instrumentUrl
     this._setBpm(bpm)
+    this.initialBpm = bpm
     this.partName = partName
     this.autostart = autostart
     this.colorClassifier = new Classifier({ imageArray: {}, segments: 10 })
@@ -78,7 +79,7 @@ class Soundation {
         this._nextKey()
         break
       case 'bpm':
-        this._transitionBpm()
+        this._circleBpm()
         break
       case 'track':
         this._nextTrack()
@@ -105,13 +106,12 @@ class Soundation {
    * @param color
    */
   key({ key, color }) {
-    if (!_.isNil(key.order) && !_.isNil(key.chord)) {
+    if (!_.isNil(key) && !_.isNil(key.order) && !_.isNil(key.chord)) {
       // manually setting the key
       this._partPlaying.setChord(key.order, key.chord)
     } else if (!_.isNil(color)) {
       // passing a color argument and let the color classifier decide the key
-      const c = this.colorClassifier.color(color, true)
-      this._partPlaying.setChordFromColor(c)
+      this._partPlaying.setChordFromColor(this.colorClassifier.color(color, true))
     }
   }
 
@@ -121,8 +121,13 @@ class Soundation {
    * // TODO: document track names
    * @param trackname
    */
-  track({ trackname }) {
-    // TODO: implement track change
+  track({ trackname, color }) {
+    if (!_.isNil(trackname)) {
+      this._transitionBpm(bpm)
+    } else if (!_.isNil(color)) {
+      // passing a color argument and let the color classifier decide the track
+      this._changeTrack(this._colorToTrack(this.colorClassifier.color(color, true)))
+    }
   }
 
   /**
@@ -132,8 +137,13 @@ class Soundation {
    * @param bpm
    * @param transition currently not supported
    */
-  bpm({ bpm, transition }) {
-    // TODO: implement bpm change
+  bpm({ bpm, color }) {
+    if (!_.isNil(bpm)) {
+      this._transitionBpm(bpm)
+    } else if (!_.isNil(color)) {
+      // passing a color argument and let the color classifier decide the bpm
+      this._transitionBpm(this._colorToBpm(this.colorClassifier.color(color, true)))
+    }
   }
 
   /**
@@ -156,6 +166,8 @@ class Soundation {
    * resume()
    */
   pause() {
+    this._partPlaying.disable()
+    this._setBpm(this.initialBpm)
     Tone.Transport.stop()
   }
 
@@ -164,6 +176,7 @@ class Soundation {
    * Used together with pause()
    */
   resume() {
+    this._partPlaying.enable()
     Tone.Transport.start()
   }
 
@@ -175,14 +188,13 @@ class Soundation {
    * @param key: { letter: 'minor', chord: 'C#'}
    * @param color: { r: 10, g: 130, b: 255 }
    */
-  strum({ key, color }) {
+  strum({ key, color, delay }) {
     if (!_.isNil(key) && !_.isNil(key.chord) && !_.isNil(key.letter)) {
       ({ letter, chord } = { letter: key.letter, chord: key.chord })
       this._partPlaying.strum(letter, chord)
     } else if (!_.isNil(color)) {
-      key = Chords.colorToKey(color);
-      ({ letter, chord } = { letter: key.letter, chord: key.chord })
-      this._partPlaying.strum(letter, chord)
+      key = Chords.colorToKey(this.colorClassifier.color(color, true))
+      this._partPlaying.strum(key.order, key.chord, delay)
     }
   }
 
@@ -239,7 +251,7 @@ class Soundation {
   _setBpm(bpm) {
     if (!_.isNil(bpm) && bpm > 0) {
       Tone.Transport.bpm.value = bpm
-      this.bpm = bpm
+      this.currentBpm = bpm
     } else {
       console.warn('You cannot set BPM to a null, negative, or zero value')
     }
@@ -261,56 +273,125 @@ class Soundation {
    *  - anything to 10
    * @private
    */
-  _transitionBpm() {
+  _circleBpm() {
     let goal = 0
     const delay = 100
     const step = 5
     const i = 0
-    console.debug(`Bpm starts from ${this.bpm}`)
-    if (this.bpm > 0 && this.bpm <= 100) {
-      console.log('Bpm state 1')
+    if (this.currentBpm > 0 && this.currentBpm <= 100) {
       goal = 101
       const animation = setInterval(() => {
-        if (this.bpm <= goal) {
-          this._setBpm(this.bpm + step)
+        if (this.currentBpm <= goal) {
+          this._setBpm(this.currentBpm + step)
         } else {
-          console.log('transition ended')
           clearInterval(animation)
         }
       }, delay)
-    } else if (this.bpm > 100 && this.bpm <= 200) {
-      console.log('Bpm state 2')
+    } else if (this.currentBpm > 100 && this.currentBpm <= 200) {
       goal = 201
       const animation = setInterval(() => {
-        if (this.bpm <= goal) {
-          this._setBpm(this.bpm + step)
+        if (this.currentBpm <= goal) {
+          this._setBpm(this.currentBpm + step)
         } else {
-          console.log('transition ended')
           clearInterval(animation)
         }
       }, delay)
-    } else if (this.bpm > 200 && this.bpm <= 300) {
-      console.log('Bpm state 3')
+    } else if (this.currentBpm > 200 && this.currentBpm <= 300) {
       goal = 301
       const animation = setInterval(() => {
-        if (this.bpm <= goal) {
-          this._setBpm(this.bpm + step)
+        if (this.currentBpm <= goal) {
+          this._setBpm(this.currentBpm + step)
         } else {
-          console.log('transition ended')
           clearInterval(animation)
         }
       }, delay)
     } else {
       goal = 70
       const animation = setInterval(() => {
-        if (this.bpm >= goal) {
-          this._setBpm(this.bpm - step)
+        if (this.currentBpm >= goal) {
+          this._setBpm(this.currentBpm - step)
         } else {
-          console.log('transition ended')
           clearInterval(animation)
         }
       }, delay)
     }
+  }
+
+  /**
+   * Transitions bpm to another value
+   * TODO: make transition smooth
+   * @param target
+   * @private
+   */
+  _transitionBpm(target) {
+    // how fast the animation ticks
+    const changeRate = 100
+
+    // how much the animation proceeds
+    const step = 5
+
+    // if direction is positive then we have to reduce bpm
+    const direction = this.currentBpm - target
+
+    // Create an interval and destroy it when it's done
+    if (direction > 0) {
+      const animation = setInterval(() => {
+        const f = (this.currentBpm >= target)
+          ? this._setBpm(this.currentBpm - step)
+          : clearInterval(animation)
+      }, changeRate)
+    } else if (direction < 0) {
+      const animation = setInterval(() => {
+        const f = (this.currentBpm <= target)
+          ? this._setBpm(this.currentBpm + step)
+          : clearInterval(animation)
+      }, changeRate)
+    }
+  }
+
+  /**
+   * Maps distinct color to bpm values
+   * @param color
+   * @returns {*}
+   * @private
+   */
+  _colorToBpm(color) {
+    this.Bpms = {
+      '#000000': 50,
+      '#808080': 60,
+      '#0000ff': 70,
+      '#800080': 80,
+      '#ff0000': 90,
+      '#008000': 100,
+      '#ffa500': 110,
+      '#ffff00': 120,
+      '#00ffff': 130,
+      '#ffffff': 140,
+    }
+    return this.Bpms[color]
+  }
+
+  /**
+   * Maps color to track names
+   * @param color
+   * @returns {*}
+   * @private
+   */
+  _colorToTrack(color) {
+    this.tracks = {
+      '#000000': '1 note',
+      '#808080': '2 notes',
+      '#0000ff': '3 notes',
+      '#800080': '4 notes',
+      '#ff0000': '4 notes',
+      '#008000': '4 notes',
+      '#ffa500': '4 notes',
+      '#ffff00': '5 notes',
+      '#00ffff': '6 notes',
+      '#ffffff': '7 notes',
+    }
+
+    return this.tracks[color]
   }
 
   /**
@@ -321,12 +402,31 @@ class Soundation {
    */
   _nextTrack() {
     const nextTrack = CoreParts.next()
-    const partReplacment = new Part(nextTrack.partData, nextTrack.partName)
+    const partReplacment = new Part(this.instrumentUrl, nextTrack.partData, nextTrack.partName)
     return partReplacment.start()
       .then(() => {
         this._partPlaying.dispose()
         this._partPlaying = partReplacment
       })
+  }
+
+  /**
+   * Changes track based on name
+   * @param trackname
+   * @private
+   */
+  _changeTrack(trackname) {
+    const nextTrack = CoreParts.get(trackname, true)
+    if (!_.isNil(nextTrack.partName) && !_.isNil(nextTrack.partData)) {
+      console.log(this.instrumentUrl)
+      const partReplacment = new Part(this.instrumentUrl, nextTrack.partData, nextTrack.partName)
+      return partReplacment.start()
+        .then(() => {
+          this._partPlaying.dispose()
+          this._partPlaying = partReplacment
+        })
+    }
+    return true
   }
 }
 

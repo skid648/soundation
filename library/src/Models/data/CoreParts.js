@@ -148,8 +148,9 @@ class Parts {
     this.nextPartIndex = 0
   }
 
-  get(partName) {
+  get(partName, full = false) {
     const part = _.find(this.parts, { partName })
+    if (full) return part
     return (part == null)
       ? null
       : part.partData
