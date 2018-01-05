@@ -17,11 +17,13 @@ class Soundation {
    */
   constructor(instrumentUrl, bpm = 60, partName = '1 note', autostart = false) {
     this.instrumentUrl = instrumentUrl
+    this.currentBpm = 0
     this._setBpm(bpm)
     this.initialBpm = bpm
     this.partName = partName
     this.autostart = autostart
     this.colorClassifier = new Classifier({ imageArray: {}, segments: 10 })
+    this.transitioningBpm = false
   }
 
   /* ***************************** *
@@ -249,6 +251,7 @@ class Soundation {
    * @private
    */
   _setBpm(bpm) {
+    console.debug(`│  Bpm => [${bpm}]`)
     if (!_.isNil(bpm) && bpm > 0) {
       Tone.Transport.bpm.value = bpm
       this.currentBpm = bpm
@@ -324,28 +327,43 @@ class Soundation {
    * @private
    */
   _transitionBpm(target) {
-    // how fast the animation ticks
-    const changeRate = 100
+    if (!this.transitioningBpm) {
+      this.transitioningBpm = true
+      // how fast the animation ticks
+      const changeRate = 100
 
-    // how much the animation proceeds
-    const step = 5
+      // how much the animation proceeds
+      const step = 5
 
-    // if direction is positive then we have to reduce bpm
-    const direction = this.currentBpm - target
+      // if direction is positive then we have to reduce bpm
+      const direction = this.currentBpm - target
 
-    // Create an interval and destroy it when it's done
-    if (direction > 0) {
-      const animation = setInterval(() => {
-        const f = (this.currentBpm >= target)
-          ? this._setBpm(this.currentBpm - step)
-          : clearInterval(animation)
-      }, changeRate)
-    } else if (direction < 0) {
-      const animation = setInterval(() => {
-        const f = (this.currentBpm <= target)
-          ? this._setBpm(this.currentBpm + step)
-          : clearInterval(animation)
-      }, changeRate)
+      // Create an interval and destroy it when it's done
+      if (direction > 0) {
+        console.debug(`╭ Reducing bpm [${this.currentBpm}] => [${target}]`)
+        const animation = setInterval(() => {
+          if (this.currentBpm > target) {
+            this._setBpm(this.currentBpm - step)
+          } else {
+            clearInterval(animation)
+            console.debug('╰ Transition end')
+            this.transitioningBpm = false
+          }
+        }, changeRate)
+      } else if (direction < 0) {
+        console.debug(`╭ Advancing bpm [${this.currentBpm}] => [${target}]`)
+        const animation = setInterval(() => {
+          if (this.currentBpm < target) {
+            this._setBpm(this.currentBpm + step)
+          } else {
+            clearInterval(animation)
+            console.debug('╰ Transition end')
+            this.transitioningBpm = false
+          }
+        }, changeRate)
+      } else {
+        this.transitioningBpm = false
+      }
     }
   }
 
