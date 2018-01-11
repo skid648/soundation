@@ -128,7 +128,7 @@ class Soundation {
       this._transitionBpm(bpm)
     } else if (!_.isNil(color)) {
       // passing a color argument and let the color classifier decide the track
-      this._changeTrack(this._colorToTrack(this.colorClassifier.color(color, true)))
+      this._setTrack(this._colorToTrack(this.colorClassifier.color(color, true)))
     }
   }
 
@@ -226,12 +226,22 @@ class Soundation {
   _initializeConfiguration() {
     // if true soundation keeps looping the part
     this._loopTransportEnable(true)
-    // grab the part from CoreParts
-    const part = CoreParts.get(this.partName)
-    // initiate the part
-    this._partPlaying = new Part(this.instrumentUrl, part, this.partName)
-    // start the part
-    return this._partPlaying.start()
+
+    // load all the parts
+    const partObjects = CoreParts.get('all')
+
+    this.parts = []
+
+    _.forEach(partObjects, (part) => {
+      this.parts.push(new Part(this.instrumentUrl, part.partData, part.partName))
+    })
+
+    // initialize the parts
+    return Promise.all(_.map(this.parts, part => part.start()))
+      .then(() => {
+        // Set default part
+        this._partPlaying = _.find(this.parts, { name: this.partName })
+      })
   }
 
   /**
@@ -261,11 +271,15 @@ class Soundation {
   }
 
   /**
-   * Gets the next key from the chroma array
+   * Changes track based on name
+   * @param trackname
    * @private
    */
-  _nextKey() {
-    this._partPlaying.nextChord()
+  _setTrack(trackname) {
+    this._partPlaying.disable()
+    this._partPlaying = _.find(this.parts, { name: trackname })
+    this._partPlaying.setChord('major', 'D#')
+    this._partPlaying.enable()
   }
 
   /**
@@ -322,7 +336,7 @@ class Soundation {
 
   /**
    * Transitions bpm to another value
-   * TODO: make transition smooth
+   * TODO: make transition smoother?
    * @param target
    * @private
    */
@@ -420,31 +434,15 @@ class Soundation {
    */
   _nextTrack() {
     const nextTrack = CoreParts.next()
-    const partReplacment = new Part(this.instrumentUrl, nextTrack.partData, nextTrack.partName)
-    return partReplacment.start()
-      .then(() => {
-        this._partPlaying.dispose()
-        this._partPlaying = partReplacment
-      })
+    this._setTrack(nextTrack)
   }
 
   /**
-   * Changes track based on name
-   * @param trackname
+   * Gets the next key from the chroma array
    * @private
    */
-  _changeTrack(trackname) {
-    const nextTrack = CoreParts.get(trackname, true)
-    if (!_.isNil(nextTrack.partName) && !_.isNil(nextTrack.partData)) {
-      console.log(this.instrumentUrl)
-      const partReplacment = new Part(this.instrumentUrl, nextTrack.partData, nextTrack.partName)
-      return partReplacment.start()
-        .then(() => {
-          this._partPlaying.dispose()
-          this._partPlaying = partReplacment
-        })
-    }
-    return true
+  _nextKey() {
+    this._partPlaying.nextChord()
   }
 }
 

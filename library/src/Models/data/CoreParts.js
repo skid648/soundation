@@ -149,6 +149,7 @@ class Parts {
   }
 
   get(partName, full = false) {
+    if (partName === 'all') return this.parts
     const part = _.find(this.parts, { partName })
     if (full) return part
     return (part == null)
