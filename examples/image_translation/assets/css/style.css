@@ -279,3 +279,21 @@ body {
 .animation-delay-4 {
     animation-delay: 4s;
 }
+
+.colorName, .coords {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 30px;
+    color: white;
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.coords {
+    top: 105px;
+    flex-direction: column;
+}

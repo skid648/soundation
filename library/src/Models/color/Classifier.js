@@ -64,7 +64,7 @@ class Classifier {
       { name: 'dark gold', hex: '#b8860b' },
       { name: 'gray', hex: '#a9a9a9' },
       { name: 'green', hex: '#006400' },
-      { name: 'gray', hex: '#a9a9a9' },
+      { name: 'e', hex: '#a9a9a9' },
       { name: 'light yellow', hex: '#bdb76b' },
       { name: 'magenta', hex: '#8b008b' },
       { name: 'dark green', hex: '#556b2f' },
@@ -215,7 +215,7 @@ class Classifier {
       const colorName = new SpeechSynthesisUtterance(this._findClosestColorRGB(color))
       window.speechSynthesis.speak(colorName)
     } catch (e) {
-      console.warn(`Trying to synthesize speech: ${e}`)
+      console.warn(`Error while trying to synthesize speech: ${e}`)
     }
   }
 
@@ -331,6 +331,14 @@ class Classifier {
         nameFound = this.colorTable[i].name
       }
     }
+
+    const cssAttributes = ' width: 22px; height: 22px; display: inline-block; margin: 0px 5px;'
+    const cssColor = nameFound.replace(' ', '')
+
+    const colorGiven = `<span style="background: rgb(${r}, ${g}, ${b}); ${cssAttributes}"></span>`
+    const colorMatched = `<span style="background: ${cssColor}; ${cssAttributes}"></span>`
+    const color = `<span>${nameFound}</span>`
+    $('.colorName').html(`<div>${colorGiven} ⇌ ${colorMatched}</div>${color}`)
     return nameFound
   }
 

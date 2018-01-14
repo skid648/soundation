@@ -46,6 +46,7 @@ function getMouseCoordsFromElement(event, element) {
       ? (event.offsetY)
       : event.pageY - element.offsetTop;
 
+  $('.coords').html(`<div>x: ${posX} y: ${posY}</div>`)
   return { posX, posY }
 }
 
