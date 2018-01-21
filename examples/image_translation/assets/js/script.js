@@ -8,10 +8,6 @@
  * Function helpers
  */
 
-function rgbToHex(r, g, b) {
-  return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
-}
-
 function getPixelPositionRaw(x, y, image) {
   return ((y * image.width) + x) * 4
 }
@@ -63,30 +59,23 @@ bpmImage.load(bpmImageSrc, () => {
   harp.imageClassifier({}, 10)
   harp.load()
     .then(() => {
-      const image = bpmImage.imageData
-
       // When mouse hover image
       $('#bpm img').mousemove((event) => {
-        // get color from pixel
-        const coords = getMouseCoordsFromElement(event, $('#bpm img')[0])
-        const color = getPixelColor(coords.posX, coords.posY, image)
-
-        // resume the harp and change the tempo based on the color
+        // get color value from image and coordinates
+        const color = harp.colors.get(event, '#bpm img', bpmImage.imageData)
+        // resume the harp
         harp.resume()
-        harp.bpm({ color: rgbToHex(color.r, color.g, color.b) })
+        // change the tempo based on the color
+        harp.bpm({ color })
       })
 
       // When mouse leaves the image stop the sound
-      $('#bpm img').mouseout(() => {
-        harp.pause()
-      })
+      $('#bpm img').mouseout(() => harp.pause())
 
       // clicking on image
       $('#bpm img').click((event) => {
         // grab color from pixel
-        const coords = getMouseCoordsFromElement(event, $('#bpm img')[0])
-        const color = getPixelColor(coords.posX, coords.posY, image)
-
+        const color = harp.colors.get(event, '#bpm img', bpmImage.imageData)
         // Shout the color when the users clicks
         harp.shoutColor(color)
       })
@@ -105,17 +94,12 @@ trackImage.load(trackImageSrc, () => {
   harp.imageClassifier({}, 10)
   harp.load()
     .then(() => {
-      const image = trackImage.imageData
-
       // When mouse hover image
       $('#tracks img').mousemove((event) => {
-        // get color from pixel
-        const coords = getMouseCoordsFromElement(event, $('#tracks img')[0])
-        const color = getPixelColor(coords.posX, coords.posY, image)
-
+        const color = harp.colors.get(event, '#tracks img', trackImage.imageData)
         // resume the harp and change the track being played based on the color
         harp.resume()
-        harp.track({ color: rgbToHex(color.r, color.g, color.b) })
+        harp.track({ color })
       })
 
       // When mouse leaves the image stop the sound
@@ -125,10 +109,7 @@ trackImage.load(trackImageSrc, () => {
 
       // clicking on image
       $('#tracks img').click((event) => {
-        // grab color from pixel
-        const coords = getMouseCoordsFromElement(event, $('#tracks img')[0])
-        const color = getPixelColor(coords.posX, coords.posY, image)
-
+        const color = harp.colors.get(event, '#tracks img', trackImage.imageData)
         // Shout the color when the users clicks
         harp.shoutColor(color)
       })
@@ -141,23 +122,20 @@ trackImage.load(trackImageSrc, () => {
 
 const keyImageSrc = $('#key img').attr('src')
 const keyImage = new MarvinImage()
+
 keyImage.load(keyImageSrc, () => {
   let lastColor = {}
   const harp = new Soundation(`http://${window.location.host}/assets/harp`)
+
   harp.imageClassifier({}, 10)
   harp.load()
     .then(() => {
-      const image = keyImage.imageData
-
       // When mouse hover image
       $('#key img').mousemove((event) => {
-        // get color from pixel
-        const coords = getMouseCoordsFromElement(event, $('#key img')[0])
-        const color = getPixelColor(coords.posX, coords.posY, image)
-
+        const color = harp.colors.get(event, '#key img', keyImage.imageData)
         // resume the harp and change the key of the sound based on the color
         harp.resume()
-        harp.key({ color: rgbToHex(color.r, color.g, color.b) })
+        harp.key({ color })
         lastColor = color
       })
 
@@ -165,7 +143,7 @@ keyImage.load(keyImageSrc, () => {
       $('#key img').mouseout(() => {
         harp.pause()
         harp.strum({
-          color: rgbToHex(lastColor.r, lastColor.g, lastColor.b),
+          color: lastColor,
           delay: 200,
         })
       })
@@ -173,8 +151,7 @@ keyImage.load(keyImageSrc, () => {
       // clicking on image
       $('#key img').click((event) => {
         // grab color from pixel
-        const coords = getMouseCoordsFromElement(event, $('#key img')[0])
-        const color = getPixelColor(coords.posX, coords.posY, image)
+        const color = harp.colors.get(event, '#key img', keyImage.imageData)
 
         // Shout the color when the users clicks
         harp.shoutColor(color)

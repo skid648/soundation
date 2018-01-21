@@ -5,6 +5,7 @@ import Part from './Models/music/Part'
 import CoreParts from './Models/data/CoreParts'
 import Classifier from './Models/color/Classifier'
 import Chords from './Models/data/ChordsAndNotesGenerator'
+import Colors from './Helpers/Color'
 
 
 class Soundation {
@@ -24,6 +25,7 @@ class Soundation {
     this.autostart = autostart
     this.colorClassifier = new Classifier({ imageArray: {}, segments: 10 })
     this.transitioningBpm = false
+    this.colors = Colors
   }
 
   /* ***************************** *

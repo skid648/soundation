@@ -211,8 +211,8 @@ class Classifier {
    * @param color
    */
   shoutColor(color) {
+    const colorName = new SpeechSynthesisUtterance(this._findClosestColorRGB(color))
     try {
-      const colorName = new SpeechSynthesisUtterance(this._findClosestColorRGB(color))
       window.speechSynthesis.speak(colorName)
     } catch (e) {
       console.warn(`Error while trying to synthesize speech: ${e}`)
@@ -313,8 +313,8 @@ class Classifier {
    * @returns {string}
    * @private
    */
-  _findClosestColorRGB({ r, g, b }) {
-    const sampleGiven = { r, g, b }
+  _findClosestColorRGB(colorSample) {
+    const sampleGiven = this._hex2rgb(colorSample)
     let delta = 3 * 256 * 256
     let examinator = { r: 0, g: 0, b: 0 }
     let nameFound = 'black'
@@ -332,13 +332,6 @@ class Classifier {
       }
     }
 
-    const cssAttributes = ' width: 22px; height: 22px; display: inline-block; margin: 0px 5px;'
-    const cssColor = nameFound.replace(' ', '')
-
-    const colorGiven = `<span style="background: rgb(${r}, ${g}, ${b}); ${cssAttributes}"></span>`
-    const colorMatched = `<span style="background: ${cssColor}; ${cssAttributes}"></span>`
-    const color = `<span>${nameFound}</span>`
-    $('.colorName').html(`<div>${colorGiven} ⇌ ${colorMatched}</div>${color}`)
     return nameFound
   }
 

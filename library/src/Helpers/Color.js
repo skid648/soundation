@@ -1,0 +1,57 @@
+class Color {
+  static get(event, imageSelector, imageData) {
+    let color = {}
+    if ($(imageSelector)[0] != null) {
+      const coords = this.getMouseCoordsFromElement(event, $(imageSelector))
+      color = this.getPixelColor(coords.posX, coords.posY, imageData)
+    } else {
+      color = null
+      console.warn(`No element found with the given selector: ${imageSelector}`)
+    }
+    return this.rgbToHex(color.r, color.g, color.b)
+  }
+
+  static getMouseCoordsFromElement(event, element) {
+    const posX =
+      event.offsetX
+        ? (event.offsetX)
+        : event.pageX - element.offsetLeft;
+
+    const posY =
+      event.offsetY
+        ? (event.offsetY)
+        : event.pageY - element.offsetTop;
+
+    return { posX, posY }
+  }
+
+  static getPixelPositionRaw(x, y, image) {
+    return ((y * image.width) + x) * 4
+  }
+
+  static getPixelColor(x, y, image) {
+    const pos = this.getPixelPositionRaw(x, y, image)
+    /**
+     * Shift
+     * @type {number}
+     */
+    const color = (image.data[pos] << 24)
+    | (image.data[pos + 1] << 16)
+    | (image.data[pos + 2] << 8)
+    | (image.data[pos + 3])
+    const r = (color >> 24) & 0xFF
+    const g = (color >> 16) & 0xFF
+    const b = (color >> 8) & 0xFF
+    const a = (color >> 0) & 0xFF
+    return {
+      r, g, b, a,
+    }
+  }
+
+  static rgbToHex(r, g, b) {
+    const hexstring = ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1)
+    return `#${hexstring}`
+  }
+}
+
+export default Color
