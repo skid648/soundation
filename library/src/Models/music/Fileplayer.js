@@ -18,7 +18,7 @@ class Fileplayer {
    *
    * [ Bb3, C3, C5, D6, Eb3, F4, G5, Gb6 ] in mp3 format
    *
-   * @param folder The folder to fetch the samples from
+   * @param {String} folder The folder to fetch the samples from
    */
   constructor(folder) {
     /**
@@ -29,7 +29,7 @@ class Fileplayer {
     this._multiPlayer = new Tone.Players().toMaster()
 
     /**
-     * the instrument folder
+     * The instrument folder
      * @type {String}
      * @private
      */
@@ -73,14 +73,14 @@ class Fileplayer {
     this._notes = {}
 
     /**
-     * All the buffers
+     * Holds all the buffers
      * @type {Object}
      * @private
      */
     this._buffers = {}
 
     /**
-     * Generate Note numbers based on chromatic scale
+     * Holds the note numbers based on a chromatic scale
      * @type {Array}
      * @private
      */
@@ -97,7 +97,7 @@ class Fileplayer {
    * After initializing the player load() should be called
    * All buffers are loaded and a player is generated for every
    * re-pitched note
-   * returns Promise([thenable])
+   * @returns {Promise.<object, Error>}
    */
   load() {
     const promiseArray = []
@@ -136,6 +136,7 @@ class Fileplayer {
    * @param note Note number
    * @param duration Duration of note playing in sec
    * @param startTime The exact start time
+   * @returns {object}
    */
   triggerAttackRelease(note, duration, startTime) {
     const description = this._notes[note]
@@ -277,14 +278,12 @@ class Fileplayer {
   }
 
   /**
-   * Check if note needs respelling and
-   * if it does need return the new name
-   * otherwise return null
+   * Check if note needs respelling.
    * @param note
-   * @returns {*}
+   * @returns {(String|Null)} New name, or null
    * @private
    */
-  _getNotesRespalling(note) {
+  _getNotesRespelling(note) {
     const respelling = {
       Db: 'C#', Eb: 'D#', Gb: 'F#', Ab: 'G#', Bb: 'A#',
     }
@@ -331,7 +330,7 @@ class Fileplayer {
           }
 
           // and the respelling if it exists
-          const respelling = this._getNotesRespalling(note)
+          const respelling = this._getNotesRespelling(note)
           if (respelling) this._notes[respelling] = this._notes[note]
         }
         return res

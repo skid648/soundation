@@ -6,7 +6,8 @@
   "scripts": {
     "build-dev": "yarn && webpack --watch --progress --colors",
     "build": "webpack",
-    "serve": "cd ./examples/image_translation/ && http-server"
+    "serve": "cd ./examples/image_translation/ && http-server",
+    "generateDocs": "node_modules/.bin/jsdoc --configure conf.json --verbose"
   },
   "author": "Gkliatis Athanasios",
   "license": "ISC",
@@ -15,6 +16,7 @@
     "color-classifier": "0.0.1",
     "eslint-plugin-import": "^2.8.0",
     "jquery": "^3.2.1",
+    "jsdoc": "^3.5.5",
     "lodash": "^4.17.4",
     "teoria": "^2.5.0",
     "tone": "^0.12.2",

@@ -186,17 +186,19 @@ body {
 
 #intro {
     text-align: justify;
+    flex-direction: column;
 }
 
 .content {
     box-sizing: border-box;
-    width: 60%;
+    width: 100%;
     margin: 60px auto 60px 0px;
     font-size: 25px;
     font-weight: bold;
     color: #7b7a7a;
     padding: 0px 60px;
-    border-right: 1px solid rgba(0,0,0,0.09);
+    display: flex;
+    flex-direction: row;
 }
 
 .viz-portfolio-total-value {
@@ -224,15 +226,22 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 430px;
+}
+
+.content .text {
+    border-right: 1px solid rgba(0,0,0,0.09);
+    margin: 10px;
+    padding-right: 80px;
 }
 
 .viz-legend {
-    width: 75%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     margin-top: 20px;
+    padding-left: 65px;
 }
 
 .viz-legend .name {
@@ -301,6 +310,200 @@ body {
 
 
 .code {
+    width: 100%;
     margin: 50px 0px;
     box-shadow: 0px 0px 28px rgba(0,0,0,0.2), 0 10px 10px rgba(0,0,0,0.18);
+    margin-top: 0px;
+    position: relative;
+}
+
+.results {
+    position: absolute;
+    width: 75px;
+    height: 35px;
+    left: 64px;
+    top: 9px;
+}
+
+#bpm, #key, #tracks {
+    flex-direction: row;
+    max-height: 700px;
+}
+
+#bpm img, #bpm .explanation {
+     width: 50%;
+    flex-direction: column;
+    margin: 30px;
+}
+
+#bpm .explanation {
+    height: 605px;
+}
+
+#bpm .explanation .bpm-value {
+    width: 100%;
+    min-height:30%;
+    transition:  all .2s;
+}
+
+#bpm .explanation .color {
+    width: 100%;
+    min-height:30%;
+    transition:  all .2s;
+    border-radius: 100%;
+    background: rgb(191, 191, 191);
+    width: 200px;
+    height: 200px;
+    margin: 0px auto;
+    box-shadow: inset 0px 2px 28px rgba(0,0,0,0.2);
+}
+
+#bpm .bpm-value {
+    font-size: 150px;
+    text-align: center;
+}
+
+#bpm .explanation h2 {
+    color: #7b7a7a;
+    margin: 25px;
+    font-size: 40px;
+}
+
+
+#tracks img, #tracks .explanation {
+    width: 50%;
+    flex-direction: column;
+    margin: 30px;
+}
+
+#tracks .explanation {
+    height: 605px;
+}
+
+#tracks .explanation .track-value {
+    width: 100%;
+    min-height:30%;
+    transition:  all .2s;
+    color: #f6b349;
+}
+
+#tracks .explanation .color {
+    width: 100%;
+    min-height:30%;
+    transition:  all .2s;
+    border-radius: 100%;
+    background: rgb(191, 191, 191);
+    width: 200px;
+    height: 200px;
+    margin: 0px auto;
+    box-shadow: inset 0px 2px 28px rgba(0,0,0,0.2);
+}
+
+#tracks .track-value {
+    font-size: 100px;
+    text-align: center;
+}
+
+#tracks .explanation h2 {
+    color: #7b7a7a;
+    margin: 25px;
+    font-size: 40px;
+}
+
+
+#key img, #key .explanation {
+    width: 50%;
+    flex-direction: column;
+    margin: 30px;
+}
+
+#key .explanation {
+    height: 605px;
+}
+
+#key .explanation .key-value {
+    width: 100%;
+    min-height:30%;
+    transition:  all .2s;
+}
+
+#key .explanation .color {
+    width: 100%;
+    min-height:30%;
+    transition:  all .2s;
+    border-radius: 100%;
+    background: rgb(191, 191, 191);
+    width: 200px;
+    height: 200px;
+    margin: 0px auto;
+    box-shadow: inset 0px 2px 28px rgba(0,0,0,0.2);
+}
+
+#key .key-value {
+    font-size: 150px;
+    text-align: center;
+    color: #23464e;
+}
+
+#key .explanation h2 {
+    color: #7b7a7a;
+    margin: 25px;
+    font-size: 40px;
+}
+
+
+.notification {
+    position: fixed;
+    top: 0px;
+    left: -10px;
+    width: 25%;
+    display: block;
+    /* position: relative; */
+    margin: 30px 30px 30px 30px;
+    background: rgb(212, 212, 212);
+    color: #7b7a7a;
+    padding: 50px;
+    z-index: 1;
+    transition: all 0.5s;
+    pointer-events: none;
+    box-sizing: border-box;
+    opacity: 0;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.2), 0 10px 10px rgba(0,0,0,0.18);
+}
+
+.notification h2 {
+    margin-bottom: 20px;
+}
+
+#bpm-title {
+    cursor: pointer;
+}
+
+.fa-info {
+    align-self: flex-start;
+}
+
+a {
+    color: #0000008a;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#outro {
+    min-height: 20%;
+}
+
+.fab {
+    font-family: Font Awesome\ 5 Brands;
+    font-size: 40px;
+    margin: 20px 60px;
+    color: #949494;
+    cursor: pointer;
+    transition: all 0.4s;
+}
+
+.fab:hover {
+    color: #7d7d7d;
+    transition: all 0.4s;
 }

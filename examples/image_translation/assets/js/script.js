@@ -1,51 +1,3 @@
-// try {
-//   const Greetings = new SpeechSynthesisUtterance('Welcome to soundation. A library to hear what you cannot see.')
-//   window.speechSynthesis.speak(Greetings)
-// } catch (e) {
-//   console.warn(`Trying to synthesize speech: ${e}`)
-// }
-/**
- * Function helpers
- */
-
-function getPixelPositionRaw(x, y, image) {
-  return ((y * image.width) + x) * 4
-}
-
-function getPixelColor(x, y, image) {
-  const pos = getPixelPositionRaw(x, y, image)
-  /**
-   * Shift
-   * @type {number}
-   */
-  const color = (image.data[pos] << 24)
-    | (image.data[pos + 1] << 16)
-    | (image.data[pos + 2] << 8)
-    | (image.data[pos + 3])
-  const r = (color >> 24) & 0xFF
-  const g = (color >> 16) & 0xFF
-  const b = (color >> 8) & 0xFF
-  const a = (color >> 0) & 0xFF
-  return {
-    r, g, b, a,
-  }
-}
-
-function getMouseCoordsFromElement(event, element) {
-  const posX =
-    event.offsetX
-      ? (event.offsetX)
-      : event.pageX - element.offsetLeft;
-
-  const posY =
-    event.offsetY
-      ? (event.offsetY)
-      : event.pageY - element.offsetTop;
-
-  $('.coords').html(`<div>x: ${posX} y: ${posY}</div>`)
-  return { posX, posY }
-}
-
 
 /**
  * BPM TEST
@@ -63,10 +15,11 @@ bpmImage.load(bpmImageSrc, () => {
       $('#bpm img').mousemove((event) => {
         // get color value from image and coordinates
         const color = harp.colors.get(event, '#bpm img', bpmImage.imageData)
+        $('#bpm .explanation .color').css('background', color)
         // resume the harp
         harp.resume()
         // change the tempo based on the color
-        harp.bpm({ color })
+        harp.bpm({ color, displayElement: '.bpm-value' })
       })
 
       // When mouse leaves the image stop the sound
@@ -97,9 +50,10 @@ trackImage.load(trackImageSrc, () => {
       // When mouse hover image
       $('#tracks img').mousemove((event) => {
         const color = harp.colors.get(event, '#tracks img', trackImage.imageData)
+        $('#tracks .explanation .color').css('background', color)
         // resume the harp and change the track being played based on the color
         harp.resume()
-        harp.track({ color })
+        harp.track({ color, displayElement: '.track-value' })
       })
 
       // When mouse leaves the image stop the sound
@@ -133,9 +87,10 @@ keyImage.load(keyImageSrc, () => {
       // When mouse hover image
       $('#key img').mousemove((event) => {
         const color = harp.colors.get(event, '#key img', keyImage.imageData)
+        $('#key .explanation .color').css('background', color)
         // resume the harp and change the key of the sound based on the color
         harp.resume()
-        harp.key({ color })
+        harp.key({ color, displayElement: '.key-value' })
         lastColor = color
       })
 
@@ -157,5 +112,45 @@ keyImage.load(keyImageSrc, () => {
         harp.shoutColor(color)
       })
     })
+})
+
+const scrollToElement = function (element) {
+  console.log(element)
+  $('html, body').animate({
+    scrollTop: $(element).offset().top
+  }, 2000);
+}
+
+$('#bpm-title').hover(() => {
+  $('.notification').html()
+  $('.notification').html($('#bpm-title-info').html())
+  $('.notification').css('opacity', '1')
+  $('.notification').css('left', '0px')
+}, () => {
+  $('.notification').css('opacity', '0')
+
+  $('.notification').css('left', '-10px')
+})
+
+$('#track-title').hover(() => {
+  $('.notification').html()
+  $('.notification').html($('#track-title-info').html())
+  $('.notification').css('opacity', '1')
+  $('.notification').css('left', '0px')
+}, () => {
+  $('.notification').css('opacity', '0')
+
+  $('.notification').css('left', '-10px')
+})
+
+$('#key-title').hover(() => {
+  $('.notification').html()
+  $('.notification').html($('#key-title-info').html())
+  $('.notification').css('opacity', '1')
+  $('.notification').css('left', '0px')
+}, () => {
+  $('.notification').css('opacity', '0')
+
+  $('.notification').css('left', '-10px')
 })
 

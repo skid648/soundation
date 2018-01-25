@@ -11,9 +11,10 @@ import Colors from './Helpers/Color'
 class Soundation {
   /**
    * Constructs and returns the Soundation object
-   * @param bpm Overall bpm of soundation
-   * @param partName Choose the part to be played initially
-   * @param autostart Set false to disable the the player from starting after loading
+   * @param {String} instrumentUrl The instrument's url
+   * @param {Number} bpm Overall bpm of soundation
+   * @param {String} partName Choose the part to be played initially
+   * @param {Boolean} autostart Set false to disable the the player from starting after loading
    * @returns {*}
    */
   constructor(instrumentUrl, bpm = 60, partName = '1 note', autostart = false) {
@@ -26,6 +27,9 @@ class Soundation {
     this.colorClassifier = new Classifier({ imageArray: {}, segments: 10 })
     this.transitioningBpm = false
     this.colors = Colors
+    this.displayElementBpm = ''
+    this.displayElementKey = ''
+    this.displayElementTrack = ''
   }
 
   /* ***************************** *
@@ -109,13 +113,15 @@ class Soundation {
    * @param key
    * @param color
    */
-  key({ key, color }) {
+  key({ key, color, displayElement }) {
+    this.displayElementKey = displayElement
     if (!_.isNil(key) && !_.isNil(key.order) && !_.isNil(key.chord)) {
       // manually setting the key
       this._partPlaying.setChord(key.order, key.chord)
     } else if (!_.isNil(color)) {
       // passing a color argument and let the color classifier decide the key
-      this._partPlaying.setChordFromColor(this.colorClassifier.color(color, true))
+      const chord = this._partPlaying.setChordFromColor(this.colorClassifier.color(color, true))
+      $(this.displayElementKey).html(chord)
     }
   }
 
@@ -125,9 +131,10 @@ class Soundation {
    * // TODO: document track names
    * @param trackname
    */
-  track({ trackname, color }) {
+  track({ trackname, color, displayElement }) {
+    this.displayElementTrack = displayElement
     if (!_.isNil(trackname)) {
-      this._transitionBpm(bpm)
+      this._setTrack(trackname)
     } else if (!_.isNil(color)) {
       // passing a color argument and let the color classifier decide the track
       this._setTrack(this._colorToTrack(this.colorClassifier.color(color, true)))
@@ -141,7 +148,8 @@ class Soundation {
    * @param bpm
    * @param transition currently not supported
    */
-  bpm({ bpm, color }) {
+  bpm({ bpm, color, displayElement }) {
+    this.displayElementBpm = displayElement
     if (!_.isNil(bpm)) {
       this._transitionBpm(bpm)
     } else if (!_.isNil(color)) {
@@ -152,7 +160,7 @@ class Soundation {
 
   /**
    * Speaks out loud the color name.
-   * @param color {r, g, b} object
+   * @param color object 'r,g,b'
    */
   shoutColor(color) {
     this.colorClassifier.shoutColor(color)
@@ -189,8 +197,8 @@ class Soundation {
    * one close to the other. Can be called
    * multiple times. Takes either a key or
    * a color
-   * @param key: { letter: 'minor', chord: 'C#'}
-   * @param color: { r: 10, g: 130, b: 255 }
+   * @param key object "letter: 'minor', chord: 'C#'"
+   * @param color object " r: 10, g: 130, b: 255 "
    */
   strum({ key, color, delay }) {
     if (!_.isNil(key) && !_.isNil(key.chord) && !_.isNil(key.letter)) {
@@ -219,10 +227,10 @@ class Soundation {
   /**
    * Used to initialize configuration of
    * soundation the first time.
-   *  - Sets looping
-   *  - Retrieves the part to be played
-   *  - Initiliazes the part and starts it
-   * @returns {promise[thenable]}
+   * Sets looping,
+   * Retrieves the part to be played,
+   * Initiliazes the part and starts it
+   * @returns {Promise.<null, Error>}
    * @private
    */
   _initializeConfiguration() {
@@ -263,6 +271,7 @@ class Soundation {
    * @private
    */
   _setBpm(bpm) {
+    $(this.displayElementBpm).html(bpm)
     console.debug(`│  Bpm => [${bpm}]`)
     if (!_.isNil(bpm) && bpm > 0) {
       Tone.Transport.bpm.value = bpm
@@ -278,6 +287,7 @@ class Soundation {
    * @private
    */
   _setTrack(trackname) {
+    $(this.displayElementTrack).html(trackname)
     this._partPlaying.disable()
     this._partPlaying = _.find(this.parts, { name: trackname })
     this._partPlaying.setChord('major', 'D#')
@@ -286,10 +296,7 @@ class Soundation {
 
   /**
    * Circles and transition bpm from
-   *  - 0 -> 100
-   *  - 100 ->200
-   *  - 200 -> 300
-   *  - anything to 10
+   *  0 -> 100, 100 ->200, 200 -> 300, anything to 10
    * @private
    */
   _circleBpm() {
@@ -385,11 +392,11 @@ class Soundation {
 
   /**
    * Maps distinct color to bpm values
-   * @param color
+   * @param {String} Hex A hex value
    * @returns {*}
    * @private
    */
-  _colorToBpm(color) {
+  _colorToBpm(hex) {
     this.Bpms = {
       '#000000': 50,
       '#808080': 60,
@@ -402,16 +409,16 @@ class Soundation {
       '#00ffff': 130,
       '#ffffff': 140,
     }
-    return this.Bpms[color]
+    return this.Bpms[hex]
   }
 
   /**
    * Maps color to track names
-   * @param color
+   * @param {String} Hex A hex value
    * @returns {*}
    * @private
    */
-  _colorToTrack(color) {
+  _colorToTrack(hex) {
     this.tracks = {
       '#000000': '1 note',
       '#808080': '2 notes',
@@ -425,7 +432,7 @@ class Soundation {
       '#ffffff': '7 notes',
     }
 
-    return this.tracks[color]
+    return this.tracks[hex]
   }
 
   /**

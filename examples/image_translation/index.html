@@ -10,12 +10,15 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <!-- Highlighter -->
-    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.0.4/css/all.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" type="text/css" href="assets/css/animate.css">
     <title>Soundation</title>
 </head>
 <body>
+    <div class="notification">
+
+    </div>
     <div class="app">
         <div class="header">
             <img src="./assets/img/soundation.png" alt="" id="logo" class="animated FadeIn">
@@ -23,48 +26,106 @@
             <h2 class="center sub animated FadeIn">A library to hear what you cannot see</h2>
         </div>
         <section id="intro" class="animated FadeIn">
-            <div class="content">
-                <div>
+            <div class="content small">
+                <div class="text">
                     Soundation is a library that helps translating image to audio. This can be used to help visually impaired or colorblind people.
                     It has been developed as a mini project for my Thesis and was primarily build to test such scenario. It lacks a lot of features due to it's origin but it is
                     build with extensibility in mind.
+                    <br>
+                    <br>
+                    See it in action:
+                    <br>
+                    <h4><a onclick="scrollToElement('#bpm-title')">Bpm translation</a> and it's <a target="_blank" href="https://codepen.io/skid648/pen/QaZeOE">source code.</a></h4>
+                    <h4><a onclick="scrollToElement('#track-title')">Track translation</a> and it's <a target="_blank" href="">source code.</a></h4>
+                    <h4><a onclick="scrollToElement('#key-title')">Key translation</a> and it's <a target="_blank" href="">source code.</a></h4>
                 </div>
-                <div class="code animated fadeInUp animation-delay-2">
-                    <p data-height="700" data-theme-id="dark" data-slug-hash="QaZeOE" data-default-tab="js" data-user="skid648" data-embed-version="2" data-pen-title="QaZeOE" class="codepen">See the Pen <a href="https://codepen.io/skid648/pen/QaZeOE/">QaZeOE</a> by G.Thanasis (<a href="https://codepen.io/skid648">@skid648</a>) on <a href="https://codepen.io">CodePen</a>.</p>
-                    <script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>
+                <div class="charts">
+                    <div class="viz-portfolio-total-value"></div>
+                    <div class="viz-legend">
+                        <div class="value animated fadeInUp animation-delay-2">
+                            <span class="color-2"></span>
+                            <span class="name">Visually impaired</span>
+                        </div>
+                        <div class="value animated fadeInUp animation-delay-3">
+                            <span class="color-1"></span>
+                            <span class="name">Visually impaired that use internet</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="charts">
-                <div class="viz-portfolio-total-value"></div>
-                <div class="viz-legend">
-                    <div class="value animated fadeInUp animation-delay-2">
-                        <span class="color-2"></span>
-                        <span class="name">Visually impaired</span>
-                    </div>
-                    <div class="value animated fadeInUp animation-delay-3">
-                        <span class="color-1"></span>
-                        <span class="name">Visually impaired that use internet</span>
-                    </div>
-                </div>
-            </div>
+            <!--<div class="code animated fadeInUp animation-delay-2">-->
+                <!--<div class='results' onclick="scrollToElement('#bpm-title')"></div>-->
+                <!--<p data-height="600" data-theme-id="dark" data-slug-hash="QaZeOE" data-default-tab="js" data-user="skid648" data-embed-version="2" data-pen-title="QaZeOE" class="codepen">See the Pen <a href="https://codepen.io/skid648/pen/QaZeOE/">QaZeOE</a> by G.Thanasis (<a href="https://codepen.io/skid648">@skid648</a>) on <a href="https://codepen.io">CodePen</a>.</p>-->
+                <!--<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>-->
+            <!--</div>-->
         </section>
-        <h2 class="center sub animated FadeIn">Bpm manipulation based on color</h2>
+        <h2 id="bpm-title" class="center sub animated FadeIn">Bpm manipulation based on color</h2>
+        <span id="bpm-title-info" style="display: none">
+            <h2>Bpm translation</h2>
+            <div>
+                When you hover the mouse on the picture soundation grabs the color and
+                translates it to a bpm value. You should hover smoothly and wait for the sound change.
+                When the sound in steady, click to learn the color.
+            </div>
+        </span>
         <div class="seperator" class="animated FadeIn"></div>
         <section id="bpm" class="animated FadeIn">
             <img src="assets/img/bpmchange.jpeg" width="500" height="605" alt="">
+            <div class="explanation">
+                <h2>Color sample</h2>
+                <div class="color">
+
+                </div>
+                <h2>Bpm value</h2>
+                <div class="bpm-value">0</div>
+            </div>
         </section>
-        <h2 class="center sub animated FadeIn">Track change based on color</h2>
+        <h2 id="track-title" class="center sub animated FadeIn">Track change based on color</h2>
+        <span id="track-title-info" style="display: none">
+            <h2>Track translation</h2>
+            <div>
+                When you hover the mouse on the picture soundation grabs the color and
+                translates it to a new track. The moment you hear a track change stop and
+                click to learn the color.
+            </div>
+        </span>
         <div class="seperator" class="animated FadeIn"></div>
         <section id="tracks" class="animated FadeIn">
             <img src="assets/img/trackchange.jpeg" width="500" height="640" alt="">
+            <div class="explanation">
+                <h2>Color sample</h2>
+                <div class="color">
+
+                </div>
+                <h2>Track name</h2>
+                <div class="track-value">1 note</div>
+            </div>
         </section>
-        <h2 class="center sub animated FadeIn">Key manipulation based on color</h2>
+        <h2 id="key-title" class="center sub animated FadeIn">Key manipulation based on color</h2>
+        <span id="key-title-info" style="display: none">
+            <h2>Key translation</h2>
+            <div>
+                When you hover the mouse on the picture soundation grabs the color and
+                translates it to a new key. As always you can click to learn the color you are on.
+            </div>
+        </span>
         <div class="seperator" class="animated FadeIn"></div>
         <section id="key" class="animated FadeIn">
             <img src="assets/img/keychange.jpeg" width="500" height="500" alt="">
+            <div class="explanation">
+                <h2>Color sample</h2>
+                <div class="color">
+
+                </div>
+                <h2>Current Key</h2>
+                <div class="key-value">C#</div>
+            </div>
         </section>
         <div class="seperator" class="animated FadeIn"></div>
         <section id="outro" class="animated FadeIn">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-google-plus-g"></i>
         </section>
     </div>
 

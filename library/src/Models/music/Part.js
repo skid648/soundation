@@ -110,6 +110,7 @@ class Part {
     const key = Chords.colorToKey(colorCode)
     // console.log(`Setting part from color: ${colorCode} to key: ${JSON.stringify(key)}`)
     this.setChord(key.order, key.chord)
+    return key.chord
   }
 
   /**

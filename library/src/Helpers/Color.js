@@ -1,5 +1,15 @@
 class Color {
   static get(event, imageSelector, imageData) {
+    const image = $(imageSelector)[0]
+
+    // console.log(`Image height: ${image.height}, image width: ${image.width}`)
+    // console.log(`Image natural height: ${image.naturalHeight},
+    // image natural width: ${image.naturalWidth}`)
+    // const yOffset = image.naturalHeight - image.height
+    // const xOffset = image.naturalWidth - image.width
+    // console.log(`Height offset: ${yOffset}, Width offset: ${xOffset}`)
+    // TODO: fixing mapping image if resized
+
     let color = {}
     if ($(imageSelector)[0] != null) {
       const coords = this.getMouseCoordsFromElement(event, $(imageSelector))
@@ -11,7 +21,7 @@ class Color {
     return this.rgbToHex(color.r, color.g, color.b)
   }
 
-  static getMouseCoordsFromElement(event, element) {
+  static getMouseCoordsFromElement(event, element, yOffset = 0, xOffset = 0) {
     const posX =
       event.offsetX
         ? (event.offsetX)
@@ -21,8 +31,7 @@ class Color {
       event.offsetY
         ? (event.offsetY)
         : event.pageY - element.offsetTop;
-
-    return { posX, posY }
+    return { posX: posX - xOffset, posY: posY - yOffset }
   }
 
   static getPixelPositionRaw(x, y, image) {

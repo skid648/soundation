@@ -35,7 +35,7 @@ class Classifier {
 
     /**
      * A table with color names
-     * @type {[*]}
+     * @type Array
      */
     this.colorTable = [
       { name: 'black', hex: '#000000' },
