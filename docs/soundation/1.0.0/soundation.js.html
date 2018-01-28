@@ -116,6 +116,9 @@ class Soundation {
     this.colorClassifier = new Classifier({ imageArray: {}, segments: 10 })
     this.transitioningBpm = false
     this.colors = Colors
+    this.displayElementBpm = ''
+    this.displayElementKey = ''
+    this.displayElementTrack = ''
   }
 
   /* ***************************** *
@@ -199,13 +202,15 @@ class Soundation {
    * @param key
    * @param color
    */
-  key({ key, color }) {
+  key({ key, color, displayElement }) {
+    this.displayElementKey = displayElement
     if (!_.isNil(key) &amp;&amp; !_.isNil(key.order) &amp;&amp; !_.isNil(key.chord)) {
       // manually setting the key
       this._partPlaying.setChord(key.order, key.chord)
     } else if (!_.isNil(color)) {
       // passing a color argument and let the color classifier decide the key
-      this._partPlaying.setChordFromColor(this.colorClassifier.color(color, true))
+      const chord = this._partPlaying.setChordFromColor(this.colorClassifier.color(color, true))
+      $(this.displayElementKey).html(chord)
     }
   }
 
@@ -215,9 +220,10 @@ class Soundation {
    * // TODO: document track names
    * @param trackname
    */
-  track({ trackname, color }) {
+  track({ trackname, color, displayElement }) {
+    this.displayElementTrack = displayElement
     if (!_.isNil(trackname)) {
-      this._transitionBpm(bpm)
+      this._setTrack(trackname)
     } else if (!_.isNil(color)) {
       // passing a color argument and let the color classifier decide the track
       this._setTrack(this._colorToTrack(this.colorClassifier.color(color, true)))
@@ -231,7 +237,8 @@ class Soundation {
    * @param bpm
    * @param transition currently not supported
    */
-  bpm({ bpm, color }) {
+  bpm({ bpm, color, displayElement }) {
+    this.displayElementBpm = displayElement
     if (!_.isNil(bpm)) {
       this._transitionBpm(bpm)
     } else if (!_.isNil(color)) {
@@ -353,6 +360,7 @@ class Soundation {
    * @private
    */
   _setBpm(bpm) {
+    $(this.displayElementBpm).html(bpm)
     console.debug(`│  Bpm => [${bpm}]`)
     if (!_.isNil(bpm) &amp;&amp; bpm > 0) {
       Tone.Transport.bpm.value = bpm
@@ -368,6 +376,7 @@ class Soundation {
    * @private
    */
   _setTrack(trackname) {
+    $(this.displayElementTrack).html(trackname)
     this._partPlaying.disable()
     this._partPlaying = _.find(this.parts, { name: trackname })
     this._partPlaying.setChord('major', 'D#')
