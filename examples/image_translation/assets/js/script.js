@@ -117,9 +117,13 @@ keyImage.load(keyImageSrc, () => {
 const scrollToElement = function (element) {
   console.log(element)
   $('html, body').animate({
-    scrollTop: $(element).offset().top
+    scrollTop: $(element).offset().top,
   }, 2000);
 }
+
+/**
+ * Show bpm info on hover
+ */
 
 $('#bpm-title').hover(() => {
   $('.notification').html()
@@ -132,6 +136,21 @@ $('#bpm-title').hover(() => {
   $('.notification').css('left', '-10px')
 })
 
+$('#bpm-link').hover(() => {
+  $('.notification').html()
+  $('.notification').html($('#bpm-title-info').html())
+  $('.notification').css('opacity', '1')
+  $('.notification').css('left', '0px')
+}, () => {
+  $('.notification').css('opacity', '0')
+
+  $('.notification').css('left', '-10px')
+})
+
+/**
+ * Show tracks info on hover
+ */
+
 $('#track-title').hover(() => {
   $('.notification').html()
   $('.notification').html($('#track-title-info').html())
@@ -142,6 +161,21 @@ $('#track-title').hover(() => {
 
   $('.notification').css('left', '-10px')
 })
+
+$('#tracks-link').hover(() => {
+  $('.notification').html()
+  $('.notification').html($('#track-title-info').html())
+  $('.notification').css('opacity', '1')
+  $('.notification').css('left', '0px')
+}, () => {
+  $('.notification').css('opacity', '0')
+
+  $('.notification').css('left', '-10px')
+})
+
+/**
+ * Show key info on hover
+ */
 
 $('#key-title').hover(() => {
   $('.notification').html()
@@ -154,3 +188,54 @@ $('#key-title').hover(() => {
   $('.notification').css('left', '-10px')
 })
 
+$('#key-link').hover(() => {
+  $('.notification').html()
+  $('.notification').html($('#key-title-info').html())
+  $('.notification').css('opacity', '1')
+  $('.notification').css('left', '0px')
+}, () => {
+  $('.notification').css('opacity', '0')
+
+  $('.notification').css('left', '-10px')
+})
+
+
+/**
+ * Share buttons
+ */
+
+$(document).ready(() => {
+  $('.fb-share').click(function (e) {
+    e.preventDefault();
+    window.open(
+      $(this).attr('href'),
+      '_blank',
+      `height=450, width=550, top=${($(window).height() / 2) - 275}, left=${($(window).width() / 2) - 225}, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0`,
+    )
+    return false
+  })
+})
+
+$(document).ready(() => {
+  $('.twitter-share').click(function (e) {
+    e.preventDefault();
+    window.open(
+      $(this).attr('href'),
+      '_blank',
+      `height=450, width=550, top=${($(window).height() / 2) - 275}, left=${($(window).width() / 2) - 225}, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0`,
+    )
+    return false
+  })
+})
+
+$(document).ready(() => {
+  $('.google-share').click(function (e) {
+    e.preventDefault();
+    window.open(
+      $(this).attr('href'),
+      '_blank',
+      `height=450, width=550, top=${($(window).height() / 2) - 275}, left=${($(window).width() / 2) - 225}, toolbar=0, location=0, menubar=0, directories=0, scrollbars=0`,
+    )
+    return false
+  })
+})

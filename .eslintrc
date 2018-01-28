@@ -13,6 +13,7 @@
     "no-restricted-syntax": "warn",
     "no-trailing-spaces": "off",
     "no-restricted-properties": "off",
-    "no-bitwise": "off"
+    "no-bitwise": "off",
+    "max-len": "warn"
   }
 }
