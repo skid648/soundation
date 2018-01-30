@@ -4,6 +4,7 @@
     <script src="assets/js/third-party/marvin.js"></script>
     <script src="assets/js/soundation.min.js"></script>
     <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="assets/js/third-party/jscolor.js"></script>
     <!-- Highlighter -->
     <link rel="stylesheet"
           href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
@@ -20,11 +21,15 @@
 
     </div>
     <div class="app">
+
+        <!-- Header block -->
         <div class="header">
             <img src="./assets/img/soundation.png" alt="" id="logo" class="animated FadeIn">
             <div class="seperator animated FadeIn"></div>
             <h2 class="center sub animated FadeIn">A library to hear what you cannot see</h2>
         </div>
+
+        <!-- Intro card -->
         <section id="intro" class="animated FadeIn">
             <div class="content small">
                 <div class="text">
@@ -59,6 +64,8 @@
                 <!--<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>-->
             <!--</div>-->
         </section>
+
+        <!-- Bpm test card -->
         <h2 id="bpm-title" class="center sub animated FadeIn">Bpm manipulation based on color</h2>
         <span id="bpm-title-info" style="display: none">
             <h2>Bpm translation</h2>
@@ -70,6 +77,23 @@
         </span>
         <div class="seperator" class="animated FadeIn"></div>
         <section id="bpm" class="animated FadeIn">
+            <i class="fas fa-sliders-h"></i>
+            <div class="settings">
+                <h3>Settings</h3>
+                <div class="update">
+                    <div class="color"><div class="bpm-value">0</div></div>
+                    <div class="row"><input class="jscolor" value="#000000" type="text" id="bpm50"><label for="bpm50"> 50</label></div>
+                    <div class="row"><input class="jscolor" value="#808080" type="text" id="bpm60"><label for="bpm60"> 60</label></div>
+                    <div class="row"><input class="jscolor" value="#0000ff" type="text" id="bpm70"><label for="bpm70"> 70</label></div>
+                    <div class="row"><input class="jscolor" value="#800080" type="text" id="bpm80"><label for="bpm80"> 80</label></div>
+                    <div class="row"><input class="jscolor" value="#ff0000" type="text" id="bpm90"><label for="bpm90"> 90</label></div>
+                    <div class="row"><input class="jscolor" value="#008000" type="text" id="bpm100"><label for="bpm100">100</label></div>
+                    <div class="row"><input class="jscolor" value="#ffa500" type="text" id="bpm110"><label for="bpm110">110</label></div>
+                    <div class="row"><input class="jscolor" value="#ffff00" type="text" id="bpm120"><label for="bpm120">120</label></div>
+                    <div class="row"><input class="jscolor" value="#00ffff" type="text" id="bpm130"><label for="bpm130">130</label></div>
+                    <div class="row"><input class="jscolor" value="#ffffff" type="text" id="bpm140"><label for="bpm140">140</label></div>
+                </div>
+            </div>
             <img src="assets/img/bpmchange.jpeg" width="500" height="605" alt="">
             <div class="explanation">
                 <h2>Color sample</h2>
@@ -80,6 +104,8 @@
                 <div class="bpm-value">0</div>
             </div>
         </section>
+
+        <!-- Track test card -->
         <h2 id="track-title" class="center sub animated FadeIn">Track change based on color</h2>
         <span id="track-title-info" style="display: none">
             <h2>Track translation</h2>
@@ -91,6 +117,10 @@
         </span>
         <div class="seperator" class="animated FadeIn"></div>
         <section id="tracks" class="animated FadeIn">
+            <i class="fas fa-sliders-h"></i>
+            <div class="settings">
+                <h3>Settings</h3>
+            </div>
             <img src="assets/img/trackchange.jpeg" width="500" height="640" alt="">
             <div class="explanation">
                 <h2>Color sample</h2>
@@ -101,6 +131,8 @@
                 <div class="track-value">1 note</div>
             </div>
         </section>
+
+        <!-- Key test card -->
         <h2 id="key-title" class="center sub animated FadeIn">Key manipulation based on color</h2>
         <span id="key-title-info" style="display: none">
             <h2>Key translation</h2>
@@ -111,6 +143,10 @@
         </span>
         <div class="seperator" class="animated FadeIn"></div>
         <section id="key" class="animated FadeIn">
+            <i class="fas fa-sliders-h"></i>
+            <div class="settings">
+                <h3>Settings</h3>
+            </div>
             <img src="assets/img/keychange.jpeg" width="500" height="500" alt="">
             <div class="explanation">
                 <h2>Color sample</h2>
@@ -121,7 +157,10 @@
                 <div class="key-value">C#</div>
             </div>
         </section>
+
         <div class="seperator" class="animated FadeIn"></div>
+
+        <!-- Outro -->
         <section id="outro" class="animated FadeIn">
             <i href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2F83.212.115.223&picture=http://83.212.115.223/assets/img/soundation.png" class="fab fa-facebook-f fb-share"></i>
             <i href="http://twitter.com/home?status=Soundation+http%3A%2F%2F83.212.115.223" class="fab fa-twitter twitter-share"></i>

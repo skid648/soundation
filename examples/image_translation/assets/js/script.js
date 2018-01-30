@@ -15,7 +15,7 @@ bpmImage.load(bpmImageSrc, () => {
       $('#bpm img').mousemove((event) => {
         // get color value from image and coordinates
         const color = harp.colors.get(event, '#bpm img', bpmImage.imageData)
-        $('#bpm .explanation .color').css('background', color)
+        $('#bpm .color').css('background', color)
         // resume the harp
         harp.resume()
         // change the tempo based on the color
@@ -50,7 +50,7 @@ trackImage.load(trackImageSrc, () => {
       // When mouse hover image
       $('#tracks img').mousemove((event) => {
         const color = harp.colors.get(event, '#tracks img', trackImage.imageData)
-        $('#tracks .explanation .color').css('background', color)
+        $('#tracks .color').css('background', color)
         // resume the harp and change the track being played based on the color
         harp.resume()
         harp.track({ color, displayElement: '.track-value' })
@@ -87,7 +87,7 @@ keyImage.load(keyImageSrc, () => {
       // When mouse hover image
       $('#key img').mousemove((event) => {
         const color = harp.colors.get(event, '#key img', keyImage.imageData)
-        $('#key .explanation .color').css('background', color)
+        $('#key .color').css('background', color)
         // resume the harp and change the key of the sound based on the color
         harp.resume()
         harp.key({ color, displayElement: '.key-value' })
@@ -239,3 +239,11 @@ $(document).ready(() => {
     return false
   })
 })
+
+
+$('.fa-sliders-h').click(function (e) {
+  const settingsPane = $(this).siblings('.settings')
+  $(this).toggleClass('clicked')
+  settingsPane.toggleClass('open')
+})
+
