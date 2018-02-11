@@ -1,0 +1,635 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      soundation.js - Documentation
+  </title>
+
+  <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+
+  
+
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("1919205b2da72e4da3b9b6639b444d59");</script>
+  <!-- end Mixpanel -->
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <svg fill="#6D6D6D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Soundation
+    </h3>
+
+    <h3>Classes</h3><ul><li id="Fileplayer-nav"><a href="Fileplayer.html">Fileplayer</a><ul class='methods'><li data-type="method" id="Fileplayer-_createBufferPromise-nav"><a href="Fileplayer.html#_createBufferPromise">_createBufferPromise</a></li><li data-type="method" id="Fileplayer-_getNotes-nav"><a href="Fileplayer.html#_getNotes">_getNotes</a></li><li data-type="method" id="Fileplayer-_getNotesRespelling-nav"><a href="Fileplayer.html#_getNotesRespelling">_getNotesRespelling</a></li><li data-type="method" id="Fileplayer-_intervalToFrequencyRatio-nav"><a href="Fileplayer.html#_intervalToFrequencyRatio">_intervalToFrequencyRatio</a></li><li data-type="method" id="Fileplayer-dispose-nav"><a href="Fileplayer.html#dispose">dispose</a></li><li data-type="method" id="Fileplayer-load-nav"><a href="Fileplayer.html#load">load</a></li><li data-type="method" id="Fileplayer-releaseAll-nav"><a href="Fileplayer.html#releaseAll">releaseAll</a></li><li data-type="method" id="Fileplayer-triggerAttackRelease-nav"><a href="Fileplayer.html#triggerAttackRelease">triggerAttackRelease</a></li><li data-type="method" id="Fileplayer-triggerRelease-nav"><a href="Fileplayer.html#triggerRelease">triggerRelease</a></li></ul></li><li id="Instruments-nav"><a href="Instruments.html">Instruments</a><ul class='methods'><li data-type="method" id="Instruments-dispose-nav"><a href="Instruments.html#dispose">dispose</a></li><li data-type="method" id="Instruments-isLoaded-nav"><a href="Instruments.html#isLoaded">isLoaded</a></li><li data-type="method" id="Instruments-load-nav"><a href="Instruments.html#load">load</a></li><li data-type="method" id="Instruments-play-nav"><a href="Instruments.html#play">play</a></li></ul></li><li id="Part-nav"><a href="Part.html">Part</a><ul class='methods'><li data-type="method" id="Part-_onNextNote-nav"><a href="Part.html#_onNextNote">_onNextNote</a></li><li data-type="method" id="Part-disable-nav"><a href="Part.html#disable">disable</a></li><li data-type="method" id="Part-dispose-nav"><a href="Part.html#dispose">dispose</a></li><li data-type="method" id="Part-enable-nav"><a href="Part.html#enable">enable</a></li><li data-type="method" id="Part-nextChord-nav"><a href="Part.html#nextChord">nextChord</a></li><li data-type="method" id="Part-setChord-nav"><a href="Part.html#setChord">setChord</a></li><li data-type="method" id="Part-start-nav"><a href="Part.html#start">start</a></li><li data-type="method" id="Part-strum-nav"><a href="Part.html#strum">strum</a></li></ul></li><li id="Soundation-nav"><a href="Soundation.html">Soundation</a><ul class='methods'><li data-type="method" id="Soundation-_circleBpm-nav"><a href="Soundation.html#_circleBpm">_circleBpm</a></li><li data-type="method" id="Soundation-_colorToBpm-nav"><a href="Soundation.html#_colorToBpm">_colorToBpm</a></li><li data-type="method" id="Soundation-_colorToTrack-nav"><a href="Soundation.html#_colorToTrack">_colorToTrack</a></li><li data-type="method" id="Soundation-_initializeConfiguration-nav"><a href="Soundation.html#_initializeConfiguration">_initializeConfiguration</a></li><li data-type="method" id="Soundation-_loopTransportEnable-nav"><a href="Soundation.html#_loopTransportEnable">_loopTransportEnable</a></li><li data-type="method" id="Soundation-_nextKey-nav"><a href="Soundation.html#_nextKey">_nextKey</a></li><li data-type="method" id="Soundation-_nextTrack-nav"><a href="Soundation.html#_nextTrack">_nextTrack</a></li><li data-type="method" id="Soundation-_setBpm-nav"><a href="Soundation.html#_setBpm">_setBpm</a></li><li data-type="method" id="Soundation-_setTrack-nav"><a href="Soundation.html#_setTrack">_setTrack</a></li><li data-type="method" id="Soundation-_transitionBpm-nav"><a href="Soundation.html#_transitionBpm">_transitionBpm</a></li><li data-type="method" id="Soundation-bpm-nav"><a href="Soundation.html#bpm">bpm</a></li><li data-type="method" id="Soundation-destroy-nav"><a href="Soundation.html#destroy">destroy</a></li><li data-type="method" id="Soundation-imageClassifier-nav"><a href="Soundation.html#imageClassifier">imageClassifier</a></li><li data-type="method" id="Soundation-key-nav"><a href="Soundation.html#key">key</a></li><li data-type="method" id="Soundation-load-nav"><a href="Soundation.html#load">load</a></li><li data-type="method" id="Soundation-next-nav"><a href="Soundation.html#next">next</a></li><li data-type="method" id="Soundation-pause-nav"><a href="Soundation.html#pause">pause</a></li><li data-type="method" id="Soundation-resume-nav"><a href="Soundation.html#resume">resume</a></li><li data-type="method" id="Soundation-shoutColor-nav"><a href="Soundation.html#shoutColor">shoutColor</a></li><li data-type="method" id="Soundation-strum-nav"><a href="Soundation.html#strum">strum</a></li><li data-type="method" id="Soundation-track-nav"><a href="Soundation.html#track">track</a></li></ul></li></ul>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        soundation.js
+      </h1>
+    
+
+    
+      
+
+<section>
+  <article>
+    <pre class="prettyprint source linenums"><code>import _ from 'lodash'
+
+import Tone from 'tone'
+import Part from './Models/music/Part'
+import CoreParts from './Models/data/CoreParts'
+import Classifier from './Models/color/Classifier'
+import Chords from './Models/data/ChordsAndNotesGenerator'
+import Colors from './Helpers/Color'
+
+
+class Soundation {
+  /**
+   * Constructs and returns the Soundation object
+   * @param {String} instrumentUrl The instrument's url
+   * @param {Number} bpm Overall bpm of soundation
+   * @param {String} partName Choose the part to be played initially
+   * @param {Boolean} autostart Set false to disable the the player from starting after loading
+   * @returns {*}
+   */
+  constructor(instrumentUrl, bpm = 60, partName = '1 note', autostart = false) {
+    this.instrumentUrl = instrumentUrl
+    this.currentBpm = 0
+    this._setBpm(bpm)
+    this.initialBpm = bpm
+    this.partName = partName
+    this.autostart = autostart
+    this.colorClassifier = new Classifier({ imageArray: {}, segments: 10 })
+    this.transitioningBpm = false
+    this.colors = Colors
+    this.displayElementBpm = ''
+    this.displayElementKey = ''
+    this.displayElementTrack = ''
+    this.bpms = {
+      '#000000': 50,
+      '#808080': 60,
+      '#0000ff': 70,
+      '#800080': 80,
+      '#ff0000': 90,
+      '#008000': 100,
+      '#ffa500': 110,
+      '#ffff00': 120,
+      '#00ffff': 130,
+      '#ffffff': 140,
+    }
+    this.tracks = {
+      '#000000': '1 note',
+      '#808080': '2 notes',
+      '#0000ff': '3 notes',
+      '#800080': '4 notes',
+      '#ff0000': '4 notes',
+      '#008000': '4 notes',
+      '#ffa500': '4 notes',
+      '#ffff00': '5 notes',
+      '#00ffff': '6 notes',
+      '#ffffff': '7 notes',
+    }
+  }
+
+  /* ***************************** *
+
+            PUBLIC METHODS
+
+   * ***************************** */
+
+  /**
+   * Initializes ths soundation object.
+   * This involves grabbing all the instrument
+   * sounds, initializing the chord that the part
+   * will play and finally starts the transport
+   * if autoplay is set to true. (Transport is tone's
+   * master time keeper and needs to be started for
+   * the events to be played)
+   */
+  load() {
+    return this._initializeConfiguration()
+      .then((res) => {
+        this._partPlaying.setChord('major', 'D#')
+        if (this.autostart) Tone.Transport.start()
+        return res
+      })
+  }
+
+  /**
+   * Sets and loads a color classifier
+   * based on an image given. If no
+   * image given it generates a generic
+   * classifier to a rainbow palette.
+   * @param image An image object
+   * @param segments number of segments to extract palette
+   */
+  imageClassifier(image, segments) {
+    this.colorClassifier = new Classifier({
+      imageArray: image,
+      segments,
+    })
+  }
+
+  /**
+   * Soundation can transform it's sound real time
+   * either directly thought the public api or can
+   * automatically advance the variables and loop them
+   *
+   * This method takes care of the automatic transition
+   * Auto advance to the next sound transformation
+   * @param method can be one of ['key', 'bpm', 'track']
+   */
+  next(method) {
+    console.debug(`Advancing to next ${method}`)
+    switch (method) {
+      case 'key':
+        this._nextKey()
+        break
+      case 'bpm':
+        this._circleBpm()
+        break
+      case 'track':
+        this._nextTrack()
+        break
+      default:
+        // default case is key
+        this._nextKey()
+        break
+    }
+  }
+
+  /* ***************************** *
+
+            SETTER METHODS
+
+   * ***************************** */
+
+  setBpmMapping(mapping) {
+    this.bpms = mapping
+  }
+
+  setTrackMapping(mapping) {
+    this.tracks = mapping
+  }
+
+  setKeyMapping(mapping) {
+    this._partPlaying.setChordsColorMapping(mapping)
+  }
+
+  /* ***************************** *
+
+             API METHODS
+
+   * ***************************** */
+
+  /**
+   * Manually alter the key that the sound
+   * will play in. You can set the key directly
+   * or you can let the library decide the key
+   * based on a color.
+   * @param key
+   * @param color
+   */
+  key({ key, color, displayElement }) {
+    /**
+     * Change in which element it
+     * should display the current value
+     */
+    this.displayElementKey = displayElement
+    /**
+     * Either key is set directly or we
+     * translate a color to it
+     */
+    if (!_.isNil(key) &amp;&amp; !_.isNil(key.order) &amp;&amp; !_.isNil(key.chord)) {
+      /**
+       * Manualy setting the key
+       */
+      this._partPlaying.setChord(key.order, key.chord)
+    } else if (!_.isNil(color)) {
+      /**
+       * Passing a color argument and let
+       * the color classifier decide the key
+       */
+      const chord = this._partPlaying.setChordFromColor(this.colorClassifier.color(color, true))
+      $(this.displayElementKey).html(chord)
+    }
+  }
+
+  /**
+   * Alter the part that is playing
+   * to another predefined track
+   * // TODO: document track names
+   * @param trackname
+   */
+  track({ trackname, color, displayElement }) {
+    /**
+     * Change in which element it
+     * should display the current value
+     */
+    this.displayElementTrack = displayElement
+    /**
+     * Either track name is set directly or we
+     * translate a color to it
+     */
+    if (!_.isNil(trackname)) {
+      /**
+       * Manualy setting the track
+       * from the name given
+       */
+      this._setTrack(trackname)
+    } else if (!_.isNil(color)) {
+      /**
+       * Passing a color argument and let
+       * the color classifier decide the track
+       */
+      this._setTrack(this._colorToTrack(this.colorClassifier.color(color, true)))
+    }
+  }
+
+  /**
+   * Alter how fast or slow the track is
+   * playing. Bpm gradually transition from
+   * the current value to the new one
+   * @param bpm
+   * @param transition currently not supported
+   */
+  bpm({ bpm, color, displayElement }) {
+    /**
+     * Change in which element it
+     * should display the current value
+     */
+    this.displayElementBpm = displayElement
+    /**
+     * Either bpm is set directly or we
+     * translate a color to it
+     */
+    if (!_.isNil(bpm)) {
+      /**
+       * Manualy setting the bpm
+       */
+      this._transitionBpm(bpm)
+    } else if (!_.isNil(color)) {
+      /**
+       * passing a color argument and let
+       * the color classifier decide the bpm
+       */
+      this._transitionBpm(this._colorToBpm(this.colorClassifier.color(color, true)))
+    }
+  }
+
+  /**
+   * Speaks out loud the color name.
+   * @param color object 'r,g,b'
+   */
+  shoutColor(color) {
+    this.colorClassifier.shoutColor(color)
+  }
+
+  /* ***************************** *
+
+      USEFUL GENERIC-USE METHODS
+
+   * ***************************** */
+
+  /**
+   * Stops soundation object from playing
+   * without disposing anything. Used together with
+   * resume()
+   */
+  pause() {
+    this._partPlaying.disable()
+    this._setBpm(this.initialBpm)
+    Tone.Transport.stop()
+  }
+
+  /**
+   * Resumes soundation object from the start
+   * Used together with pause()
+   */
+  resume() {
+    this._partPlaying.enable()
+    Tone.Transport.start()
+  }
+
+  /**
+   * Plays a bulk of notes from a chord
+   * one close to the other. Can be called
+   * multiple times. Takes either a key or
+   * a color
+   * @param key object "letter: 'minor', chord: 'C#'"
+   * @param color object " r: 10, g: 130, b: 255 "
+   */
+  strum({ key, color, delay }) {
+    if (!_.isNil(key) &amp;&amp; !_.isNil(key.chord) &amp;&amp; !_.isNil(key.letter)) {
+      ({ letter, chord } = { letter: key.letter, chord: key.chord })
+      this._partPlaying.strum(letter, chord)
+    } else if (!_.isNil(color)) {
+      key = Chords.colorToKey(this.colorClassifier.color(color, true))
+      this._partPlaying.strum(key.order, key.chord, delay)
+    }
+  }
+
+  /**
+   * Destructor of the class.
+   * Cleans eventing up.
+   */
+  destroy() {
+    this._partPlaying.dispose()
+  }
+
+  /* ***************************** *
+
+           PRIVATE METHODS
+
+   * ***************************** */
+
+  /**
+   * Used to initialize configuration of
+   * soundation the first time.
+   * Sets looping,
+   * Retrieves the part to be played,
+   * Initiliazes the part and starts it
+   * @returns {Promise.&lt;null, Error>}
+   * @private
+   */
+  _initializeConfiguration() {
+    // if true soundation keeps looping the part
+    this._loopTransportEnable(true)
+
+    // load all the parts
+    const partObjects = CoreParts.get('all')
+
+    this.parts = []
+
+    _.forEach(partObjects, (part) => {
+      this.parts.push(new Part(this.instrumentUrl, part.partData, part.partName))
+    })
+
+    // initialize the parts
+    return Promise.all(_.map(this.parts, part => part.start()))
+      .then(() => {
+        // Set default part
+        this._partPlaying = _.find(this.parts, { name: this.partName })
+      })
+  }
+
+  /**
+   * Enables sample looping
+   * @param switchOn
+   * @private
+   */
+  _loopTransportEnable(switchOn) {
+    Tone.Transport.loop = _.isNil(switchOn) ? true : switchOn
+    Tone.Transport.loopStart = '0m'
+    Tone.Transport.loopEnd = '1m'
+  }
+
+  /**
+   * Changes and stores bpm
+   * @param bpm
+   * @private
+   */
+  _setBpm(bpm) {
+    $(this.displayElementBpm).html(bpm)
+    console.debug(`│  Bpm => [${bpm}]`)
+    if (!_.isNil(bpm) &amp;&amp; bpm > 0) {
+      Tone.Transport.bpm.value = bpm
+      this.currentBpm = bpm
+    } else {
+      this.currentBpm = 1
+      console.warn('You cannot set BPM to a null, negative, or zero value setting to 1')
+    }
+  }
+
+  /**
+   * Changes track based on name
+   * @param trackname
+   * @private
+   */
+  _setTrack(trackName) {
+    const previousTrack = this._partPlaying
+    $(this.displayElementTrack).html(trackName)
+    this._partPlaying.disable()
+    if (_.find(this.parts, { name: trackName }) != null) {
+      this._partPlaying = _.find(this.parts, { name: trackName })
+    } else {
+      this._partPlaying = previousTrack
+      console.warn(`Searching for track: ${trackName} => ${JSON.stringify(_.find(this.parts, { name: trackName }))}`)
+    }
+    this._partPlaying.setChord('major', 'D#')
+    this._partPlaying.enable()
+  }
+
+  /**
+   * Circles and transition bpm from
+   *  0 -> 100, 100 ->200, 200 -> 300, anything to 10
+   * @private
+   */
+  _circleBpm() {
+    let goal = 0
+    const delay = 100
+    const step = 5
+    const i = 0
+    if (this.currentBpm > 0 &amp;&amp; this.currentBpm &lt;= 100) {
+      goal = 101
+      const animation = setInterval(() => {
+        if (this.currentBpm &lt;= goal) {
+          this._setBpm(this.currentBpm + step)
+        } else {
+          clearInterval(animation)
+        }
+      }, delay)
+    } else if (this.currentBpm > 100 &amp;&amp; this.currentBpm &lt;= 200) {
+      goal = 201
+      const animation = setInterval(() => {
+        if (this.currentBpm &lt;= goal) {
+          this._setBpm(this.currentBpm + step)
+        } else {
+          clearInterval(animation)
+        }
+      }, delay)
+    } else if (this.currentBpm > 200 &amp;&amp; this.currentBpm &lt;= 300) {
+      goal = 301
+      const animation = setInterval(() => {
+        if (this.currentBpm &lt;= goal) {
+          this._setBpm(this.currentBpm + step)
+        } else {
+          clearInterval(animation)
+        }
+      }, delay)
+    } else {
+      goal = 70
+      const animation = setInterval(() => {
+        if (this.currentBpm >= goal) {
+          this._setBpm(this.currentBpm - step)
+        } else {
+          clearInterval(animation)
+        }
+      }, delay)
+    }
+  }
+
+  /**
+   * Transitions bpm to another value
+   * TODO: make transition smoother?
+   * @param target
+   * @private
+   */
+  _transitionBpm(target) {
+    if (!this.transitioningBpm) {
+      this.transitioningBpm = true
+      // how fast the animation ticks
+      const changeRate = 100
+
+      // how much the animation proceeds
+      const step = 5
+
+      // if direction is positive then we have to reduce bpm
+      const direction = this.currentBpm - target
+
+      // Create an interval and destroy it when it's done
+      if (direction > 0) {
+        console.debug(`╭ Reducing bpm [${this.currentBpm}] => [${target}]`)
+        const animation = setInterval(() => {
+          if (this.currentBpm > target) {
+            this._setBpm(this.currentBpm - step)
+          } else {
+            clearInterval(animation)
+            console.debug('╰ Transition end')
+            this.transitioningBpm = false
+          }
+        }, changeRate)
+      } else if (direction &lt; 0) {
+        console.debug(`╭ Advancing bpm [${this.currentBpm}] => [${target}]`)
+        const animation = setInterval(() => {
+          if (this.currentBpm &lt; target) {
+            this._setBpm(this.currentBpm + step)
+          } else {
+            clearInterval(animation)
+            console.debug('╰ Transition end')
+            this.transitioningBpm = false
+          }
+        }, changeRate)
+      } else {
+        this.transitioningBpm = false
+      }
+    }
+  }
+
+  /**
+   * Maps distinct color to bpm values
+   * @param {String} Hex A hex value
+   * @returns {*}
+   * @private
+   */
+  _colorToBpm(hex) {
+    return this.bpms[hex]
+  }
+
+  /**
+   * Maps color to track names
+   * @param {String} Hex A hex value
+   * @returns {*}
+   * @private
+   */
+  _colorToTrack(hex) {
+    return this.tracks[hex]
+  }
+
+  /**
+   * Returns the next track chartData.
+   * If no track is next it starts
+   * looping again the tracks
+   * @private
+   */
+  _nextTrack() {
+    const nextTrack = CoreParts.next()
+    this._setTrack(nextTrack)
+  }
+
+  /**
+   * Gets the next key from the chroma array
+   * @private
+   */
+  _nextKey() {
+    this._partPlaying.nextChord()
+  }
+}
+
+export default Soundation
+</code></pre>
+  </article>
+</section>
+
+    
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+  
+</body>
+</html>

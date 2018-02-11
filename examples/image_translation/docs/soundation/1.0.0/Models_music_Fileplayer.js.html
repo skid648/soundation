@@ -1,0 +1,472 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      Models/music/Fileplayer.js - Documentation
+  </title>
+
+  <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+
+  
+
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("1919205b2da72e4da3b9b6639b444d59");</script>
+  <!-- end Mixpanel -->
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <svg fill="#6D6D6D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Soundation
+    </h3>
+
+    <h3>Classes</h3><ul><li id="Fileplayer-nav"><a href="Fileplayer.html">Fileplayer</a><ul class='methods'><li data-type="method" id="Fileplayer-_createBufferPromise-nav"><a href="Fileplayer.html#_createBufferPromise">_createBufferPromise</a></li><li data-type="method" id="Fileplayer-_getNotes-nav"><a href="Fileplayer.html#_getNotes">_getNotes</a></li><li data-type="method" id="Fileplayer-_getNotesRespelling-nav"><a href="Fileplayer.html#_getNotesRespelling">_getNotesRespelling</a></li><li data-type="method" id="Fileplayer-_intervalToFrequencyRatio-nav"><a href="Fileplayer.html#_intervalToFrequencyRatio">_intervalToFrequencyRatio</a></li><li data-type="method" id="Fileplayer-dispose-nav"><a href="Fileplayer.html#dispose">dispose</a></li><li data-type="method" id="Fileplayer-load-nav"><a href="Fileplayer.html#load">load</a></li><li data-type="method" id="Fileplayer-releaseAll-nav"><a href="Fileplayer.html#releaseAll">releaseAll</a></li><li data-type="method" id="Fileplayer-triggerAttackRelease-nav"><a href="Fileplayer.html#triggerAttackRelease">triggerAttackRelease</a></li><li data-type="method" id="Fileplayer-triggerRelease-nav"><a href="Fileplayer.html#triggerRelease">triggerRelease</a></li></ul></li><li id="Instruments-nav"><a href="Instruments.html">Instruments</a><ul class='methods'><li data-type="method" id="Instruments-dispose-nav"><a href="Instruments.html#dispose">dispose</a></li><li data-type="method" id="Instruments-isLoaded-nav"><a href="Instruments.html#isLoaded">isLoaded</a></li><li data-type="method" id="Instruments-load-nav"><a href="Instruments.html#load">load</a></li><li data-type="method" id="Instruments-play-nav"><a href="Instruments.html#play">play</a></li></ul></li><li id="Part-nav"><a href="Part.html">Part</a><ul class='methods'><li data-type="method" id="Part-_onNextNote-nav"><a href="Part.html#_onNextNote">_onNextNote</a></li><li data-type="method" id="Part-disable-nav"><a href="Part.html#disable">disable</a></li><li data-type="method" id="Part-dispose-nav"><a href="Part.html#dispose">dispose</a></li><li data-type="method" id="Part-enable-nav"><a href="Part.html#enable">enable</a></li><li data-type="method" id="Part-nextChord-nav"><a href="Part.html#nextChord">nextChord</a></li><li data-type="method" id="Part-setChord-nav"><a href="Part.html#setChord">setChord</a></li><li data-type="method" id="Part-start-nav"><a href="Part.html#start">start</a></li><li data-type="method" id="Part-strum-nav"><a href="Part.html#strum">strum</a></li></ul></li><li id="Soundation-nav"><a href="Soundation.html">Soundation</a><ul class='methods'><li data-type="method" id="Soundation-_circleBpm-nav"><a href="Soundation.html#_circleBpm">_circleBpm</a></li><li data-type="method" id="Soundation-_colorToBpm-nav"><a href="Soundation.html#_colorToBpm">_colorToBpm</a></li><li data-type="method" id="Soundation-_colorToTrack-nav"><a href="Soundation.html#_colorToTrack">_colorToTrack</a></li><li data-type="method" id="Soundation-_initializeConfiguration-nav"><a href="Soundation.html#_initializeConfiguration">_initializeConfiguration</a></li><li data-type="method" id="Soundation-_loopTransportEnable-nav"><a href="Soundation.html#_loopTransportEnable">_loopTransportEnable</a></li><li data-type="method" id="Soundation-_nextKey-nav"><a href="Soundation.html#_nextKey">_nextKey</a></li><li data-type="method" id="Soundation-_nextTrack-nav"><a href="Soundation.html#_nextTrack">_nextTrack</a></li><li data-type="method" id="Soundation-_setBpm-nav"><a href="Soundation.html#_setBpm">_setBpm</a></li><li data-type="method" id="Soundation-_setTrack-nav"><a href="Soundation.html#_setTrack">_setTrack</a></li><li data-type="method" id="Soundation-_transitionBpm-nav"><a href="Soundation.html#_transitionBpm">_transitionBpm</a></li><li data-type="method" id="Soundation-bpm-nav"><a href="Soundation.html#bpm">bpm</a></li><li data-type="method" id="Soundation-destroy-nav"><a href="Soundation.html#destroy">destroy</a></li><li data-type="method" id="Soundation-imageClassifier-nav"><a href="Soundation.html#imageClassifier">imageClassifier</a></li><li data-type="method" id="Soundation-key-nav"><a href="Soundation.html#key">key</a></li><li data-type="method" id="Soundation-load-nav"><a href="Soundation.html#load">load</a></li><li data-type="method" id="Soundation-next-nav"><a href="Soundation.html#next">next</a></li><li data-type="method" id="Soundation-pause-nav"><a href="Soundation.html#pause">pause</a></li><li data-type="method" id="Soundation-resume-nav"><a href="Soundation.html#resume">resume</a></li><li data-type="method" id="Soundation-shoutColor-nav"><a href="Soundation.html#shoutColor">shoutColor</a></li><li data-type="method" id="Soundation-strum-nav"><a href="Soundation.html#strum">strum</a></li><li data-type="method" id="Soundation-track-nav"><a href="Soundation.html#track">track</a></li></ul></li></ul>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        Models/music/Fileplayer.js
+      </h1>
+    
+
+    
+      
+
+<section>
+  <article>
+    <pre class="prettyprint source linenums"><code>import Tone from 'tone'
+import Promise from 'bluebird'
+import Log from '../..//Helpers/Logging'
+
+class Fileplayer {
+  /* ***************************** *
+
+            INITIALIZATION
+
+   * ***************************** */
+
+  /**
+   * The class loads samples of an instrument
+   * and abstracts playing the notes individually.
+   * Initiating the class and then calling load() is required.
+   * To add an instrument, you need 8 accurate samples of
+   * the following notes:
+   *
+   * [ Bb3, C3, C5, D6, Eb3, F4, G5, Gb6 ] in mp3 format
+   *
+   * @param {String} folder The folder to fetch the samples from
+   */
+  constructor(folder) {
+    /**
+     * The multibuffer player
+     * @type {Tone.MultiPlayer}
+     * @private
+     */
+    this._multiPlayer = new Tone.Players().toMaster()
+
+    /**
+     * The instrument folder
+     * @type {String}
+     * @private
+     */
+    this._instrumentFolder = folder
+
+    /**
+     * The lowest note playable
+     * @type {String}
+     * @private
+     */
+    this._lowestNote = 'C3'
+
+    /**
+     * The highest note playable
+     * @type {String}
+     * @private
+     */
+    this._highestNote = 'Gb6'
+
+    /**
+     * The number of chromatic steps (up and down) which the sample
+     * will be re-pitched
+     * @type {Number}
+     * @private
+     */
+    this._stepSize = 3
+
+    /**
+     * The number of buffers currently
+     * loading.
+     * @type {Number}
+     * @private
+     */
+    this._loadCount = 0
+
+    /**
+     * The sample lookup. Each note maps to a buffer and a playbackRate
+     * @type {Object}
+     * @private
+     */
+    this._notes = {}
+
+    /**
+     * Holds all the buffers
+     * @type {Object}
+     * @private
+     */
+    this._buffers = {}
+
+    /**
+     * Holds the note numbers based on a chromatic scale
+     * @type {Array}
+     * @private
+     */
+    this._allNotes = this._getNotes(this._lowestNote, this._highestNote)
+
+    /**
+     * if all the samples are loaded
+     * @type {Boolean}
+     */
+    this.loaded = false
+  }
+
+  /**
+   * After initializing the player load() should be called
+   * All buffers are loaded and a player is generated for every
+   * re-pitched note
+   * @returns {Promise.&lt;object, Error>}
+   */
+  load() {
+    const promiseArray = []
+    const forStep = (this._stepSize * 2) + 1
+
+    for (let noteIndex = 0; noteIndex &lt; this._allNotes.length; noteIndex += forStep) {
+      const bufferPitch = this._allNotes[noteIndex + this._stepSize]
+      const end = Math.max(forStep, this._allNotes.length)
+
+      if (!_.isNil(bufferPitch)) {
+        promiseArray.push(this._createBufferPromise(bufferPitch, noteIndex, end, this._allNotes))
+      }
+    }
+
+    return Promise.all(promiseArray)
+      .then((res) => {
+        this.loaded = true
+        return res
+      })
+      .catch((err) => {
+        console.error('Instrument files did not load successfully, plase make sure there ' +
+          'are files with the names Bb3.mp3, C3.mp3, C5.mp3, D6.mp3, Eb3.mp3, F4.mp3, G5.mp3, ' +
+          'Gb6.mp3 inside the folder')
+        return Promise.reject(new Error('Did not load instrument completely'))
+      })
+  }
+
+  /* ***************************** *
+
+              PLAYBACK
+
+   * ***************************** */
+
+  /**
+   * Fires a note from the current instrument
+   * @param note Note number
+   * @param duration Duration of note playing in sec
+   * @param startTime The exact start time
+   * @returns {object}
+   */
+  triggerAttackRelease(note, duration, startTime) {
+    const description = this._notes[note]
+
+    /**
+     * Grab the player based on the note given
+     */
+    const player = this._multiPlayer.get(description.buffer)
+
+    /**
+     * For the player to sound correctly we need to convert
+     * buffers interval to Frequency ratio and alter the player
+     * before triggering the sound.
+     */
+    player._playbackRate = this._intervalToFrequencyRatio(description.interval)
+
+    /**
+     * Finally we start the player
+     *
+     *    startTime: current
+     *    offset: 0
+     *    duration: depends on the bpm
+     *
+     */
+    return player.start(startTime, 0, duration)
+  }
+
+  /**
+   * Method to stop a note playing from a player
+   * @param note
+   * @param time
+   */
+  triggerRelease(note, time) {
+    const description = this._notes[note]
+    this._multiPlayer.stop(description.buffer, time)
+  }
+
+  /**
+   * Stop all the players
+   */
+  releaseAll() {
+    this._multiPlayer.stopAll()
+  }
+
+  /* ***************************** *
+
+              DESTRUCT
+
+   * ***************************** */
+
+  /**
+   * Destroy everything
+   */
+  dispose() {
+    this.releaseAll()
+    for (const buff in this._buffers) {
+      this._buffers[buff].dispose()
+    }
+    this._buffers = null
+    this._notes = null
+  }
+
+  /* ***************************** *
+
+            CALCULATE NOTES
+
+   * ***************************** */
+
+  /**
+     * Generates an array of notes from start
+     * to end based on chromatic scale
+     * @param start
+     * @param end
+     * @returns {Array}
+     * @private
+     */
+  _getNotes(start, end) {
+    /**
+     * Chromatic scale is notes that are separated via semitones
+     * @type { Array }
+     */
+    const chromatic = ['C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B']
+
+    /**
+     * This regex splits the given notes symbol to note
+     * and octave
+     * E.g. given C3 after the split ['C', '3']
+     * @type {RegExp}
+     */
+    const splitRegexp = /(-?\d+)/
+    const startOctave = parseInt(start.split(splitRegexp)[1], 10)
+    let startNote = start.split(splitRegexp)[0]
+
+    /**
+     * Calculating start note based on chromatic scale
+     * Where e.g. C = 0
+     * @type {number} 0 - 11
+     */
+    startNote = chromatic.indexOf(startNote)
+
+    const endOctave = parseInt(end.split(splitRegexp)[1], 10)
+    let endNote = end.split(splitRegexp)[0]
+
+    endNote = chromatic.indexOf(endNote)
+
+    /**
+     * currentNote gets set to the start note
+     * In the comments example is 0
+     */
+    let currentNote = startNote
+
+    /**
+     * currentOctave gets set to the start Octave
+     * In the comments example is 3
+     * @type {Number}
+     */
+    let currentOctave = startOctave
+
+    const retNotes = []
+
+    /**
+     * Example for the while loop is
+     *  currentNote: 0
+     *  endNote: 6
+     *  currentOctave: 3
+     *  endOctave: 6
+     */
+    while (!(currentNote === endNote &amp;&amp; currentOctave === endOctave)) {
+      retNotes.push(chromatic[currentNote] + currentOctave)
+
+      currentNote++
+
+      if (currentNote >= chromatic.length) {
+        currentNote = 0
+        currentOctave++
+      }
+    }
+    return retNotes
+  }
+
+  /**
+   * Check if note needs respelling.
+   * @param note
+   * @returns {(String|Null)} New name, or null
+   * @private
+   */
+  _getNotesRespelling(note) {
+    const respelling = {
+      Db: 'C#', Eb: 'D#', Gb: 'F#', Ab: 'G#', Bb: 'A#',
+    }
+    const splitRegexp = /(-?\d+)/
+    const pitch = note.split(splitRegexp)[0]
+    const octave = parseInt(note.split(splitRegexp)[1], 10)
+    if (Object.prototype.hasOwnProperty.call(respelling, pitch)) {
+      return respelling[pitch] + octave.toString()
+    }
+    return null
+  }
+
+  /* ***************************** *
+
+                BUFFERS
+
+   * ***************************** */
+
+  /**
+   * Grab buffer from url and append to the fileplayer class
+   * to be ready for use.
+   * @param bufferPitch Name of the buffer
+   * @param noteIndex
+   * @param end
+   * @param allNotes
+   * @returns {*|Promise.&lt;T>}
+   * @private
+   */
+  _createBufferPromise(bufferPitch, noteIndex, end, allNotes) {
+    return new Promise((resolve, reject) => new Tone.Buffer(`${this._instrumentFolder}/${bufferPitch}.mp3`, buffer => resolve(buffer)))
+      .then((res) => {
+        this._loadCount -= 1
+        if (this._loadCount === 0) this.loaded = true
+
+        this._multiPlayer.add(bufferPitch, res)
+        this._buffers[bufferPitch] = res
+
+        for (let j = noteIndex; j &lt; end; j++) {
+          // insert note from buffer
+          const note = allNotes[j]
+          this._notes[note] = {
+            interval: (j - noteIndex - this._stepSize),
+            buffer: bufferPitch,
+          }
+
+          // and the respelling if it exists
+          const respelling = this._getNotesRespelling(note)
+          if (respelling) this._notes[respelling] = this._notes[note]
+        }
+        return res
+      })
+      .catch((e) => {
+        console.err(`Buffer failed: ${JSON.stringify(e)}...`)
+        return Promise.reject(new Error())
+      })
+  }
+
+  /* ***************************** *
+
+                  MISC
+
+   * ***************************** */
+
+  /**
+   * Converts buffers interval to Frequency ratio
+   * @param interval
+   * @returns {number}
+   * @private
+   */
+  _intervalToFrequencyRatio(interval) {
+    return Math.pow(2, (interval / 12))
+  }
+}
+
+export default Fileplayer
+</code></pre>
+  </article>
+</section>
+
+    
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+  
+</body>
+</html>

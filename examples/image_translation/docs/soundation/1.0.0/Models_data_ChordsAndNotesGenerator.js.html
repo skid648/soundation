@@ -1,0 +1,229 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+      Models/data/ChordsAndNotesGenerator.js - Documentation
+  </title>
+
+  <link href="https://www.braintreepayments.com/images/favicon-ccda0b14.png" rel="icon" type="image/png">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+
+  <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+  <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+
+  
+
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(e,a){if(!a.__SV){var b=window;try{var c,l,i,j=b.location,g=j.hash;c=function(a,b){return(l=a.match(RegExp(b+"=([^&]*)")))?l[1]:null};g&&c(g,"state")&&(i=JSON.parse(decodeURIComponent(c(g,"state"))),"mpeditor"===i.action&&(b.sessionStorage.setItem("_mpcehash",g),history.replaceState(i.desiredHash||"",e.title,j.pathname+j.search)))}catch(m){}var k,h;window.mixpanel=a;a._i=[];a.init=function(b,c,f){function e(b,a){var c=a.split(".");2==c.length&&(b=b[c[0]],a=c[1]);b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,
+  0)))}}var d=a;"undefined"!==typeof f?d=a[f]=[]:f="mixpanel";d.people=d.people||[];d.toString=function(b){var a="mixpanel";"mixpanel"!==f&&(a+="."+f);b||(a+=" (stub)");return a};d.people.toString=function(){return d.toString(1)+".people (stub)"};k="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config reset people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+  for(h=0;h<k.length;h++)e(d,k[h]);a._i.push([b,c,f])};a.__SV=1.2;b=e.createElement("script");b.type="text/javascript";b.async=!0;b.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";c=e.getElementsByTagName("script")[0];c.parentNode.insertBefore(b,c)}})(document,window.mixpanel||[]);
+  mixpanel.init("1919205b2da72e4da3b9b6639b444d59");</script>
+  <!-- end Mixpanel -->
+</head>
+
+<body>
+  <svg style="display: none;">
+    <defs>
+      <symbol id="linkIcon" fill="#706d77" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0h24v24H0z" fill="none"/>
+          <path d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/>
+      </symbol>
+    </defs>
+  </svg>
+
+  <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+  <label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+  </label>
+
+  <label for="nav-trigger" class="overlay"></label>
+
+  <div class="top-nav-wrapper">
+    <ul>
+      <li >
+        <a href="index.html">
+          
+            <svg fill="#6D6D6D" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              <path d="M0 0h24v24H0z" fill="none"/>
+            </svg>
+          
+          
+        </a>
+      </li>
+
+      
+
+    </ul>
+  </div>
+
+  <nav>
+    <h3 class="reference-title">
+      Soundation
+    </h3>
+
+    <h3>Classes</h3><ul><li id="Fileplayer-nav"><a href="Fileplayer.html">Fileplayer</a><ul class='methods'><li data-type="method" id="Fileplayer-_createBufferPromise-nav"><a href="Fileplayer.html#_createBufferPromise">_createBufferPromise</a></li><li data-type="method" id="Fileplayer-_getNotes-nav"><a href="Fileplayer.html#_getNotes">_getNotes</a></li><li data-type="method" id="Fileplayer-_getNotesRespelling-nav"><a href="Fileplayer.html#_getNotesRespelling">_getNotesRespelling</a></li><li data-type="method" id="Fileplayer-_intervalToFrequencyRatio-nav"><a href="Fileplayer.html#_intervalToFrequencyRatio">_intervalToFrequencyRatio</a></li><li data-type="method" id="Fileplayer-dispose-nav"><a href="Fileplayer.html#dispose">dispose</a></li><li data-type="method" id="Fileplayer-load-nav"><a href="Fileplayer.html#load">load</a></li><li data-type="method" id="Fileplayer-releaseAll-nav"><a href="Fileplayer.html#releaseAll">releaseAll</a></li><li data-type="method" id="Fileplayer-triggerAttackRelease-nav"><a href="Fileplayer.html#triggerAttackRelease">triggerAttackRelease</a></li><li data-type="method" id="Fileplayer-triggerRelease-nav"><a href="Fileplayer.html#triggerRelease">triggerRelease</a></li></ul></li><li id="Instruments-nav"><a href="Instruments.html">Instruments</a><ul class='methods'><li data-type="method" id="Instruments-dispose-nav"><a href="Instruments.html#dispose">dispose</a></li><li data-type="method" id="Instruments-isLoaded-nav"><a href="Instruments.html#isLoaded">isLoaded</a></li><li data-type="method" id="Instruments-load-nav"><a href="Instruments.html#load">load</a></li><li data-type="method" id="Instruments-play-nav"><a href="Instruments.html#play">play</a></li></ul></li><li id="Part-nav"><a href="Part.html">Part</a><ul class='methods'><li data-type="method" id="Part-_onNextNote-nav"><a href="Part.html#_onNextNote">_onNextNote</a></li><li data-type="method" id="Part-disable-nav"><a href="Part.html#disable">disable</a></li><li data-type="method" id="Part-dispose-nav"><a href="Part.html#dispose">dispose</a></li><li data-type="method" id="Part-enable-nav"><a href="Part.html#enable">enable</a></li><li data-type="method" id="Part-nextChord-nav"><a href="Part.html#nextChord">nextChord</a></li><li data-type="method" id="Part-setChord-nav"><a href="Part.html#setChord">setChord</a></li><li data-type="method" id="Part-start-nav"><a href="Part.html#start">start</a></li><li data-type="method" id="Part-strum-nav"><a href="Part.html#strum">strum</a></li></ul></li><li id="Soundation-nav"><a href="Soundation.html">Soundation</a><ul class='methods'><li data-type="method" id="Soundation-_circleBpm-nav"><a href="Soundation.html#_circleBpm">_circleBpm</a></li><li data-type="method" id="Soundation-_colorToBpm-nav"><a href="Soundation.html#_colorToBpm">_colorToBpm</a></li><li data-type="method" id="Soundation-_colorToTrack-nav"><a href="Soundation.html#_colorToTrack">_colorToTrack</a></li><li data-type="method" id="Soundation-_initializeConfiguration-nav"><a href="Soundation.html#_initializeConfiguration">_initializeConfiguration</a></li><li data-type="method" id="Soundation-_loopTransportEnable-nav"><a href="Soundation.html#_loopTransportEnable">_loopTransportEnable</a></li><li data-type="method" id="Soundation-_nextKey-nav"><a href="Soundation.html#_nextKey">_nextKey</a></li><li data-type="method" id="Soundation-_nextTrack-nav"><a href="Soundation.html#_nextTrack">_nextTrack</a></li><li data-type="method" id="Soundation-_setBpm-nav"><a href="Soundation.html#_setBpm">_setBpm</a></li><li data-type="method" id="Soundation-_setTrack-nav"><a href="Soundation.html#_setTrack">_setTrack</a></li><li data-type="method" id="Soundation-_transitionBpm-nav"><a href="Soundation.html#_transitionBpm">_transitionBpm</a></li><li data-type="method" id="Soundation-bpm-nav"><a href="Soundation.html#bpm">bpm</a></li><li data-type="method" id="Soundation-destroy-nav"><a href="Soundation.html#destroy">destroy</a></li><li data-type="method" id="Soundation-imageClassifier-nav"><a href="Soundation.html#imageClassifier">imageClassifier</a></li><li data-type="method" id="Soundation-key-nav"><a href="Soundation.html#key">key</a></li><li data-type="method" id="Soundation-load-nav"><a href="Soundation.html#load">load</a></li><li data-type="method" id="Soundation-next-nav"><a href="Soundation.html#next">next</a></li><li data-type="method" id="Soundation-pause-nav"><a href="Soundation.html#pause">pause</a></li><li data-type="method" id="Soundation-resume-nav"><a href="Soundation.html#resume">resume</a></li><li data-type="method" id="Soundation-shoutColor-nav"><a href="Soundation.html#shoutColor">shoutColor</a></li><li data-type="method" id="Soundation-strum-nav"><a href="Soundation.html#strum">strum</a></li><li data-type="method" id="Soundation-track-nav"><a href="Soundation.html#track">track</a></li></ul></li></ul>
+  </nav>
+
+  <div id="main">
+    
+      <h1 class="page-title">
+        Models/data/ChordsAndNotesGenerator.js
+      </h1>
+    
+
+    
+      
+
+<section>
+  <article>
+    <pre class="prettyprint source linenums"><code>import Teoria from 'teoria'
+
+class Chords {
+  constructor() {
+    this.Notes = { major: {}, minor: {} }
+    this.majorOrder = ['C', 'G', 'D', 'A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'F'];
+    this.minorOrder = ['A', 'E', 'B', 'F#', 'C#', 'G#', 'D#', 'A#', 'F', 'C', 'G', 'D'];
+    this.colors = {
+      '#000000': { order: 'major', chord: 'C' },
+      '#808080': { order: 'major', chord: 'G' },
+      '#0000ff': { order: 'major', chord: 'G#' },
+      '#800080': { order: 'major', chord: 'D#' },
+      '#ff0000': { order: 'major', chord: 'A' },
+      '#008000': { order: 'major', chord: 'F#' },
+      '#ffa500': { order: 'major', chord: 'E' },
+      '#ffff00': { order: 'major', chord: 'B' },
+      '#00ffff': { order: 'major', chord: 'C#' },
+      '#ffffff': { order: 'major', chord: 'D' },
+    }
+    this._calculateNotes()
+
+    /**
+     * These are used to loop all keys sequentially
+     */
+    this.flattenedChords = this._getFlattenedChords()
+    this.chordIndex = 0
+  }
+
+  /**
+   * Return Object
+   * {
+   *    major: {
+   *       A:  [57, 61, 64, 69, 73, 76, 81, 85, 88]
+   *       A#: [58, 62, 65, 70, 74, 77, 82, 86, 89]
+   *       B:  [59, 63, 66, 71, 75, 78, 83, 87, 90]
+   *       C:  [48, 52, 55, 60, 64, 67, 72, 76, 79]
+   *       C#: [49, 53, 56, 61, 65, 68, 73, 77, 80]
+   *       D:  [50, 54, 57, 62, 66, 69, 74, 78, 81]
+   *       D#: [51, 55, 58, 63, 67, 70, 75, 79, 82]
+   *       E:  [52, 56, 59, 64, 68, 71, 76, 80, 83]
+   *       F:  [53, 57, 60, 65, 69, 72, 77, 81, 84]
+   *       F#: [54, 58, 61, 66, 70, 73, 78, 82, 85]
+   *       G:  [55, 59, 62, 67, 71, 74, 79, 83, 86]
+   *       G#: [56, 60, 63, 68, 72, 75, 80, 84, 87]
+   *    },
+   *    minor: {
+   *       A:  [57, 60, 64, 69, 72, 76, 81, 84, 88]
+   *       A#: [58, 61, 65, 70, 73, 77, 82, 85, 89]
+   *       B:  [59, 62, 66, 71, 74, 78, 83, 86, 90]
+   *       C:  [48, 51, 55, 60, 63, 67, 72, 75, 79]
+   *       C#: [49, 52, 56, 61, 64, 68, 73, 76, 80]
+   *       D:  [50, 53, 57, 62, 65, 69, 74, 77, 81]
+   *       D#: [51, 54, 58, 63, 66, 70, 75, 78, 82]
+   *       E:  [52, 55, 59, 64, 67, 71, 76, 79, 83]
+   *       F:  [53, 56, 60, 65, 68, 72, 77, 80, 84]
+   *       F#: [54, 57, 61, 66, 69, 73, 78, 81, 85]
+   *       G:  [55, 58, 62, 67, 70, 74, 79, 82, 86]
+   *       G#: [56, 59, 63, 68, 71, 75, 80, 83, 87]
+   *    }
+   * }
+   * @returns {{major: {}, minor: {}}|*}
+   */
+  getChords() {
+    return this.Notes
+  }
+
+  nextChord() {
+    if (this.chordIndex >= this.flattenedChords.length - 1) {
+      this.chordIndex = 0
+    } else {
+      this.chordIndex = this.chordIndex + 1
+    }
+    return this.flattenedChords[this.chordIndex]
+  }
+  
+  colorToKey(color) {
+    return this.colors[color]
+  }
+
+  setColorMappings(mapping) {
+    this.colors = mapping
+  }
+
+  // Private functions
+
+  _calculateNotes() {
+    _.forEach(this.majorOrder, (key) => {
+      const major = Teoria.note(`${key}3`).chord('major')
+      const minor = Teoria.note(`${key}3`).chord('minor')
+
+      this.Notes.major[key] = []
+      this.Notes.minor[key] = []
+
+      const octaves = 3
+
+      for (let o = 0; o &lt; octaves; o++) {
+        const majorNotes = major.notes()
+        const minorNotes = minor.notes()
+
+        _.forEach(majorNotes, (object, i) => {
+          this.Notes.major[key].push(majorNotes[i].midi())
+          this.Notes.minor[key].push(minorNotes[i].midi())
+        })
+
+        major.transpose(Teoria.interval('P8'))
+        minor.transpose(Teoria.interval('P8'))
+      }
+    })
+  }
+
+  _getFlattenedChords() {
+    const majorChords = _.map(this.majorOrder, chord => ({ order: 'major', chord }))
+    const minorChords = _.map(this.minorOrder, chord => ({ order: 'minor', chord }))
+    return _.flatten(_.union(majorChords, minorChords))
+  }
+}
+
+export default new Chords()
+</code></pre>
+  </article>
+</section>
+
+    
+
+
+  </div>
+
+  <br class="clear">
+
+  <footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a>
+  </footer>
+
+  <script src="scripts/linenumber.js"></script>
+  <script src="scripts/pagelocation.js"></script>
+
+  
+  
+</body>
+</html>

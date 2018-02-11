@@ -15,7 +15,7 @@
     "referenceTitle": "Soundation"
   },
   "opts": {
-    "destination": "./docs/",
+    "destination": "./examples/image_translation/docs/",
     "encoding": "utf8",
     "private": true,
     "recurse": true,
