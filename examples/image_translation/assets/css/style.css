@@ -471,7 +471,7 @@ body {
     margin-bottom: 20px;
 }
 
-#bpm-title {
+#bpm-title, #track-title, #key-title {
     cursor: pointer;
 }
 
@@ -579,10 +579,10 @@ a {
 }
 
 .update .row {
-    width: 250px;
+    width: 300px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     margin: 0px;
     font-size: 35px;
@@ -597,14 +597,24 @@ a {
     border: none;
     background: #b5b5b5;
     padding: 12px;
+    text-align: center;
 }
 
-.update .color {
-    width: 250px;
-    height: 40px;
-    border-radius: 0px;
-    margin: 10px;
+.update .color-value, .update input, .update select {
+    width: 120px;
+    height: 30px;
+    border-radius: 0px !important;
+    margin: 5px;
     transition: all 0.2s;
+    border: 0px;
+    background: #b5b5b5;
+}
+
+.update .color,
+.update .track,
+.update .key,
+.update .reset-row{
+    margin: 10px auto;
 }
 
 .update .color .bpm-value,
@@ -618,8 +628,27 @@ a {
     align-content: center;
     align-items: center;
     width: 250px;
-    height: 40px;
-    color: white;
+    height: 30px;
+    color: white !important;
     text-shadow: 1px 1px 8px #0000008f;
     transition: all 0.2s;
+}
+
+.reset-row {
+    width: 300px;
+    margin: 0px auto;
+    display: flex;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    color: rgba(0,0,0,0.3);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.fa-link {
+    font-size: 15px;
+    color: gray;
+    transform: rotate(45deg);
 }

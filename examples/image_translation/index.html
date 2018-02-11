@@ -58,11 +58,6 @@
                     </div>
                 </div>
             </div>
-            <!--<div class="code animated fadeInUp animation-delay-2">-->
-                <!--<div class='results' onclick="scrollToElement('#bpm-title')"></div>-->
-                <!--<p data-height="600" data-theme-id="dark" data-slug-hash="QaZeOE" data-default-tab="js" data-user="skid648" data-embed-version="2" data-pen-title="QaZeOE" class="codepen">See the Pen <a href="https://codepen.io/skid648/pen/QaZeOE/">QaZeOE</a> by G.Thanasis (<a href="https://codepen.io/skid648">@skid648</a>) on <a href="https://codepen.io">CodePen</a>.</p>-->
-                <!--<script async src="https://production-assets.codepen.io/assets/embed/ei.js"></script>-->
-            <!--</div>-->
         </section>
 
         <!-- Bpm test card -->
@@ -82,24 +77,23 @@
                 <h3>Settings</h3>
                 <div class="update">
                     <div class="color"><div class="bpm-value">0</div></div>
-                    <div class="row"><input class="jscolor" value="#000000" type="text" id="bpm50"><label for="bpm50"> 50</label></div>
-                    <div class="row"><input class="jscolor" value="#808080" type="text" id="bpm60"><label for="bpm60"> 60</label></div>
-                    <div class="row"><input class="jscolor" value="#0000ff" type="text" id="bpm70"><label for="bpm70"> 70</label></div>
-                    <div class="row"><input class="jscolor" value="#800080" type="text" id="bpm80"><label for="bpm80"> 80</label></div>
-                    <div class="row"><input class="jscolor" value="#ff0000" type="text" id="bpm90"><label for="bpm90"> 90</label></div>
-                    <div class="row"><input class="jscolor" value="#008000" type="text" id="bpm100"><label for="bpm100">100</label></div>
-                    <div class="row"><input class="jscolor" value="#ffa500" type="text" id="bpm110"><label for="bpm110">110</label></div>
-                    <div class="row"><input class="jscolor" value="#ffff00" type="text" id="bpm120"><label for="bpm120">120</label></div>
-                    <div class="row"><input class="jscolor" value="#00ffff" type="text" id="bpm130"><label for="bpm130">130</label></div>
-                    <div class="row"><input class="jscolor" value="#ffffff" type="text" id="bpm140"><label for="bpm140">140</label></div>
+                    <div class="row"><div style="background: #000000" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="50" type="text"></div>
+                    <div class="row"><div style="background: #808080" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="60" type="text"></div>
+                    <div class="row"><div style="background: #0000ff" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="70" type="text"></div>
+                    <div class="row"><div style="background: #800080" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="80" type="text"></div>
+                    <div class="row"><div style="background: #ff0000" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="90" type="text"></div>
+                    <div class="row"><div style="background: #008000" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="100" type="text"></div>
+                    <div class="row"><div style="background: #ffa500" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="110" type="text"></div>
+                    <div class="row"><div style="background: #ffff00" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="120" type="text"></div>
+                    <div class="row"><div style="background: #00ffff" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="130" type="text"></div>
+                    <div class="row"><div style="background: #ffffff" class="color-value"></div><i class="fas fa-link"></i><input onchange="updateBpmMapping()" value="140" type="text"></div>
+                    <div class="reset-row" onclick="resetBpmMapping()">Reset</div>
                 </div>
             </div>
             <img src="assets/img/bpmchange.jpeg" width="500" height="605" alt="">
             <div class="explanation">
                 <h2>Color sample</h2>
-                <div class="color">
-
-                </div>
+                <div class="color"></div>
                 <h2>Bpm value</h2>
                 <div class="bpm-value">0</div>
             </div>
@@ -120,6 +114,150 @@
             <i class="fas fa-sliders-h"></i>
             <div class="settings">
                 <h3>Settings</h3>
+                <div class="update">
+                    <div class="color"><div class="track-value">0</div></div>
+                    <div class="row"><div style="background: #000000" class="color-value"></div><i class="fas fa-link"></i>
+                        <select onchange="updateTrackMapping()">
+                            <option selected="selected" value="1 note">1 note</option>
+                            <option value="2 notes">2 note</option>
+                            <option value="3 notes">3 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="5 notes">5 note</option>
+                            <option value="6 notes">6 note</option>
+                            <option value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="row"><div style="background: #808080" class="color-value"></div><i class="fas fa-link"></i>
+                    <select onchange="updateTrackMapping()">
+                            <option value="1 note">1 note</option>
+                            <option selected="selected" value="2 notes">2 note</option>
+                            <option value="3 notes">3 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="5 notes">5 note</option>
+                            <option value="6 notes">6 note</option>
+                            <option value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="row"><div style="background: #0000ff" class="color-value"></div><i class="fas fa-link"></i>
+                    <select onchange="updateTrackMapping()">
+                            <option value="1 note">1 note</option>
+                            <option value="2 notes">2 note</option>
+                            <option selected="selected" value="3 notes">3 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="5 notes">5 note</option>
+                            <option value="6 notes">6 note</option>
+                            <option value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="row"><div style="background: #800080" class="color-value"></div><i class="fas fa-link"></i>
+                    <select onchange="updateTrackMapping()">
+                            <option value="1 note">1 note</option>
+                            <option value="2 notes">2 note</option>
+                            <option value="3 notes">3 note</option>
+                            <option selected="selected" value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="5 notes">5 note</option>
+                            <option value="6 notes">6 note</option>
+                            <option value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="row"><div style="background: #ff0000" class="color-value"></div><i class="fas fa-link"></i>
+                    <select onchange="updateTrackMapping()">
+                            <option value="1 note">1 note</option>
+                            <option value="2 notes">2 note</option>
+                            <option value="3 notes">3 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option selected="selected" value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="5 notes">5 note</option>
+                            <option value="6 notes">6 note</option>
+                            <option value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="row"><div style="background: #008000" class="color-value"></div><i class="fas fa-link"></i>
+                    <select onchange="updateTrackMapping()">
+                            <option value="1 note">1 note</option>
+                            <option value="2 notes">2 note</option>
+                            <option value="3 notes">3 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option selected="selected" value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="5 notes">5 note</option>
+                            <option value="6 notes">6 note</option>
+                            <option value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="row"><div style="background: #ffa500" class="color-value"></div><i class="fas fa-link"></i>
+                    <select onchange="updateTrackMapping()">
+                            <option value="1 note">1 note</option>
+                            <option value="2 notes">2 note</option>
+                            <option value="3 notes">3 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option selected="selected" value="4 notes">4 note</option>
+                            <option value="5 notes">5 note</option>
+                            <option value="6 notes">6 note</option>
+                            <option value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="row"><div style="background: #ffff00" class="color-value"></div><i class="fas fa-link"></i>
+                    <select onchange="updateTrackMapping()">
+                            <option value="1 note">1 note</option>
+                            <option value="2 notes">2 note</option>
+                            <option value="3 notes">3 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option selected="selected" value="5 notes">5 note</option>
+                            <option value="6 notes">6 note</option>
+                            <option value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="row"><div style="background: #00ffff" class="color-value"></div><i class="fas fa-link"></i>
+                    <select onchange="updateTrackMapping()">
+                            <option value="1 note">1 note</option>
+                            <option value="2 notes">2 note</option>
+                            <option value="3 notes">3 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="5 notes">5 note</option>
+                            <option selected="selected" value="6 notes">6 note</option>
+                            <option value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="row"><div style="background: #ffffff" class="color-value"></div><i class="fas fa-link"></i>
+                        <select onchange="updateTrackMapping()">
+                            <option value="1 note">1 note</option>
+                            <option value="2 notes">2 note</option>
+                            <option value="3 notes">3 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="4 notes">4 note</option>
+                            <option value="5 notes">5 note</option>
+                            <option value="6 notes">6 note</option>
+                            <option selected="selected" value="7 notes">7 note</option>
+                        </select>
+                    </div>
+                    <div class="reset-row"><div onclick="resetTrackMapping()">Reset</div></div>
+                </div>
             </div>
             <img src="assets/img/trackchange.jpeg" width="500" height="640" alt="">
             <div class="explanation">
@@ -146,6 +284,172 @@
             <i class="fas fa-sliders-h"></i>
             <div class="settings">
                 <h3>Settings</h3>
+                <div class="update">
+                    <div class="color"><div class="key-value">0</div></div>
+                    <div class="row">
+                        <div style="background: #000000" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option selected="selected" value="C">C</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="D#">D#</option>
+                            <option value="A">A</option>
+                            <option value="F#">F#</option>
+                            <option value="E">E</option>
+                            <option value="B">B</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="background: #808080" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option value="C">C</option>
+                            <option selected="selected" value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="D#">D#</option>
+                            <option value="A">A</option>
+                            <option value="F#">F#</option>
+                            <option value="E">E</option>
+                            <option value="B">B</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="background: #0000ff" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option value="C">C</option>
+                            <option value="G">G</option>
+                            <option selected="selected" value="G#">G#</option>
+                            <option value="D#">D#</option>
+                            <option value="A">A</option>
+                            <option value="F#">F#</option>
+                            <option value="E">E</option>
+                            <option value="B">B</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="background: #800080" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option value="C">C</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option selected="selected" value="D#">D#</option>
+                            <option value="A">A</option>
+                            <option value="F#">F#</option>
+                            <option value="E">E</option>
+                            <option value="B">B</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="background: #ff0000" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option value="C">C</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="D#">D#</option>
+                            <option selected="selected" value="A">A</option>
+                            <option value="F#">F#</option>
+                            <option value="E">E</option>
+                            <option value="B">B</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="background: #008000" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option value="C">C</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="D#">D#</option>
+                            <option value="A">A</option>
+                            <option selected="selected" value="F#">F#</option>
+                            <option value="E">E</option>
+                            <option value="B">B</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="background: #ffa500" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option value="C">C</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="D#">D#</option>
+                            <option value="A">A</option>
+                            <option value="F#">F#</option>
+                            <option selected="selected" value="E">E</option>
+                            <option value="B">B</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="background: #ffff00" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option value="C">C</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="D#">D#</option>
+                            <option value="A">A</option>
+                            <option value="F#">F#</option>
+                            <option value="E">E</option>
+                            <option selected="selected" value="B">B</option>
+                            <option value="C#">C#</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="background: #00ffff" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option value="C">C</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="D#">D#</option>
+                            <option value="A">A</option>
+                            <option value="F#">F#</option>
+                            <option value="E">E</option>
+                            <option value="B">B</option>
+                            <option selected="selected" value="C#">C#</option>
+                            <option value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="row">
+                        <div style="background: #ffffff" class="color-value"></div>
+                        <i class="fas fa-link"></i>
+                        <select onchange="updateKeyMapping()">
+                            <option value="C">C</option>
+                            <option value="G">G</option>
+                            <option value="G#">G#</option>
+                            <option value="D#">D#</option>
+                            <option value="A">A</option>
+                            <option value="F#">F#</option>
+                            <option value="E">E</option>
+                            <option value="B">B</option>
+                            <option value="C#">C#</option>
+                            <option selected="selected" value="D">D</option>
+                        </select>
+                    </div>
+                    <div class="reset-row">
+                        <div onclick="resetKeyMapping()">Reset</div>
+                    </div>
+                </div>
             </div>
             <img src="assets/img/keychange.jpeg" width="500" height="500" alt="">
             <div class="explanation">

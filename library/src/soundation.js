@@ -30,6 +30,30 @@ class Soundation {
     this.displayElementBpm = ''
     this.displayElementKey = ''
     this.displayElementTrack = ''
+    this.bpms = {
+      '#000000': 50,
+      '#808080': 60,
+      '#0000ff': 70,
+      '#800080': 80,
+      '#ff0000': 90,
+      '#008000': 100,
+      '#ffa500': 110,
+      '#ffff00': 120,
+      '#00ffff': 130,
+      '#ffffff': 140,
+    }
+    this.tracks = {
+      '#000000': '1 note',
+      '#808080': '2 notes',
+      '#0000ff': '3 notes',
+      '#800080': '4 notes',
+      '#ff0000': '4 notes',
+      '#008000': '4 notes',
+      '#ffa500': '4 notes',
+      '#ffff00': '5 notes',
+      '#00ffff': '6 notes',
+      '#ffffff': '7 notes',
+    }
   }
 
   /* ***************************** *
@@ -101,6 +125,24 @@ class Soundation {
 
   /* ***************************** *
 
+            SETTER METHODS
+
+   * ***************************** */
+
+  setBpmMapping(mapping) {
+    this.bpms = mapping
+  }
+
+  setTrackMapping(mapping) {
+    this.tracks = mapping
+  }
+
+  setKeyMapping(mapping) {
+    this._partPlaying.setChordsColorMapping(mapping)
+  }
+
+  /* ***************************** *
+
              API METHODS
 
    * ***************************** */
@@ -114,12 +156,25 @@ class Soundation {
    * @param color
    */
   key({ key, color, displayElement }) {
+    /**
+     * Change in which element it
+     * should display the current value
+     */
     this.displayElementKey = displayElement
+    /**
+     * Either key is set directly or we
+     * translate a color to it
+     */
     if (!_.isNil(key) && !_.isNil(key.order) && !_.isNil(key.chord)) {
-      // manually setting the key
+      /**
+       * Manualy setting the key
+       */
       this._partPlaying.setChord(key.order, key.chord)
     } else if (!_.isNil(color)) {
-      // passing a color argument and let the color classifier decide the key
+      /**
+       * Passing a color argument and let
+       * the color classifier decide the key
+       */
       const chord = this._partPlaying.setChordFromColor(this.colorClassifier.color(color, true))
       $(this.displayElementKey).html(chord)
     }
@@ -132,11 +187,26 @@ class Soundation {
    * @param trackname
    */
   track({ trackname, color, displayElement }) {
+    /**
+     * Change in which element it
+     * should display the current value
+     */
     this.displayElementTrack = displayElement
+    /**
+     * Either track name is set directly or we
+     * translate a color to it
+     */
     if (!_.isNil(trackname)) {
+      /**
+       * Manualy setting the track
+       * from the name given
+       */
       this._setTrack(trackname)
     } else if (!_.isNil(color)) {
-      // passing a color argument and let the color classifier decide the track
+      /**
+       * Passing a color argument and let
+       * the color classifier decide the track
+       */
       this._setTrack(this._colorToTrack(this.colorClassifier.color(color, true)))
     }
   }
@@ -149,11 +219,25 @@ class Soundation {
    * @param transition currently not supported
    */
   bpm({ bpm, color, displayElement }) {
+    /**
+     * Change in which element it
+     * should display the current value
+     */
     this.displayElementBpm = displayElement
+    /**
+     * Either bpm is set directly or we
+     * translate a color to it
+     */
     if (!_.isNil(bpm)) {
+      /**
+       * Manualy setting the bpm
+       */
       this._transitionBpm(bpm)
     } else if (!_.isNil(color)) {
-      // passing a color argument and let the color classifier decide the bpm
+      /**
+       * passing a color argument and let
+       * the color classifier decide the bpm
+       */
       this._transitionBpm(this._colorToBpm(this.colorClassifier.color(color, true)))
     }
   }
@@ -277,7 +361,8 @@ class Soundation {
       Tone.Transport.bpm.value = bpm
       this.currentBpm = bpm
     } else {
-      console.warn('You cannot set BPM to a null, negative, or zero value')
+      this.currentBpm = 1
+      console.warn('You cannot set BPM to a null, negative, or zero value setting to 1')
     }
   }
 
@@ -286,10 +371,16 @@ class Soundation {
    * @param trackname
    * @private
    */
-  _setTrack(trackname) {
-    $(this.displayElementTrack).html(trackname)
+  _setTrack(trackName) {
+    const previousTrack = this._partPlaying
+    $(this.displayElementTrack).html(trackName)
     this._partPlaying.disable()
-    this._partPlaying = _.find(this.parts, { name: trackname })
+    if (_.find(this.parts, { name: trackName }) != null) {
+      this._partPlaying = _.find(this.parts, { name: trackName })
+    } else {
+      this._partPlaying = previousTrack
+      console.warn(`Searching for track: ${trackName} => ${JSON.stringify(_.find(this.parts, { name: trackName }))}`)
+    }
     this._partPlaying.setChord('major', 'D#')
     this._partPlaying.enable()
   }
@@ -397,19 +488,7 @@ class Soundation {
    * @private
    */
   _colorToBpm(hex) {
-    this.Bpms = {
-      '#000000': 50,
-      '#808080': 60,
-      '#0000ff': 70,
-      '#800080': 80,
-      '#ff0000': 90,
-      '#008000': 100,
-      '#ffa500': 110,
-      '#ffff00': 120,
-      '#00ffff': 130,
-      '#ffffff': 140,
-    }
-    return this.Bpms[hex]
+    return this.bpms[hex]
   }
 
   /**
@@ -419,19 +498,6 @@ class Soundation {
    * @private
    */
   _colorToTrack(hex) {
-    this.tracks = {
-      '#000000': '1 note',
-      '#808080': '2 notes',
-      '#0000ff': '3 notes',
-      '#800080': '4 notes',
-      '#ff0000': '4 notes',
-      '#008000': '4 notes',
-      '#ffa500': '4 notes',
-      '#ffff00': '5 notes',
-      '#00ffff': '6 notes',
-      '#ffffff': '7 notes',
-    }
-
     return this.tracks[hex]
   }
 

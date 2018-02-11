@@ -8,14 +8,14 @@ class Chords {
     this.colors = {
       '#000000': { order: 'major', chord: 'C' },
       '#808080': { order: 'major', chord: 'G' },
-      '#ffffff': { order: 'major', chord: 'D' },
-      '#ff0000': { order: 'major', chord: 'A' },
-      '#ffa500': { order: 'major', chord: 'E' },
-      '#ffff00': { order: 'major', chord: 'B' },
-      '#008000': { order: 'major', chord: 'F#' },
-      '#00ffff': { order: 'major', chord: 'C#' },
       '#0000ff': { order: 'major', chord: 'G#' },
       '#800080': { order: 'major', chord: 'D#' },
+      '#ff0000': { order: 'major', chord: 'A' },
+      '#008000': { order: 'major', chord: 'F#' },
+      '#ffa500': { order: 'major', chord: 'E' },
+      '#ffff00': { order: 'major', chord: 'B' },
+      '#00ffff': { order: 'major', chord: 'C#' },
+      '#ffffff': { order: 'major', chord: 'D' },
     }
     this._calculateNotes()
 
@@ -63,7 +63,26 @@ class Chords {
   getChords() {
     return this.Notes
   }
-    
+
+  nextChord() {
+    if (this.chordIndex >= this.flattenedChords.length - 1) {
+      this.chordIndex = 0
+    } else {
+      this.chordIndex = this.chordIndex + 1
+    }
+    return this.flattenedChords[this.chordIndex]
+  }
+  
+  colorToKey(color) {
+    return this.colors[color]
+  }
+
+  setColorMappings(mapping) {
+    this.colors = mapping
+  }
+
+  // Private functions
+
   _calculateNotes() {
     _.forEach(this.majorOrder, (key) => {
       const major = Teoria.note(`${key}3`).chord('major')
@@ -93,19 +112,6 @@ class Chords {
     const majorChords = _.map(this.majorOrder, chord => ({ order: 'major', chord }))
     const minorChords = _.map(this.minorOrder, chord => ({ order: 'minor', chord }))
     return _.flatten(_.union(majorChords, minorChords))
-  }
-
-  nextChord() {
-    if (this.chordIndex >= this.flattenedChords.length - 1) {
-      this.chordIndex = 0
-    } else {
-      this.chordIndex = this.chordIndex + 1
-    }
-    return this.flattenedChords[this.chordIndex]
-  }
-  
-  colorToKey(color) {
-    return this.colors[color]
   }
 }
 

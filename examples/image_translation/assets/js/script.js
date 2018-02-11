@@ -32,6 +32,37 @@ bpmImage.load(bpmImageSrc, () => {
         // Shout the color when the users clicks
         harp.shoutColor(color)
       })
+
+      updateBpmMapping = () => {
+        let settings = $('#bpm .row')
+        let mapping = {}
+        _.forEach(settings, row => {
+          mapping[$(row).find('.color-value').attr('style').replace('background: ', '')] = $(row).find('input').val()
+        })
+        harp.setBpmMapping(mapping)
+      }
+
+      resetBpmMapping = () => {
+        let mapping = {
+          '#000000': 50,
+          '#808080': 60,
+          '#0000ff': 70,
+          '#800080': 80,
+          '#ff0000': 90,
+          '#008000': 100,
+          '#ffa500': 110,
+          '#ffff00': 120,
+          '#00ffff': 130,
+          '#ffffff': 140,
+        }
+        harp.setBpmMapping(mapping)
+        let settings = $('#bpm .row')
+        _.forEach(settings, row => {
+          let originalBpm = mapping[$(row).find('.color-value').attr('style').replace('background: ', '')]
+          $(row).find('input').val(originalBpm)
+        })
+      }
+
     })
 })
 
@@ -47,7 +78,7 @@ trackImage.load(trackImageSrc, () => {
   harp.imageClassifier({}, 10)
   harp.load()
     .then(() => {
-      // When mouse hover image
+      // When mouse hovers image
       $('#tracks img').mousemove((event) => {
         const color = harp.colors.get(event, '#tracks img', trackImage.imageData)
         $('#tracks .color').css('background', color)
@@ -56,7 +87,7 @@ trackImage.load(trackImageSrc, () => {
         harp.track({ color, displayElement: '.track-value' })
       })
 
-      // When mouse leaves the image stop the sound
+      // When mouse leaves the image, stop the sound
       $('#tracks img').mouseout(() => {
         harp.pause()
       })
@@ -67,6 +98,36 @@ trackImage.load(trackImageSrc, () => {
         // Shout the color when the users clicks
         harp.shoutColor(color)
       })
+
+      updateTrackMapping = () => {
+        let settings = $('#tracks .row')
+        let mapping = {}
+        _.forEach(settings, row => {
+          mapping[$(row).find('.color-value').attr('style').replace('background: ', '')] = $(row).find('select').val()
+        })
+        harp.setTrackMapping(mapping)
+      }
+
+      resetTrackMapping = () => {
+        let mapping = {
+          '#000000': '1 note',
+          '#808080': '2 notes',
+          '#0000ff': '3 notes',
+          '#800080': '4 notes',
+          '#ff0000': '4 notes',
+          '#008000': '4 notes',
+          '#ffa500': '4 notes',
+          '#ffff00': '5 notes',
+          '#00ffff': '6 notes',
+          '#ffffff': '7 notes',
+        }
+        harp.setTrackMapping(mapping)
+        let settings = $('#tracks .row')
+        _.forEach(settings, row => {
+          let originalTrack = mapping[$(row).find('.color-value').attr('style').replace('background: ', '')]
+          $(row).find('select').val(originalTrack)
+        })
+      }
     })
 })
 
@@ -111,15 +172,38 @@ keyImage.load(keyImageSrc, () => {
         // Shout the color when the users clicks
         harp.shoutColor(color)
       })
+
+      updateKeyMapping = () => {
+        let settings = $('#key .row')
+        let mapping = {}
+        _.forEach(settings, row => {
+          mapping[$(row).find('.color-value').attr('style').replace('background: ', '')] = $(row).find('select').val()
+        })
+        harp.setKeyMapping(mapping)
+      }
+
+      resetKeyMapping = () => {
+        const mapping = {
+          '#000000': 'C',
+          '#808080': 'G',
+          '#0000ff': 'G#',
+          '#800080': 'D#',
+          '#ff0000': 'A',
+          '#008000': 'F#',
+          '#ffa500': 'E',
+          '#ffff00': 'B',
+          '#00ffff': 'C#',
+          '#ffffff': 'D',
+        }
+        let settings = $('#key .row')
+        _.forEach(settings, row => {
+          let originalTrack = mapping[$(row).find('.color-value').attr('style').replace('background: ', '')]
+          $(row).find('select').val(originalTrack)
+        })
+        harp.setKeyMapping(mapping)
+      }
     })
 })
-
-const scrollToElement = function (element) {
-  console.log(element)
-  $('html, body').animate({
-    scrollTop: $(element).offset().top,
-  }, 2000);
-}
 
 /**
  * Show bpm info on hover
@@ -247,3 +331,14 @@ $('.fa-sliders-h').click(function (e) {
   settingsPane.toggleClass('open')
 })
 
+/**
+ * Behavioral javascript
+ * @param element
+ */
+
+const scrollToElement = function (element) {
+  console.log(element)
+  $('html, body').animate({
+    scrollTop: $(element).offset().top,
+  }, 2000);
+}

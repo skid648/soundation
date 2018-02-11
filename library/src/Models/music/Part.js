@@ -29,7 +29,8 @@ class Part {
     this.name = partName
     this.sound = new Sound(this.instrumentUrl)
     this.enabled = false
-    this.chords = Chords.getChords()
+    this.chordsHelper = Chords
+    this.chords = this.chordsHelper.getChords()
     this.currentVariation = { chordName: 'major', key: 'C' }
 
     let note = []
@@ -75,7 +76,6 @@ class Part {
    * @param chordKey
    */
   setChord(chordName, chordKey) {
-    // console.debug(`Setting Part [${this.name}] to ${chordName}:${chordKey}`)
     // check if chord exists
     const notesFromChord = _.get(this.chords, `${chordName}.${chordKey}`)
     if (notesFromChord != null) {
@@ -108,9 +108,15 @@ class Part {
 
   setChordFromColor(colorCode) {
     const key = Chords.colorToKey(colorCode)
-    // console.log(`Setting part from color: ${colorCode} to key: ${JSON.stringify(key)}`)
     this.setChord(key.order, key.chord)
     return key.chord
+  }
+
+  setChordsColorMapping(mapping) {
+    _.forEach(Object.keys(mapping), (color) => {
+      mapping[color] = { order: 'major', chord: mapping[color] }
+    })
+    Chords.setColorMappings(mapping)
   }
 
   /**
