@@ -342,3 +342,21 @@ const scrollToElement = function (element) {
     scrollTop: $(element).offset().top,
   }, 2000);
 }
+
+$('a:contains("Documentation")').click(function (event) {
+  $('.menu a').removeClass('active')
+  $(this).addClass('active')
+  $('.examples').hide()
+  $('.paper').hide()
+  $('.docs').show()
+  $('.docs').css('opacity', '1')
+})
+
+$('a:contains("Example")').click(function (event) {
+  $('.menu a').removeClass('active')
+  $(this).addClass('active')
+  $('.docs').hide()
+  $('.docs').css('opacity', '0')
+  $('.paper').hide()
+  $('.examples').show()
+})
