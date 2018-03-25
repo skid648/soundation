@@ -1,0 +1,55 @@
+[Config]
+Relative path=1
+Compilator.SaveAll=0
+Compilator.Capture=0
+Compilator.HideOutput=0
+Compilator.LogType=0
+DefaultCPIndex=0
+LogtoEnd=1
+DontOpen=0
+FileFormat=0
+[Project tree]
+di
+	+Κατάλογος
+		thesis.tex
+		prologos.tex
+		intro.tex
+		perilipsi.tex
+		sximata.tex
+		telos.tex
+[Open project files]
+0=thesis.tex
+1=perilipsi.tex
+2=prologos.tex
+3=intro.tex
+4=sximata.tex
+5=telos.tex
+6=biblio.tex
+7=abbrev.tex
+[Selected Project Files]
+Main=
+Selected=thesis.tex
+[thesis.tex]
+TopLine=1
+Caret=29,5
+[perilipsi.tex]
+TopLine=1
+Caret=25,4
+[prologos.tex]
+TopLine=41
+Caret=12,62
+[intro.tex]
+TopLine=1
+Caret=1,1
+[sximata.tex]
+TopLine=11
+Caret=2,32
+[telos.tex]
+TopLine=34
+Caret=1,55
+[biblio.tex]
+TopLine=1
+Caret=1,4
+[abbrev.tex]
+TopLine=10
+Caret=1,32

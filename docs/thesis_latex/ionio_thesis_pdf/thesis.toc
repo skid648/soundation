@@ -1,0 +1,13 @@
+\select@language {greek}
+\contentsline {chapter}{\numberline {\MakeUppercase {\textalpha \anw@true \anw@print \relax }}Eisagwg'h}{1}
+\contentsline {section}{\numberline {\MakeUppercase {\textalpha \anw@true \anw@print \relax }.1}Diad'iktuo kai yhfiak'a optik'a m'esa}{1}
+\contentsline {section}{\numberline {\MakeUppercase {\textalpha \anw@true \anw@print \relax }.2}Qr'hsh tou diadikt'uou me meiwm'enh optik'h katan'ohsh}{2}
+\contentsline {section}{\numberline {\MakeUppercase {\textalpha \anw@true \anw@print \relax }.3}St'oqoc thc ergas'iac}{2}
+\contentsline {chapter}{\numberline {\MakeUppercase {\textbeta \anw@true \anw@print \relax }}Alg'orijmos met'afrashs}{4}
+\contentsline {section}{\numberline {\MakeUppercase {\textbeta \anw@true \anw@print \relax }.1}Dunamik'h met'afrash}{4}
+\contentsline {chapter}{\numberline {\MakeUppercase {\textgamma \anw@true \anw@print \relax }}Teleuta'ia M'erh}{6}
+\contentsline {chapter}{Par'arthma A'}{8}
+\contentsline {chapter}{Bibliograf'ia}{9}
+\contentsline {chapter}{Suntm'hseic}{10}
+\contentsline {chapter}{Glwss'ari Xenik'wn 'Orwn}{11}
+\contentsline {chapter}{Euret'hrio}{14}
