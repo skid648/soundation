@@ -65,11 +65,9 @@ class Chords {
   }
 
   nextChord() {
-    if (this.chordIndex >= this.flattenedChords.length - 1) {
-      this.chordIndex = 0
-    } else {
-      this.chordIndex = this.chordIndex + 1
-    }
+    (this.chordIndex >= this.flattenedChords.length - 1)
+      ? this.chordIndex = 0
+      : this.chordIndex = this.chordIndex + 1
     return this.flattenedChords[this.chordIndex]
   }
   

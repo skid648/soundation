@@ -4,10 +4,17 @@
 \contentsline {section}{\numberline {\MakeUppercase {\textalpha \anw@true \anw@print \relax }.2}Qr'hsh tou diadikt'uou me meiwm'enh optik'h katan'ohsh}{2}
 \contentsline {section}{\numberline {\MakeUppercase {\textalpha \anw@true \anw@print \relax }.3}St'oqoc thc ergas'iac}{2}
 \contentsline {chapter}{\numberline {\MakeUppercase {\textbeta \anw@true \anw@print \relax }}Alg'orijmos met'afrashs}{4}
-\contentsline {section}{\numberline {\MakeUppercase {\textbeta \anw@true \anw@print \relax }.1}Dunamik'h met'afrash}{4}
-\contentsline {chapter}{\numberline {\MakeUppercase {\textgamma \anw@true \anw@print \relax }}Teleuta'ia M'erh}{6}
-\contentsline {chapter}{Par'arthma A'}{8}
-\contentsline {chapter}{Bibliograf'ia}{9}
-\contentsline {chapter}{Suntm'hseic}{10}
-\contentsline {chapter}{Glwss'ari Xenik'wn 'Orwn}{11}
-\contentsline {chapter}{Euret'hrio}{14}
+\contentsline {section}{\numberline {\MakeUppercase {\textbeta \anw@true \anw@print \relax }.1}Anaparagwg'h twn arqe'iwn kai 'organa}{4}
+\contentsline {section}{\numberline {\MakeUppercase {\textbeta \anw@true \anw@print \relax }.2}N'otec kai sugqord'iec}{4}
+\contentsline {section}{\numberline {\MakeUppercase {\textbeta \anw@true \anw@print \relax }.3}Mousik'a komm'atia}{4}
+\contentsline {section}{\numberline {\MakeUppercase {\textbeta \anw@true \anw@print \relax }.4}Anagn'wrish qr'wmmatoc}{5}
+\contentsline {section}{\numberline {\MakeUppercase {\textbeta \anw@true \anw@print \relax }.5}Dunamik'h met'afrash}{6}
+\contentsline {chapter}{\numberline {\MakeUppercase {\textgamma \anw@true \anw@print \relax }}Pe'irama kai sumper'asmata}{7}
+\contentsline {section}{\numberline {\MakeUppercase {\textgamma \anw@true \anw@print \relax }.1}Perigraf'h tou peir'amatoc}{7}
+\contentsline {section}{\numberline {\MakeUppercase {\textgamma \anw@true \anw@print \relax }.2}Apotel'esmata tou peir'amatoc}{7}
+\contentsline {section}{\numberline {\MakeUppercase {\textgamma \anw@true \anw@print \relax }.3}Sumper'asmata}{7}
+\contentsline {section}{\numberline {\MakeUppercase {\textgamma \anw@true \anw@print \relax }.4}Perait'erw mel'eth}{7}
+\contentsline {chapter}{Bibliograf'ia}{8}
+\contentsline {chapter}{Suntm'hseic}{9}
+\contentsline {chapter}{Glwss'ari Xenik'wn 'Orwn}{10}
+\contentsline {chapter}{Euret'hrio}{11}
