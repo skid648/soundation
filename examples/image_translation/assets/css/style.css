@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 body {
-    background: #d4d4d4;
+    background: #ededed;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 15px;
     margin: 0px;
@@ -17,20 +17,23 @@ body {
 }
 
 .app section {
-    padding: 15px;
     width: 100%;
     max-width: 1200px;
-    color: #FC3A51;
+    min-height: 70vh;
+
+    padding: 15px;
     margin-bottom: 50px;
     margin-top: 50px;
-    /*color: #F5B349;*/
-    background: rgba(0,0,0,0.09);
-    min-height: 70vh;
-    box-shadow: 0 14px 28px rgba(0,0,0,0.2), 0 10px 10px rgba(0,0,0,0.18);
+
+    background: white;
+
     display: flex;
     justify-content: center;
     align-content: center;
     align-items: center;
+
+    border-radius: 5px;
+
     box-sizing: border-box;
 }
 
