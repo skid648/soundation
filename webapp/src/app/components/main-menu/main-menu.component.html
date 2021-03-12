@@ -1,0 +1,7 @@
+<nav aria-label="Main Navigation" class="flx-centered flx-row">
+  <ul class="flx-centered flx-row">
+    <li class="menu-item" *ngFor="let item of menuService.items">
+      <a class="snd-link" routerLinkActive="active" routerLink="{{item.path}}">{{item.name}}</a>
+    </li>
+  </ul>
+</nav>

@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
+$link-color: #0000008a;
+$link-color-faded: rgba(78, 78, 78, 0.54);
+$separator-color: #F5B349;
+
+body {
+  background: #ededed;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 15px;
+  margin: 0px;
+}
+
+.snd-link {
+  font-size: 1.5em;
+  color: $link-color-faded;
+  &:hover { color: $link-color; }
+}
+
+.menu-item { &:after { color: $separator-color } }

@@ -31,7 +31,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/reset.scss",
+              "src/styles.scss",
+              "src/theme.scss"
             ],
             "scripts": []
           },

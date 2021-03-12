@@ -1,1 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
+/* Application-wide Styles */
+
+/* ===============
+   BASIC STYLING
+   =============== */
+
+html { font-size: 16px }
+h1 { font-size: 3em }
+h2 { font-size: 2.8em }
+h3 { font-size: 2.6em }
+h4 { font-size: 2.4em }
+h5 { font-size: 2.2em }
+
+
+/* ===============
+   COMMON LAYOUT
+   =============== */
+
+.flx-centered {
+  display: flex;
+
+  justify-items: center;
+  justify-content: center;
+
+  align-items: center;
+  align-content: center;
+
+  &.flx-row { flex-direction: row; }
+  &.flx-column { flex-direction: column; }
+}
