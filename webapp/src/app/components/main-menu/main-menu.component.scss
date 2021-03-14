@@ -1,6 +1,6 @@
-a { text-decoration: none; }
-
 .menu-item {
+  font-size: 1.5em;
+
   &:after {
     content: '/';
     margin: 0px 20px;

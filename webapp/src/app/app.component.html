@@ -1,10 +1,12 @@
-<div class="canvas flx-centered flx-column">
+<div class="snd-canvas flx-centered flx-column">
   <header class="logo">
-    <img height="100px" src="../assets/soundation.png" alt="" id="logo" class="animated FadeIn">
+    <img height="100px" src="../assets/soundation.png" alt="Soundation logo" id="logo">
   </header>
-  <section>
+  <div class="snd-main-wrapper">
     <app-main-menu></app-main-menu>
     <router-outlet></router-outlet>
-  </section>
-  <footer></footer>
+  </div>
+  <footer>
+    <app-footer></app-footer>
+  </footer>
 </div>

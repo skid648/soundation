@@ -11,6 +11,14 @@ h3 { font-size: 2.6em }
 h4 { font-size: 2.4em }
 h5 { font-size: 2.2em }
 
+section {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+footer {
+  width: 100%;
+}
 
 /* ===============
    COMMON LAYOUT

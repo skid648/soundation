@@ -1,0 +1,32 @@
+<div class="snd-wrapper home-wrapper">
+  <section class="flx-centered snd-padd" id="what-is-it">
+    <div class="snd-wrapper snd-padd">
+      <img width="200px" src="../assets/soundation_logo_only.png" alt="">
+    </div>
+    <div class="snd-wrapper">
+      <h2>What is this all about</h2>
+      <p>
+        Soundation is a library that enables you to translate image to audio. This can be used to help visually impaired or colorblind people understand the web better.
+        It has been developed as a mini project for a Thesis and was primarily build to test such scenario. It is build with extensibility in mind.
+      </p>
+    </div>
+  </section>
+  <section class="flx-centered flx-column snd-padd" id="methods">
+    <h1 class="snd-section-title">Methods</h1>
+    <div class="snd-wrapper flx-centered">
+      <app-method *ngFor="let method of methodService.methods" [method]="method"></app-method>
+    </div>
+  </section>
+  <section class="flx-centered flx-column snd-padd" id="take-the-test">
+    <h1 class="snd-section-title">Contribute</h1>
+    <div class="snd-wrapper flx-centered flx-column">
+      <div class="snd-wrapper snd-padd">
+        <p>You can contribute by trying out a random method. You then need to answer some questions to help us figure out which method is the best for which user.</p>
+      </div>
+      <button class="snd-button primary">
+        <i class="ri-flask-line"></i>
+        <span>Take the test</span>
+      </button>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,42 @@
+<div class="snd-padd snd-footer-wrapper flx-centered flx-column">
+  <div class="snd-wrapper snd-footer-menu flx-centered">
+    <div class="snd-footer-col">
+      <div class="snd-footer-title">Menu</div>
+      <div class="snd-footer-item snd-link" *ngFor="let item of menuService.items" routerLink="{{item.path}}">{{ item.name }}</div>
+    </div>
+    <div class="snd-footer-col">
+      <div class="snd-footer-title">Contact</div>
+      <a href="mailto:thanasis.glts@gmail.com?subject=Soundation question" class="snd-footer-item">
+        <i class="ri-mail-line"></i> Ask a question
+      </a>
+      <a target="_blank" href="https://github.com/skid648" class="snd-footer-item">
+        <i class="ri-github-fill"></i> Find me on github
+      </a>
+      <a target="_blank" href="https://www.linkedin.com/in/thanasis-gkliatis-394614128/" class="snd-footer-item">
+        <i class="ri-linkedin-fill"></i> Find me on linkedin
+      </a>
+    </div>
+    <div class="snd-footer-col">
+      <div class="snd-footer-title">Creator</div>
+      <div class="snd-wrapper flx-centered snd-creator-wrapper">
+        <div class="snd-creator-portrait">
+          <img src="/assets/self.jpg" alt="Creator portrait">
+        </div>
+        <div class="snd-creator-info">
+          <span>Thanasis G.</span>
+          <p>Problem solving/tech enthusiast. Working as a Tech team leader since 2016 in <a href="socital.com" class="snd-link">Socital</a>.</p>
+        </div>
+        <span></span>
+      </div>
+    </div>
+    <div class="snd-footer-col">
+      <div class="snd-footer-title">Develop</div>
+      <a target="_blank" href="https://github.com/skid648/soundation" class="snd-footer-item">
+        <i class="ri-git-branch-line"></i> Fork the repo
+      </a>
+    </div>
+  </div>
+  <div class="snd-wrapper snd-copyright-wrapper">
+    <div class="snd-copyright">Soundation {{currentYear}}</div>
+  </div>
+</div>

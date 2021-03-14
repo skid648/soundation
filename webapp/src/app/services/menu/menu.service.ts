@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from "rxjs";
-import {Hero} from "../../interfaces/hero";
-import {HEROES} from "../../mocks/mock-heroes";
+import { MenuItem } from '../../interfaces/menuItem'
 
 @Injectable({
   providedIn: 'root'
 })
 export class MenuService {
-  public items: Array<{ name: string, path:string }> = [
+  public items: Array<MenuItem> = [
     { name: 'Research', path: '/research' },
     { name: 'Documentation', path: '/documentation' },
     { name: 'Paper', path: '/paper' },

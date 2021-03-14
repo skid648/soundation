@@ -1,20 +1,88 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
-$link-color: #0000008a;
-$link-color-faded: rgba(78, 78, 78, 0.54);
-$separator-color: #F5B349;
+$main-color: #0000008a;
+$main-color-faded: #4e4e4e8a;
+$main-content-color: #545454;
+$secondary-color: #F5B349;
 
+/* ===============
+   GLOBAL STYLING
+   =============== */
 body {
   background: #ededed;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 15px;
   margin: 0px;
+  color: $main-content-color;
 }
 
+@mixin header-style {
+  margin-bottom: 20px;
+}
+h1 { color: $secondary-color; @include header-style; }
+h2 { color: $secondary-color; @include header-style; }
+h3 { color: $secondary-color; @include header-style; }
+h4 { color: $secondary-color; @include header-style; }
+h5 { color: $secondary-color; @include header-style; }
+
+p {
+  line-height: 1.2em;
+}
+
+a {
+  text-decoration: none;
+  color: $main-color;
+}
+
+.snd-padd { padding: 20px; }
+.snd-main-wrapper {}
+
+/* ===============
+   COMMON ELEMENTS
+   =============== */
 .snd-link {
-  font-size: 1.5em;
-  color: $link-color-faded;
-  &:hover { color: $link-color; }
+  color: $main-color-faded;
+  &:hover { color: $main-color; }
 }
 
-.menu-item { &:after { color: $separator-color } }
+.snd-wrapper {
+  max-width: 800px;
+}
+
+.snd-section-title {
+  border-bottom: 5px solid #f5b349;
+  padding: 15px 0px;
+  text-align: left;
+  margin-bottom: 25px;
+  color: #767676;
+  text-transform: uppercase;
+}
+
+.snd-button {
+  border: 0px;
+  cursor: pointer;
+  padding: 10px 25px;
+  border-radius: 5px;
+  color: white;
+
+  background: #F2994A;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom right, #F2C94C, #F2994A);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom right, #F2C94C, #F2994A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  text-transform: uppercase;
+  font-size: 1.1em;
+
+  display: flex;
+
+  align-content: center;
+  align-items: center;
+
+  justify-content: center;
+  justify-items: center;
+
+  i { margin-right: 10px; }
+}
+
+/* ===============
+   MENU
+   =============== */
+.menu-item { &:after { color: $secondary-color } }
